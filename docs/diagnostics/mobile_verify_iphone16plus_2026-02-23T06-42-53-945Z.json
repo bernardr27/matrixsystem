@@ -1,0 +1,148 @@
+{
+  "summary": {
+    "device": "iPhone 16 Plus (430x932)",
+    "startedAt": "2026-02-23T06:41:41.149Z",
+    "finishedAt": "2026-02-23T06:42:53.945Z",
+    "total": 9,
+    "passed": 0,
+    "failed": 9
+  },
+  "results": [
+    {
+      "name": "nexus_dashboard",
+      "url": "http://localhost:3001/",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": true,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_dashboard_iphone16plus.png"
+    },
+    {
+      "name": "nexus_diagnostics",
+      "url": "http://localhost:3001/diagnostics",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": true,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_diagnostics_iphone16plus.png"
+    },
+    {
+      "name": "nexus_analytics",
+      "url": "http://localhost:3001/analytics",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": true,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_analytics_iphone16plus.png"
+    },
+    {
+      "name": "nexus_integrations",
+      "url": "http://localhost:3001/integrations",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": true,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_integrations_iphone16plus.png"
+    },
+    {
+      "name": "nexus_settings",
+      "url": "http://localhost:3001/settings",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": true,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_settings_iphone16plus.png"
+    },
+    {
+      "name": "reflect_setup",
+      "url": "http://localhost:3000/setup/initial",
+      "ok": false,
+      "responseStatus": 500,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "Module not found: Can't resolve 'net'\n  14 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  15 | const events_1 = require(\"events\");\n> 16 | const net = require(\"net\");\n     | ^\n  17 | const tls = require(\"tls\");\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts\n<unknown> (https://nextjs.org/docs/messages/module-not-found)\ngetNotFoundError (file://G:\\matrix\\node_modules\\next\\dist\\build\\webpack\\plugins\\wellknown-errors-plugin\\parseNotFoundError.js:140:16)\nprocess.processTicksAndRejections (node:internal/process/task_queues:103:5)\nasync getModuleBuildError (file://G:\\matrix\\node_modules\\next\\dist\\build\\webpack\\plugins\\wellknown-errors-plugin\\webpackModuleError.js:103:27)"
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "../../node_modules/@redis/client/dist/lib/client/socket.js:16:1\nModule not found: Can't resolve 'net'\n  14 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  15 | const events_1 = require(\"events\");\n> 16 | const net = require(\"net\");\n     | ^\n  17 | const tls = require(\"tls\");\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts",
+        "../../node_modules/@redis/client/dist/lib/client/socket.js:17:1\nModule not found: Can't resolve 'tls'\n  15 | const events_1 = require(\"events\");\n  16 | const net = require(\"net\");\n> 17 | const tls = require(\"tls\");\n     | ^\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n  20 | class RedisSocket extends events_1.EventEmitter {\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts",
+        "../../node_modules/@redis/client/dist/lib/lua-script.js:4:1\nModule not found: Can't resolve 'crypto'\n  2 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  3 | exports.scriptSha1 = exports.defineScript = void 0;\n> 4 | const crypto_1 = require(\"crypto\");\n    | ^\n  5 | function defineScript(script) {\n  6 |     return {\n  7 |         ...script,\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts"
+      ],
+      "screenshot": "temp_mobile_verification\\reflect_setup_iphone16plus.png"
+    },
+    {
+      "name": "reflect_auth",
+      "url": "http://localhost:3000/auth",
+      "ok": false,
+      "responseStatus": 500,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "Module not found: Can't resolve 'net'\n  14 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  15 | const events_1 = require(\"events\");\n> 16 | const net = require(\"net\");\n     | ^\n  17 | const tls = require(\"tls\");\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts\n<unknown> (https://nextjs.org/docs/messages/module-not-found)\ngetNotFoundError (file://G:\\matrix\\node_modules\\next\\dist\\build\\webpack\\plugins\\wellknown-errors-plugin\\parseNotFoundError.js:140:16)\nprocess.processTicksAndRejections (node:internal/process/task_queues:103:5)\nasync getModuleBuildError (file://G:\\matrix\\node_modules\\next\\dist\\build\\webpack\\plugins\\wellknown-errors-plugin\\webpackModuleError.js:103:27)"
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "../../node_modules/@redis/client/dist/lib/client/socket.js:16:1\nModule not found: Can't resolve 'net'\n  14 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  15 | const events_1 = require(\"events\");\n> 16 | const net = require(\"net\");\n     | ^\n  17 | const tls = require(\"tls\");\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts",
+        "../../node_modules/@redis/client/dist/lib/client/socket.js:17:1\nModule not found: Can't resolve 'tls'\n  15 | const events_1 = require(\"events\");\n  16 | const net = require(\"net\");\n> 17 | const tls = require(\"tls\");\n     | ^\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n  20 | class RedisSocket extends events_1.EventEmitter {\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts",
+        "../../node_modules/@redis/client/dist/lib/lua-script.js:4:1\nModule not found: Can't resolve 'crypto'\n  2 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  3 | exports.scriptSha1 = exports.defineScript = void 0;\n> 4 | const crypto_1 = require(\"crypto\");\n    | ^\n  5 | function defineScript(script) {\n  6 |     return {\n  7 |         ...script,\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts"
+      ],
+      "screenshot": "temp_mobile_verification\\reflect_auth_iphone16plus.png"
+    },
+    {
+      "name": "reflect_tutorial",
+      "url": "http://localhost:3000/tutorial",
+      "ok": false,
+      "responseStatus": 500,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "Module not found: Can't resolve 'net'\n  14 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  15 | const events_1 = require(\"events\");\n> 16 | const net = require(\"net\");\n     | ^\n  17 | const tls = require(\"tls\");\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts\n<unknown> (https://nextjs.org/docs/messages/module-not-found)\ngetNotFoundError (file://G:\\matrix\\node_modules\\next\\dist\\build\\webpack\\plugins\\wellknown-errors-plugin\\parseNotFoundError.js:140:16)\nprocess.processTicksAndRejections (node:internal/process/task_queues:103:5)\nasync getModuleBuildError (file://G:\\matrix\\node_modules\\next\\dist\\build\\webpack\\plugins\\wellknown-errors-plugin\\webpackModuleError.js:103:27)"
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "../../node_modules/@redis/client/dist/lib/client/socket.js:16:1\nModule not found: Can't resolve 'net'\n  14 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  15 | const events_1 = require(\"events\");\n> 16 | const net = require(\"net\");\n     | ^\n  17 | const tls = require(\"tls\");\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts",
+        "../../node_modules/@redis/client/dist/lib/client/socket.js:17:1\nModule not found: Can't resolve 'tls'\n  15 | const events_1 = require(\"events\");\n  16 | const net = require(\"net\");\n> 17 | const tls = require(\"tls\");\n     | ^\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n  20 | class RedisSocket extends events_1.EventEmitter {\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts",
+        "../../node_modules/@redis/client/dist/lib/lua-script.js:4:1\nModule not found: Can't resolve 'crypto'\n  2 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  3 | exports.scriptSha1 = exports.defineScript = void 0;\n> 4 | const crypto_1 = require(\"crypto\");\n    | ^\n  5 | function defineScript(script) {\n  6 |     return {\n  7 |         ...script,\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts"
+      ],
+      "screenshot": "temp_mobile_verification\\reflect_tutorial_iphone16plus.png"
+    },
+    {
+      "name": "reflect_session",
+      "url": "http://localhost:3000/session",
+      "ok": false,
+      "responseStatus": 500,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "Module not found: Can't resolve 'net'\n  14 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  15 | const events_1 = require(\"events\");\n> 16 | const net = require(\"net\");\n     | ^\n  17 | const tls = require(\"tls\");\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts\n<unknown> (https://nextjs.org/docs/messages/module-not-found)\ngetNotFoundError (file://G:\\matrix\\node_modules\\next\\dist\\build\\webpack\\plugins\\wellknown-errors-plugin\\parseNotFoundError.js:140:16)\nprocess.processTicksAndRejections (node:internal/process/task_queues:103:5)\nasync getModuleBuildError (file://G:\\matrix\\node_modules\\next\\dist\\build\\webpack\\plugins\\wellknown-errors-plugin\\webpackModuleError.js:103:27)"
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "../../node_modules/@redis/client/dist/lib/client/socket.js:16:1\nModule not found: Can't resolve 'net'\n  14 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  15 | const events_1 = require(\"events\");\n> 16 | const net = require(\"net\");\n     | ^\n  17 | const tls = require(\"tls\");\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts",
+        "../../node_modules/@redis/client/dist/lib/client/socket.js:17:1\nModule not found: Can't resolve 'tls'\n  15 | const events_1 = require(\"events\");\n  16 | const net = require(\"net\");\n> 17 | const tls = require(\"tls\");\n     | ^\n  18 | const errors_1 = require(\"../errors\");\n  19 | const utils_1 = require(\"../utils\");\n  20 | class RedisSocket extends events_1.EventEmitter {\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/lib/client/index.js\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts",
+        "../../node_modules/@redis/client/dist/lib/lua-script.js:4:1\nModule not found: Can't resolve 'crypto'\n  2 | Object.defineProperty(exports, \"__esModule\", { value: true });\n  3 | exports.scriptSha1 = exports.defineScript = void 0;\n> 4 | const crypto_1 = require(\"crypto\");\n    | ^\n  5 | function defineScript(script) {\n  6 |     return {\n  7 |         ...script,\n\nhttps://nextjs.org/docs/messages/module-not-found\n\nImport trace for requested module:\n../../node_modules/@redis/client/dist/index.js\n../../node_modules/redis/dist/index.js\n../../libs/matrix-lib/cache/dist/index.js\n./src/instrumentation.ts"
+      ],
+      "screenshot": "temp_mobile_verification\\reflect_session_iphone16plus.png"
+    }
+  ]
+}

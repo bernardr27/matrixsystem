@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  citadel:
+    build:
+      context: .
+      args:
+        APP_NAME: citadel
+        PORT: 3005
+    ports:
+      - "3005:3005"
+    env_file: .env.docker
+    networks:
+      - matrix-mesh
+
+  reflect:
+    build:
+      context: .
+      args:
+        APP_NAME: reflect
+        PORT: 3000
+    ports:
+      - "3000:3000"
+    env_file: .env.docker
+    networks:
+      - matrix-mesh
+
+  nexus:
+    build:
+      context: .
+      args:
+        APP_NAME: nexus
+        PORT: 3001
+    ports:
+      - "3001:3001"
+    env_file: .env.docker
+    networks:
+      - matrix-mesh
+
+  rocket-command:
+    build:
+      context: .
+      args:
+        APP_NAME: rocket-command
+        PORT: 4000
+    ports:
+      - "4000:4000"
+    env_file: .env.docker
+    networks:
+      - matrix-mesh
+
+  ghost-command:
+    build:
+      context: .
+      args:
+        APP_NAME: ghost-command
+        PORT: 5173
+    ports:
+      - "5173:5173"
+    env_file: .env.docker
+    networks:
+      - matrix-mesh
+
+networks:
+  matrix-mesh:
+    driver: bridge

@@ -1,0 +1,77 @@
+[
+  {
+    "app": "reflect",
+    "items": [
+      {
+        "name": "reflect_session",
+        "reason": "Client runtime exception",
+        "details": {
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      },
+      {
+        "name": "reflect_auth",
+        "reason": "Client runtime exception",
+        "details": {
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      }
+    ]
+  },
+  {
+    "app": "citadel",
+    "items": [
+      {
+        "name": "citadel_home",
+        "reason": "Client runtime exception",
+        "details": {
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      },
+      {
+        "name": "citadel_dashboard",
+        "reason": "Client runtime exception",
+        "details": {
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      }
+    ]
+  },
+  {
+    "app": "rocket",
+    "items": [
+      {
+        "name": "rocket_home",
+        "reason": "Client runtime exception",
+        "details": {
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      },
+      {
+        "name": "rocket_operations",
+        "reason": "Potential console/runtime error",
+        "details": {
+          "status": 200,
+          "navError": null,
+          "hasClientException": false,
+          "has404": false
+        }
+      }
+    ]
+  }
+]

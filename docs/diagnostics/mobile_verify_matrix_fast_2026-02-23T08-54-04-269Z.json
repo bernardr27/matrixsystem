@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "rocket",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": false,
+    "startedAt": "2026-02-23T08:53:51.623Z",
+    "finishedAt": "2026-02-23T08:54:04.269Z",
+    "total": 2,
+    "passed": 2,
+    "failed": 0
+  },
+  "selectedApps": [
+    "rocket"
+  ],
+  "readiness": {
+    "rocket": true
+  },
+  "startedProcesses": [],
+  "health": [
+    {
+      "app": "rocket",
+      "url": "http://localhost:4000/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "rocket_home",
+      "url": "http://localhost:4000/",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\rocket_home_matrix_fast.png"
+    },
+    {
+      "name": "rocket_operations",
+      "url": "http://localhost:4000/operations",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\rocket_operations_matrix_fast.png"
+    }
+  ]
+}

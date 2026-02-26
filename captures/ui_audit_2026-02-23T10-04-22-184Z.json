@@ -1,0 +1,1134 @@
+{
+  "timestamp": "2026-02-23T10:04:22.184Z",
+  "mode": "full",
+  "viewport": "mobile",
+  "targets": [
+    "reflect_dashboard",
+    "reflect_journal",
+    "reflect_settings",
+    "reflect_developer",
+    "reflect_data",
+    "reflect_graph",
+    "reflect_sage",
+    "reflect_archive",
+    "reflect_session_list",
+    "nexus_cockpit",
+    "nexus_diagnostics",
+    "citadel_home",
+    "citadel_dashboard",
+    "ghost_command",
+    "ghost_architect",
+    "ghost_vault",
+    "rocket_home",
+    "rocket_console"
+  ],
+  "issues": {
+    "reflect_dashboard@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "1 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_dashboard@tablet": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "1 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_dashboard@desktop": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "1 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_dashboard@ultrawide": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "1 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_journal@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "7 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_journal@tablet": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=820x1195 vs client=820x1180",
+        "selector": "html"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"System Status: Resonating in H\" at 9.6px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"04:00 AM\" at 9.6px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+4 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "7 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_journal@desktop": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=1920x1135 vs client=1920x1080",
+        "selector": "html"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"System Status: Resonating in H\" at 9.6px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"04:00 AM\" at 9.6px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+4 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "7 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_journal@ultrawide": [
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"System Status: Resonating in H\" at 9.6px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"04:00 AM\" at 9.6px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+4 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "7 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_settings@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_settings@tablet": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=820x1799 vs client=820x1180",
+        "selector": "html"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_settings@desktop": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=1920x1699 vs client=1920x1080",
+        "selector": "html"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_settings@ultrawide": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=2560x2059 vs client=2560x1440",
+        "selector": "html"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_developer@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_developer@tablet": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 536x24px (min: 44px)",
+        "selector": "a"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_developer@desktop": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 536x24px (min: 44px)",
+        "selector": "a"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_developer@ultrawide": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 536x24px (min: 44px)",
+        "selector": "a"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_data@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "4 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_data@tablet": [
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "4 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_data@desktop": [
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "4 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_data@ultrawide": [
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "4 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_graph@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_graph@tablet": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=820x1400 vs client=820x1180",
+        "selector": "html"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_graph@desktop": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=1920x1400 vs client=1920x1080",
+        "selector": "html"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_graph@ultrawide": [
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_sage@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_sage@tablet": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=820x1241 vs client=820x1180",
+        "selector": "html"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_sage@desktop": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=1920x1156 vs client=1920x1080",
+        "selector": "html"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_sage@ultrawide": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=2560x1462 vs client=2560x1440",
+        "selector": "html"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_archive@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_archive@tablet": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=820x1808 vs client=820x1180",
+        "selector": "html"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 216x18px (min: 44px)",
+        "selector": "a"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 167x17px (min: 44px)",
+        "selector": "a"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_archive@desktop": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=1920x1708 vs client=1920x1080",
+        "selector": "html"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 216x18px (min: 44px)",
+        "selector": "a"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 167x17px (min: 44px)",
+        "selector": "a"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_archive@ultrawide": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=2560x2068 vs client=2560x1440",
+        "selector": "html"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 216x18px (min: 44px)",
+        "selector": "a"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 167x17px (min: 44px)",
+        "selector": "a"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_session_list@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_session_list@tablet": [
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_session_list@desktop": [
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_session_list@ultrawide": [
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "nexus_cockpit@mobile": [],
+    "nexus_cockpit@tablet": [
+      {
+        "type": "OVERFLOW",
+        "severity": "error",
+        "message": "Horizontal overflow detected: 902px > 820px",
+        "details": [
+          {
+            "tag": "html",
+            "class": "",
+            "width": 902
+          },
+          {
+            "tag": "div",
+            "class": "absolute inset-0 pointer-events-none",
+            "width": 902
+          }
+        ]
+      },
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=902x1298 vs client=820x1180",
+        "selector": "html"
+      }
+    ],
+    "nexus_cockpit@desktop": [
+      {
+        "type": "OVERFLOW",
+        "severity": "error",
+        "message": "Horizontal overflow detected: 2112px > 1920px",
+        "details": [
+          {
+            "tag": "html",
+            "class": "",
+            "width": 2112
+          },
+          {
+            "tag": "div",
+            "class": "absolute inset-0 pointer-events-none",
+            "width": 2112
+          }
+        ]
+      },
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=2112x1188 vs client=1920x1080",
+        "selector": "html"
+      }
+    ],
+    "nexus_cockpit@ultrawide": [
+      {
+        "type": "OVERFLOW",
+        "severity": "error",
+        "message": "Horizontal overflow detected: 2816px > 2560px",
+        "details": [
+          {
+            "tag": "html",
+            "class": "",
+            "width": 2816
+          },
+          {
+            "tag": "div",
+            "class": "absolute inset-0 pointer-events-none",
+            "width": 2816
+          }
+        ]
+      },
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=2816x1584 vs client=2560x1440",
+        "selector": "html"
+      }
+    ],
+    "nexus_diagnostics@mobile": [],
+    "nexus_diagnostics@tablet": [
+      {
+        "type": "OVERFLOW",
+        "severity": "error",
+        "message": "Horizontal overflow detected: 902px > 820px",
+        "details": [
+          {
+            "tag": "html",
+            "class": "",
+            "width": 902
+          },
+          {
+            "tag": "div",
+            "class": "absolute inset-0 pointer-events-none",
+            "width": 902
+          }
+        ]
+      },
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=902x1298 vs client=820x1180",
+        "selector": "html"
+      }
+    ],
+    "nexus_diagnostics@desktop": [
+      {
+        "type": "OVERFLOW",
+        "severity": "error",
+        "message": "Horizontal overflow detected: 2112px > 1920px",
+        "details": [
+          {
+            "tag": "html",
+            "class": "",
+            "width": 2112
+          },
+          {
+            "tag": "div",
+            "class": "absolute inset-0 pointer-events-none",
+            "width": 2112
+          }
+        ]
+      },
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=2112x1188 vs client=1920x1080",
+        "selector": "html"
+      }
+    ],
+    "nexus_diagnostics@ultrawide": [
+      {
+        "type": "OVERFLOW",
+        "severity": "error",
+        "message": "Horizontal overflow detected: 2816px > 2560px",
+        "details": [
+          {
+            "tag": "html",
+            "class": "",
+            "width": 2816
+          },
+          {
+            "tag": "div",
+            "class": "absolute inset-0 pointer-events-none",
+            "width": 2816
+          }
+        ]
+      },
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=2816x1584 vs client=2560x1440",
+        "selector": "html"
+      }
+    ],
+    "citadel_home@mobile": [],
+    "citadel_home@tablet": [],
+    "citadel_home@desktop": [],
+    "citadel_home@ultrawide": [],
+    "citadel_dashboard@mobile": [],
+    "citadel_dashboard@tablet": [],
+    "citadel_dashboard@desktop": [],
+    "citadel_dashboard@ultrawide": [],
+    "ghost_command@mobile": [],
+    "ghost_command@tablet": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 39x44px (min: 44px)",
+        "selector": "button.p-1.5"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 39x44px (min: 44px)",
+        "selector": "button.p-1.5"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 40x44px (min: 44px)",
+        "selector": "button.absolute"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"COMMAND\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"OFF\" at 9px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Chat\" at 7px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+4 more tiny text elements"
+      }
+    ],
+    "ghost_command@desktop": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 39x44px (min: 44px)",
+        "selector": "button.p-1.5"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 39x44px (min: 44px)",
+        "selector": "button.p-1.5"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 40x44px (min: 44px)",
+        "selector": "button.absolute"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"COMMAND\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"OFF\" at 9px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Chat\" at 7px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+4 more tiny text elements"
+      }
+    ],
+    "ghost_command@ultrawide": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 39x44px (min: 44px)",
+        "selector": "button.p-1.5"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 39x44px (min: 44px)",
+        "selector": "button.p-1.5"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 40x44px (min: 44px)",
+        "selector": "button.absolute"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"COMMAND\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"OFF\" at 9px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Chat\" at 7px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+4 more tiny text elements"
+      }
+    ],
+    "ghost_architect@mobile": [],
+    "ghost_architect@tablet": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 40x44px (min: 44px)",
+        "selector": "button.p-2"
+      }
+    ],
+    "ghost_architect@desktop": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 40x44px (min: 44px)",
+        "selector": "button.p-2"
+      }
+    ],
+    "ghost_architect@ultrawide": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 40x44px (min: 44px)",
+        "selector": "button.p-2"
+      }
+    ],
+    "ghost_vault@mobile": [],
+    "ghost_vault@tablet": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <input>: 772x40px (min: 44px)",
+        "selector": "input.bg-slate-800/40"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 37x44px (min: 44px)",
+        "selector": "button.px-2.5"
+      }
+    ],
+    "ghost_vault@desktop": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <input>: 1856x40px (min: 44px)",
+        "selector": "input.bg-slate-800/40"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 37x44px (min: 44px)",
+        "selector": "button.px-2.5"
+      }
+    ],
+    "ghost_vault@ultrawide": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <input>: 2496x40px (min: 44px)",
+        "selector": "input.bg-slate-800/40"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 37x44px (min: 44px)",
+        "selector": "button.px-2.5"
+      }
+    ],
+    "rocket_home@mobile": [],
+    "rocket_home@tablet": [],
+    "rocket_home@desktop": [],
+    "rocket_home@ultrawide": [],
+    "rocket_console@mobile": [],
+    "rocket_console@tablet": [],
+    "rocket_console@desktop": [],
+    "rocket_console@ultrawide": []
+  },
+  "summary": {
+    "totalTargets": 72,
+    "totalErrors": 6,
+    "totalWarnings": 109,
+    "clean": 21
+  }
+}

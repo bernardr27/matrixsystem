@@ -1,0 +1,3138 @@
+# TECH REPAIR PRO - COMPREHENSIVE ANDROID DEVELOPMENT GUIDE 2025
+## Complete Blueprint for Building a Professional Tech Repair Application
+
+**Document Version:** 2.0  
+**Last Updated:** January 2026  
+**Target Platform:** Android 14+ (API 34+)  
+**Development Tool:** Android Studio Narwhal with Gemini AI Integration  
+**Primary Language:** Kotlin with Jetpack Compose  
+
+---
+
+## TABLE OF CONTENTS
+
+1. [Executive Summary](#1-executive-summary)
+2. [Development Environment Setup](#2-development-environment-setup)
+3. [Project Architecture](#3-project-architecture)
+4. [Complete File Structure](#4-complete-file-structure)
+5. [Core Dependencies](#5-core-dependencies)
+6. [Gemini AI Integration](#6-gemini-ai-integration)
+7. [Feature Implementation](#7-feature-implementation)
+8. [Database Schema](#8-database-schema)
+9. [UI/UX Design](#9-uiux-design)
+10. [Security & Best Practices](#10-security--best-practices)
+11. [Testing Strategy](#11-testing-strategy)
+12. [Deployment Guide](#12-deployment-guide)
+13. [Performance Optimization](#13-performance-optimization)
+14. [FAQ & Debugging](#14-faq--debugging)
+
+---
+
+## 1. EXECUTIVE SUMMARY
+
+### 1.1 App Overview
+
+**Tech Repair Pro** is a comprehensive mobile application designed for tech repair businesses, combining customer service management, AI-powered diagnostics, inventory tracking, and payment processing. Built specifically for Bernard's multi-device repair expertise (smartphones, tablets, computers, appliances, gaming consoles).
+
+### 1.2 Key Features
+
+**Customer-Facing:**
+- Device intake with camera photo documentation
+- AI-powered device recognition & damage detection
+- Real-time repair tracking with push notifications
+- Digital authorization & e-signatures
+- Secure payment processing
+- Repair history & warranty management
+
+**Technician-Facing:**
+- AI diagnostic assistant with Gemini integration
+- Digital work orders with photo attachments
+- Inventory management with barcode scanning
+- Knowledge base & repair guides
+- Time tracking per repair
+- Quality checklists
+
+**Business Management:**
+- Analytics dashboard (revenue, performance metrics)
+- Customer relationship management (CRM)
+- Multi-location support
+- Employee performance tracking
+
+### 1.3 Technology Stack
+
+- **Language:** Kotlin 1.9.x
+- **UI Framework:** Jetpack Compose Material 3
+- **Architecture:** MVVM + Clean Architecture
+- **AI/ML:** Gemini 2.5 Pro, ML Kit, TensorFlow Lite
+- **Backend:** Firebase (Auth, Firestore, Storage, Functions)
+- **Local Database:** Room
+- **Networking:** Retrofit + OkHttp
+- **Image Processing:** CameraX, Coil
+- **Payment:** Stripe Android SDK
+- **Background Tasks:** WorkManager
+- **Dependency Injection:** Hilt
+
+### 1.4 Development Timeline
+
+- **Environment Setup:** 2-3 days
+- **Core Features (MVP):** 4-6 weeks
+- **AI Integration:** 2 weeks
+- **Testing & QA:** 2 weeks
+- **Deployment:** 1 week
+- **Total:** 10-12 weeks
+
+---
+
+## 2. DEVELOPMENT ENVIRONMENT SETUP
+
+### 2.1 System Requirements
+
+**Minimum Requirements:**
+- OS: Windows 10/11 (64-bit), macOS 10.14+, or Linux (64-bit)
+- RAM: 8 GB minimum, 16 GB recommended
+- Disk Space: 10 GB minimum
+- CPU: Intel i5 or AMD Ryzen 5 (or equivalent)
+- Internet: Required for Gemini AI and Firebase
+
+**Recommended for Optimal Performance:**
+- RAM: 32 GB
+- SSD: 500 GB NVMe
+- CPU: Intel i7/i9 or AMD Ryzen 7/9
+- GPU: Dedicated graphics for emulator
+
+### 2.2 Software Installation
+
+#### Step 1: Install Android Studio Narwhal
+
+```bash
+# Download from:
+https://developer.android.com/studio
+
+# Install and configure:
+# 1. Accept licenses
+# 2. Install SDK Platform 34 (Android 14)
+# 3. Install Build Tools 34.0.0
+# 4. Install Android Emulator
+# 5. Install Intel HAXM (Windows/macOS) or KVM (Linux)
+```
+
+#### Step 2: Configure Gemini AI in Android Studio
+
+1. **Enable Gemini:**
+   - Open Android Studio
+   - Go to `Settings/Preferences > Tools > Gemini`
+   - Click "Enable Gemini"
+   - Sign in with Google account
+
+2. **Grant Context Access:**
+   - Allow Gemini to access codebase context
+   - This enables intelligent code suggestions
+
+3. **Install Gemini CLI (Optional):**
+```bash
+# Install Gemini CLI for advanced agent mode
+npm install -g @google-labs/gemini-cli
+
+# Authenticate
+gemini auth login
+
+# Start agent mode in project directory
+gemini agent --project-id=your-project-id
+```
+
+#### Step 3: Install Required SDKs
+
+```bash
+# In Android Studio SDK Manager, install:
+- Android SDK Platform 34
+- Android SDK Build-Tools 34.0.0
+- Android Emulator
+- Google Play Services
+- Google Play APK Expansion Library
+- Google Play Licensing Library
+```
+
+#### Step 4: Configure Firebase
+
+1. **Create Firebase Project:**
+   - Go to https://console.firebase.google.com
+   - Click "Add Project"
+   - Enter project name: "TechRepairPro"
+   - Enable Google Analytics (optional)
+
+2. **Add Android App:**
+   - Click "Add app" > Android
+   - Package name: `com.techrepairpro.app`
+   - Download `google-services.json`
+   - Place in `app/` directory
+
+3. **Enable Firebase Services:**
+   - Authentication (Email/Password, Google)
+   - Firestore Database
+   - Cloud Storage
+   - Cloud Functions
+   - Cloud Messaging
+   - Analytics
+   - Crashlytics
+
+#### Step 5: Get Gemini API Key
+
+1. Visit https://aistudio.google.com/apikey
+2. Click "Get API Key"
+3. Select "Create API key in new project" or choose existing
+4. Copy the API key
+5. Store securely in `local.properties`:
+
+```properties
+# local.properties
+sdk.dir=/path/to/Android/Sdk
+GEMINI_API_KEY=AIzaSy...your-key-here...
+```
+
+### 2.3 Create New Project
+
+```bash
+# In Android Studio:
+# 1. File > New > New Project
+# 2. Select "Empty Activity" with Compose
+# 3. Name: TechRepairPro
+# 4. Package: com.techrepairpro.app
+# 5. Language: Kotlin
+# 6. Minimum SDK: API 24 (Android 7.0)
+# 7. Build configuration language: Kotlin DSL
+```
+
+---
+
+## 3. PROJECT ARCHITECTURE
+
+### 3.1 Clean Architecture Layers
+
+```
+┌─────────────────────────────────────────────┐
+│         PRESENTATION LAYER (UI)             │
+│  ┌──────────────────────────────────────┐   │
+│  │  Jetpack Compose Screens             │   │
+│  │  ViewModels                           │   │
+│  │  UI Components                        │   │
+│  └──────────────────────────────────────┘   │
+└─────────────────────────────────────────────┘
+                    ↕ (State & Events)
+┌─────────────────────────────────────────────┐
+│           DOMAIN LAYER (Business Logic)     │
+│  ┌──────────────────────────────────────┐   │
+│  │  Use Cases                            │   │
+│  │  Business Models                      │   │
+│  │  Repository Interfaces                │   │
+│  └──────────────────────────────────────┘   │
+└─────────────────────────────────────────────┘
+                    ↕ (Data Operations)
+┌─────────────────────────────────────────────┐
+│            DATA LAYER (Data Sources)        │
+│  ┌──────────────────────────────────────┐   │
+│  │  Repositories (Implementation)        │   │
+│  │  Data Sources (Remote/Local)          │   │
+│  │  Firebase / Room / API                │   │
+│  └──────────────────────────────────────┘   │
+└─────────────────────────────────────────────┘
+```
+
+### 3.2 MVVM Pattern
+
+```kotlin
+// View (Composable)
+@Composable
+fun RepairListScreen(
+    viewModel: RepairViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
+    
+    when (uiState) {
+        is UiState.Loading -> LoadingIndicator()
+        is UiState.Success -> RepairList(uiState.data)
+        is UiState.Error -> ErrorMessage(uiState.message)
+    }
+}
+
+// ViewModel
+@HiltViewModel
+class RepairViewModel @Inject constructor(
+    private val getRepairsUseCase: GetRepairsUseCase
+) : ViewModel() {
+    
+    private val _uiState = MutableStateFlow<UiState<List>>(UiState.Loading)
+    val uiState: StateFlow<UiState<List>> = _uiState.asStateFlow()
+    
+    init {
+        loadRepairs()
+    }
+    
+    private fun loadRepairs() {
+        viewModelScope.launch {
+            getRepairsUseCase()
+                .catch { e -> _uiState.value = UiState.Error(e.message) }
+                .collect { repairs -> _uiState.value = UiState.Success(repairs) }
+        }
+    }
+}
+
+// Use Case
+class GetRepairsUseCase @Inject constructor(
+    private val repository: RepairRepository
+) {
+    operator fun invoke(): Flow<List> = repository.getRepairs()
+}
+
+// Repository
+interface RepairRepository {
+    fun getRepairs(): Flow<List>
+}
+
+class RepairRepositoryImpl @Inject constructor(
+    private val remoteDataSource: FirestoreDataSource,
+    private val localDataSource: RepairDao
+) : RepairRepository {
+    override fun getRepairs(): Flow<List> = flow {
+        // Try local first
+        val localRepairs = localDataSource.getAllRepairs().first()
+        emit(localRepairs.map { it.toDomain() })
+        
+        // Then sync with remote
+        val remoteRepairs = remoteDataSource.getRepairs()
+        localDataSource.insertAll(remoteRepairs.map { it.toEntity() })
+        emit(remoteRepairs)
+    }
+}
+```
+
+---
+
+## 4. COMPLETE FILE STRUCTURE
+
+```
+TechRepairPro/
+├── app/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/techrepairpro/app/
+│   │   │   │   ├── TechRepairApplication.kt
+│   │   │   │   ├── MainActivity.kt
+│   │   │   │   │
+│   │   │   │   ├── di/                          # Dependency Injection
+│   │   │   │   │   ├── AppModule.kt
+│   │   │   │   │   ├── NetworkModule.kt
+│   │   │   │   │   ├── DatabaseModule.kt
+│   │   │   │   │   ├── AIModule.kt
+│   │   │   │   │   └── RepositoryModule.kt
+│   │   │   │   │
+│   │   │   │   ├── presentation/                # UI Layer
+│   │   │   │   │   ├── theme/
+│   │   │   │   │   │   ├── Color.kt
+│   │   │   │   │   │   ├── Theme.kt
+│   │   │   │   │   │   ├── Type.kt
+│   │   │   │   │   │   └── Shape.kt
+│   │   │   │   │   │
+│   │   │   │   │   ├── navigation/
+│   │   │   │   │   │   ├── NavGraph.kt
+│   │   │   │   │   │   ├── Screen.kt
+│   │   │   │   │   │   └── NavigationItem.kt
+│   │   │   │   │   │
+│   │   │   │   │   ├── screens/
+│   │   │   │   │   │   ├── auth/
+│   │   │   │   │   │   │   ├── LoginScreen.kt
+│   │   │   │   │   │   │   ├── RegisterScreen.kt
+│   │   │   │   │   │   │   └── LoginViewModel.kt
+│   │   │   │   │   │   │
+│   │   │   │   │   │   ├── customer/
+│   │   │   │   │   │   │   ├── HomeScreen.kt
+│   │   │   │   │   │   │   ├── NewRepairScreen.kt
+│   │   │   │   │   │   │   ├── TrackRepairScreen.kt
+│   │   │   │   │   │   │   ├── RepairHistoryScreen.kt
+│   │   │   │   │   │   │   ├── ProfileScreen.kt
+│   │   │   │   │   │   │   └── CustomerViewModel.kt
+│   │   │   │   │   │   │
+│   │   │   │   │   │   └── technician/
+│   │   │   │   │   │       ├── DashboardScreen.kt
+│   │   │   │   │   │       ├── ActiveRepairsScreen.kt
+│   │   │   │   │   │       ├── DiagnosticScreen.kt
+│   │   │   │   │   │       ├── WorkOrderScreen.kt
+│   │   │   │   │   │       ├── InventoryScreen.kt
+│   │   │   │   │   │       ├── KnowledgeBaseScreen.kt
+│   │   │   │   │   │       └── TechnicianViewModel.kt
+│   │   │   │   │   │
+│   │   │   │   │   ├── components/
+│   │   │   │   │   │   ├── common/
+│   │   │   │   │   │   │   ├── CustomButton.kt
+│   │   │   │   │   │   │   ├── CustomTextField.kt
+│   │   │   │   │   │   │   ├── LoadingIndicator.kt
+│   │   │   │   │   │   │   ├── ErrorDialog.kt
+│   │   │   │   │   │   │   ├── StatusCard.kt
+│   │   │   │   │   │   │   └── PhotoGallery.kt
+│   │   │   │   │   │   │
+│   │   │   │   │   │   ├── camera/
+│   │   │   │   │   │   │   ├── CameraCapture.kt
+│   │   │   │   │   │   │   ├── MultiAngleCapture.kt
+│   │   │   │   │   │   │   └── PhotoPreview.kt
+│   │   │   │   │   │   │
+│   │   │   │   │   │   ├── forms/
+│   │   │   │   │   │   │   ├── DeviceIntakeForm.kt
+│   │   │   │   │   │   │   ├── WorkOrderForm.kt
+│   │   │   │   │   │   │   ├── SignaturePad.kt
+│   │   │   │   │   │   │   └── PaymentForm.kt
+│   │   │   │   │   │   │
+│   │   │   │   │   │   └── diagnostics/
+│   │   │   │   │   │       ├── AIAnalysisCard.kt
+│   │   │   │   │   │       ├── DeviceRecognitionView.kt
+│   │   │   │   │   │       └── DiagnosticWizard.kt
+│   │   │   │   │   │
+│   │   │   │   │   └── viewmodels/
+│   │   │   │   │       ├── CameraViewModel.kt
+│   │   │   │   │       ├── DiagnosticViewModel.kt
+│   │   │   │   │       ├── RepairViewModel.kt
+│   │   │   │   │       ├── InventoryViewModel.kt
+│   │   │   │   │       └── PaymentViewModel.kt
+│   │   │   │   │
+│   │   │   │   ├── domain/                      # Business Logic
+│   │   │   │   │   ├── model/
+│   │   │   │   │   │   ├── User.kt
+│   │   │   │   │   │   ├── Device.kt
+│   │   │   │   │   │   ├── Repair.kt
+│   │   │   │   │   │   ├── Part.kt
+│   │   │   │   │   │   ├── Appointment.kt
+│   │   │   │   │   │   ├── DiagnosticResult.kt
+│   │   │   │   │   │   ├── WorkOrder.kt
+│   │   │   │   │   │   └── Payment.kt
+│   │   │   │   │   │
+│   │   │   │   │   ├── repository/
+│   │   │   │   │   │   ├── RepairRepository.kt
+│   │   │   │   │   │   ├── UserRepository.kt
+│   │   │   │   │   │   ├── DeviceRepository.kt
+│   │   │   │   │   │   ├── InventoryRepository.kt
+│   │   │   │   │   │   ├── DiagnosticRepository.kt
+│   │   │   │   │   │   └── PaymentRepository.kt
+│   │   │   │   │   │
+│   │   │   │   │   └── usecase/
+│   │   │   │   │       ├── repair/
+│   │   │   │   │       │   ├── GetRepairsUseCase.kt
+│   │   │   │   │       │   ├── CreateRepairUseCase.kt
+│   │   │   │   │       │   ├── UpdateRepairStatusUseCase.kt
+│   │   │   │   │       │   └── DeleteRepairUseCase.kt
+│   │   │   │   │       ├── device/
+│   │   │   │   │       │   ├── RecognizeDeviceUseCase.kt
+│   │   │   │   │       │   └── RegisterDeviceUseCase.kt
+│   │   │   │   │       ├── diagnostic/
+│   │   │   │   │       │   ├── AnalyzeDeviceUseCase.kt
+│   │   │   │   │       │   └── GenerateDiagnosticReportUseCase.kt
+│   │   │   │   │       └── auth/
+│   │   │   │   │           ├── LoginUseCase.kt
+│   │   │   │   │           └── RegisterUseCase.kt
+│   │   │   │   │
+│   │   │   │   ├── data/                        # Data Layer
+│   │   │   │   │   ├── local/
+│   │   │   │   │   │   ├── database/
+│   │   │   │   │   │   │   ├── AppDatabase.kt
+│   │   │   │   │   │   │   ├── Converters.kt
+│   │   │   │   │   │   │   ├── dao/
+│   │   │   │   │   │   │   │   ├── RepairDao.kt
+│   │   │   │   │   │   │   │   ├── DeviceDao.kt
+│   │   │   │   │   │   │   │   ├── PartDao.kt
+│   │   │   │   │   │   │   │   └── UserDao.kt
+│   │   │   │   │   │   │   └── entity/
+│   │   │   │   │   │   │       ├── RepairEntity.kt
+│   │   │   │   │   │   │       ├── DeviceEntity.kt
+│   │   │   │   │   │   │       ├── PartEntity.kt
+│   │   │   │   │   │   │       └── UserEntity.kt
+│   │   │   │   │   │   │
+│   │   │   │   │   │   └── preferences/
+│   │   │   │   │   │       ├── UserPreferences.kt
+│   │   │   │   │   │       └── DataStoreManager.kt
+│   │   │   │   │   │
+│   │   │   │   │   ├── remote/
+│   │   │   │   │   │   ├── api/
+│   │   │   │   │   │   │   ├── ApiService.kt
+│   │   │   │   │   │   │   ├── PaymentApi.kt
+│   │   │   │   │   │   │   └── dto/
+│   │   │   │   │   │   │       ├── RepairDto.kt
+│   │   │   │   │   │   │       ├── DeviceDto.kt
+│   │   │   │   │   │   │       └── PaymentDto.kt
+│   │   │   │   │   │   │
+│   │   │   │   │   │   └── firebase/
+│   │   │   │   │   │       ├── FirestoreDataSource.kt
+│   │   │   │   │   │       ├── StorageDataSource.kt
+│   │   │   │   │   │       ├── AuthDataSource.kt
+│   │   │   │   │   │       └── MessagingService.kt
+│   │   │   │   │   │
+│   │   │   │   │   └── repository/
+│   │   │   │   │       ├── RepairRepositoryImpl.kt
+│   │   │   │   │       ├── UserRepositoryImpl.kt
+│   │   │   │   │       ├── DeviceRepositoryImpl.kt
+│   │   │   │   │       ├── InventoryRepositoryImpl.kt
+│   │   │   │   │       ├── DiagnosticRepositoryImpl.kt
+│   │   │   │   │       └── PaymentRepositoryImpl.kt
+│   │   │   │   │
+│   │   │   │   ├── ai/                          # AI/ML Integration
+│   │   │   │   │   ├── gemini/
+│   │   │   │   │   │   ├── GeminiClient.kt
+│   │   │   │   │   │   ├── DeviceRecognizer.kt
+│   │   │   │   │   │   ├── DiagnosticAgent.kt
+│   │   │   │   │   │   ├── NaturalLanguageProcessor.kt
+│   │   │   │   │   │   └── PromptTemplates.kt
+│   │   │   │   │   │
+│   │   │   │   │   ├── mlkit/
+│   │   │   │   │   │   ├── TextRecognizer.kt
+│   │   │   │   │   │   ├── BarcodeScanner.kt
+│   │   │   │   │   │   ├── ImageLabeler.kt
+│   │   │   │   │   │   └── ObjectDetector.kt
+│   │   │   │   │   │
+│   │   │   │   │   └── tflite/
+│   │   │   │   │       ├── DeviceClassifier.kt
+│   │   │   │   │       ├── DamageDetector.kt
+│   │   │   │   │       └── ModelManager.kt
+│   │   │   │   │
+│   │   │   │   ├── utils/                       # Utilities
+│   │   │   │   │   ├── ImageUtils.kt
+│   │   │   │   │   ├── DateUtils.kt
+│   │   │   │   │   ├── CurrencyUtils.kt
+│   │   │   │   │   ├── ValidationUtils.kt
+│   │   │   │   │   ├── PDFGenerator.kt
+│   │   │   │   │   ├── PermissionUtils.kt
+│   │   │   │   │   ├── NotificationUtils.kt
+│   │   │   │   │   └── Constants.kt
+│   │   │   │   │
+│   │   │   │   └── workers/                     # Background Tasks
+│   │   │   │       ├── SyncWorker.kt
+│   │   │   │       ├── ImageUploadWorker.kt
+│   │   │   │       ├── NotificationWorker.kt
+│   │   │   │       └── BackupWorker.kt
+│   │   │   │
+│   │   │   ├── res/
+│   │   │   │   ├── drawable/
+│   │   │   │   │   ├── ic_launcher_foreground.xml
+│   │   │   │   │   ├── ic_phone.xml
+│   │   │   │   │   ├── ic_tablet.xml
+│   │   │   │   │   ├── ic_laptop.xml
+│   │   │   │   │   ├── ic_camera.xml
+│   │   │   │   │   └── ic_repair.xml
+│   │   │   │   │
+│   │   │   │   ├── mipmap/
+│   │   │   │   │   ├── ic_launcher/
+│   │   │   │   │   └── ic_launcher_round/
+│   │   │   │   │
+│   │   │   │   ├── values/
+│   │   │   │   │   ├── strings.xml
+│   │   │   │   │   ├── colors.xml
+│   │   │   │   │   ├── themes.xml
+│   │   │   │   │   └── dimens.xml
+│   │   │   │   │
+│   │   │   │   ├── xml/
+│   │   │   │   │   ├── network_security_config.xml
+│   │   │   │   │   ├── file_paths.xml
+│   │   │   │   │   └── backup_rules.xml
+│   │   │   │   │
+│   │   │   │   └── raw/
+│   │   │   │       ├── device_model.tflite
+│   │   │   │       ├── damage_detector.tflite
+│   │   │   │       └── labels.txt
+│   │   │   │
+│   │   │   ├── AndroidManifest.xml
+│   │   │   └── google-services.json
+│   │   │
+│   │   ├── test/
+│   │   │   └── java/com/techrepairpro/app/
+│   │   │       ├── viewmodel/
+│   │   │       ├── repository/
+│   │   │       ├── usecase/
+│   │   │       └── utils/
+│   │   │
+│   │   └── androidTest/
+│   │       └── java/com/techrepairpro/app/
+│   │           ├── ui/
+│   │           ├── database/
+│   │           └── integration/
+│   │
+│   ├── build.gradle.kts
+│   └── proguard-rules.pro
+│
+├── buildSrc/
+│   └── src/main/kotlin/
+│       └── Dependencies.kt
+│
+├── gradle/
+│   └── wrapper/
+├── build.gradle.kts
+├── settings.gradle.kts
+├── gradle.properties
+├── local.properties
+├── AGENTS.md                                    # Gemini AI Instructions
+└── README.md
+```
+
+---
+
+## 5. CORE DEPENDENCIES
+
+### 5.1 build.gradle.kts (Project Level)
+
+```kotlin
+// Top-level build file
+buildscript {
+    dependencies {
+        classpath("com.google.gms:google-services:4.4.0")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.9")
+    }
+}
+
+plugins {
+    id("com.android.application") version "8.2.1" apply false
+    id("com.android.library") version "8.2.1" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.22" apply false
+    id("com.google.dagger.hilt.android") version "2.50" apply false
+    id("com.google.devtools.ksp") version "1.9.22-1.0.17" apply false
+}
+```
+
+### 5.2 build.gradle.kts (App Level)
+
+```kotlin
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+    kotlin("plugin.serialization") version "1.9.22"
+}
+
+android {
+    namespace = "com.techrepairpro.app"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "com.techrepairpro.app"
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+
+        // Load API keys from local.properties
+        val properties = org.jetbrains.kotlin.konan.properties.Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        buildConfigField("String", "GEMINI_API_KEY", "\"${properties.getProperty("GEMINI_API_KEY")}\"")
+        buildConfigField("String", "STRIPE_PUBLISHABLE_KEY", "\"${properties.getProperty("STRIPE_KEY")}\"")
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            
+            // Enable R8 full mode for better optimization
+            isDebuggable = false
+        }
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    
+    kotlinOptions {
+        jvmTarget = "17"
+        freeCompilerArgs += listOf(
+            "-opt-in=kotlin.RequiresOptIn",
+            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+        )
+    }
+    
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+    
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
+    }
+    
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+}
+
+dependencies {
+    // Core Android
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    
+    // Jetpack Compose BOM (Bill of Materials)
+    implementation(platform("androidx.compose:compose-bom:2024.01.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material-icons-extended")
+    implementation("androidx.navigation:navigation-compose:2.7.6")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    
+    // Lifecycle & ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    
+    // Hilt Dependency Injection
+    implementation("com.google.dagger:hilt-android:2.50")
+    ksp("com.google.dagger:hilt-compiler:2.50")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("androidx.hilt:hilt-work:1.1.0")
+    ksp("androidx.hilt:hilt-compiler:1.1.0")
+    
+    // Google Gemini AI
+    implementation("com.google.ai.client.generativeai:generativeai:0.2.0")
+    
+    // Firebase BOM
+    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
+    implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-functions-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-perf-ktx")
+    implementation("com.google.firebase:firebase-config-ktx")
+    
+    // ML Kit
+    implementation("com.google.mlkit:text-recognition:16.0.0")
+    implementation("com.google.mlkit:barcode-scanning:17.2.0")
+    implementation("com.google.mlkit:image-labeling:17.0.8")
+    implementation("com.google.mlkit:object-detection:17.0.1")
+    
+    // TensorFlow Lite
+    implementation("org.tensorflow:tensorflow-lite:2.14.0")
+    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite-gpu:2.14.0")
+    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
+    
+    // CameraX
+    val cameraxVersion = "1.3.1"
+    implementation("androidx.camera:camera-core:$cameraxVersion")
+    implementation("androidx.camera:camera-camera2:$cameraxVersion")
+    implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
+    implementation("androidx.camera:camera-view:$cameraxVersion")
+    implementation("androidx.camera:camera-extensions:$cameraxVersion")
+    
+    // Room Database
+    val roomVersion = "2.6.1"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+    
+    // DataStore (Preferences)
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    
+    // Networking - Retrofit & OkHttp
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    
+    // Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")
+    
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+    
+    // Image Loading - Coil
+    implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation("io.coil-kt:coil-gif:2.5.0")
+    
+    // Image Compression
+    implementation("id.zelory:compressor:3.0.1")
+    
+    // PDF Generation - iText
+    implementation("com.itextpdf:itext7-core:7.2.5")
+    
+    // Signature Pad
+    implementation("com.github.gcacace:signature-pad:1.3.1")
+    
+    // Location Services
+    implementation("com.google.android.gms:play-services-location:21.1.0")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    
+    // Payment - Stripe
+    implementation("com.stripe:stripe-android:20.37.2")
+    
+    // Date & Time
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+    
+    // WorkManager (Background Tasks)
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    
+    // Accompanist (Compose Extensions)
+    val accompanistVersion = "0.32.0"
+    implementation("com.google.accompanist:accompanist-permissions:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-navigation-animation:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-swiperefresh:$accompanistVersion")
+    
+    // Lottie Animations
+    implementation("com.airbnb.android:lottie-compose:6.3.0")
+    
+    // Splash Screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+    
+    // Biometric Authentication
+    implementation("androidx.biometric:biometric:1.1.0")
+    
+    // Testing
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("app.cash.turbine:turbine:1.0.0")
+    testImplementation("com.google.truth:truth:1.1.5")
+    testImplementation("io.mockk:mockk:1.13.9")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.01.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.7.6")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.50")
+    kspAndroidTest("com.google.dagger:hilt-compiler:2.50")
+}
+```
+
+---
+
+## 6. GEMINI AI INTEGRATION
+
+### 6.1 Setting Up Gemini Client
+
+**File: `ai/gemini/GeminiClient.kt`**
+
+```kotlin
+package com.techrepairpro.app.ai.gemini
+
+import android.graphics.Bitmap
+import com.google.ai.client.generativeai.GenerativeModel
+import com.google.ai.client.generativeai.type.BlockThreshold
+import com.google.ai.client.generativeai.type.HarmCategory
+import com.google.ai.client.generativeai.type.SafetySetting
+import com.google.ai.client.generativeai.type.content
+import com.google.ai.client.generativeai.type.generationConfig
+import com.techrepairpro.app.BuildConfig
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class GeminiClient @Inject constructor() {
+    
+    private val apiKey = BuildConfig.GEMINI_API_KEY
+    
+    // Vision model for image analysis
+    private val visionModel = GenerativeModel(
+        modelName = "gemini-1.5-pro-latest",
+        apiKey = apiKey,
+        generationConfig = generationConfig {
+            temperature = 0.4f
+            topK = 32
+            topP = 1f
+            maxOutputTokens = 4096
+        },
+        safetySettings = listOf(
+            SafetySetting(HarmCategory.HARASSMENT, BlockThreshold.MEDIUM_AND_ABOVE),
+            SafetySetting(HarmCategory.HATE_SPEECH, BlockThreshold.MEDIUM_AND_ABOVE),
+            SafetySetting(HarmCategory.SEXUALLY_EXPLICIT, BlockThreshold.MEDIUM_AND_ABOVE),
+            SafetySetting(HarmCategory.DANGEROUS_CONTENT, BlockThreshold.MEDIUM_AND_ABOVE),
+        )
+    )
+    
+    // Text model for conversational AI
+    private val textModel = GenerativeModel(
+        modelName = "gemini-1.5-flash-latest",
+        apiKey = apiKey,
+        generationConfig = generationConfig {
+            temperature = 0.7f
+            topK = 40
+            topP = 0.95f
+            maxOutputTokens = 2048
+        }
+    )
+    
+    /**
+     * Analyze device image and extract information
+     */
+    suspend fun analyzeDeviceImage(
+        image: Bitmap,
+        prompt: String
+    ): Result = withContext(Dispatchers.IO) {
+        try {
+            val response = visionModel.generateContent(
+                content {
+                    image(image)
+                    text(prompt)
+                }
+            )
+            Result.success(response.text ?: "No response generated")
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+    
+    /**
+     * Generate diagnostic suggestions
+     */
+    suspend fun generateDiagnostic(
+        deviceInfo: String,
+        userComplaint: String,
+        symptoms: List
+    ): Result = withContext(Dispatchers.IO) {
+        try {
+            val prompt = buildDiagnosticPrompt(deviceInfo, userComplaint, symptoms)
+            val response = textModel.generateContent(prompt)
+            Result.success(response.text ?: "Unable to generate diagnostic")
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+    
+    /**
+     * Chat-based troubleshooting assistant
+     */
+    suspend fun chat(message: String, context: String? = null): Result = 
+        withContext(Dispatchers.IO) {
+            try {
+                val fullPrompt = if (context != null) {
+                    "Context: $context\n\nUser: $message"
+                } else {
+                    message
+                }
+                val response = textModel.generateContent(fullPrompt)
+                Result.success(response.text ?: "No response")
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+        }
+    
+    private fun buildDiagnosticPrompt(
+        deviceInfo: String,
+        complaint: String,
+        symptoms: List
+    ): String = """
+        You are an expert tech repair technician with certifications in Samsung, Apple, Google, 
+        and major appliance repair. Analyze the following case and provide diagnostic insights.
+        
+        DEVICE INFORMATION:
+        $deviceInfo
+        
+        CUSTOMER COMPLAINT:
+        $complaint
+        
+        OBSERVED SYMPTOMS:
+        ${symptoms.joinToString("\n- ", prefix = "- ")}
+        
+        Please provide:
+        1. TOP 3 MOST LIKELY ROOT CAUSES (ranked by probability)
+        2. RECOMMENDED DIAGNOSTIC STEPS (in order of execution)
+        3. REQUIRED PARTS (if applicable, with part numbers when possible)
+        4. ESTIMATED REPAIR TIME (in minutes)
+        5. REPAIR DIFFICULTY (Easy/Moderate/Difficult/Expert)
+        6. SAFETY PRECAUTIONS (if device involves batteries, high voltage, etc.)
+        7. ESTIMATED COST (parts + labor estimate in USD)
+        
+        Format your response as structured JSON for easy parsing.
+    """.trimIndent()
+}
+
+data class DiagnosticResponse(
+    val rootCauses: List,
+    val diagnosticSteps: List,
+    val requiredParts: List,
+    val estimatedTime: Int, // minutes
+    val difficulty: Difficulty,
+    val safetyPrecautions: List,
+    val estimatedCost: Cost
+)
+
+data class RootCause(
+    val cause: String,
+    val probability: Float,
+    val explanation: String
+)
+
+data class Part(
+    val name: String,
+    val partNumber: String?,
+    val estimatedCost: Double
+)
+
+data class Cost(
+    val parts: Double,
+    val labor: Double,
+    val total: Double
+)
+
+enum class Difficulty {
+    EASY, MODERATE, DIFFICULT, EXPERT
+}
+```
+
+### 6.2 Device Recognition Implementation
+
+**File: `ai/gemini/DeviceRecognizer.kt`**
+
+```kotlin
+package com.techrepairpro.app.ai.gemini
+
+import android.graphics.Bitmap
+import com.google.ai.client.generativeai.type.content
+import com.techrepairpro.app.domain.model.DeviceInfo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class DeviceRecognizer @Inject constructor(
+    private val geminiClient: GeminiClient
+) {
+    
+    private val json = Json { ignoreUnknownKeys = true }
+    
+    suspend fun recognizeDevice(image: Bitmap): Result = 
+        withContext(Dispatchers.IO) {
+            val prompt = """
+                Analyze this image and identify the electronic device or appliance shown.
+                
+                Provide information in the following JSON format:
+                {
+                  "brand": "manufacturer name (Apple, Samsung, Google, LG, etc.)",
+                  "model": "exact model name (e.g., iPhone 14 Pro, Galaxy S23 Ultra)",
+                  "deviceType": "smartphone|tablet|laptop|desktop|appliance|gaming_console|smartwatch|tv|other",
+                  "detectedDamage": ["list", "of", "visible", "damage"],
+                  "condition": "Excellent|Good|Fair|Poor",
+                  "confidence": 0.95,
+                  "estimatedValue": "${'}XXX",
+                  "serialNumberVisible": true/false,
+                  "additionalNotes": "any other relevant observations"
+                }
+                
+                If multiple devices are visible, focus on the primary device in the foreground.
+                Be as specific as possible with the model identification.
+            """.trimIndent()
+            
+            try {
+                val response = geminiClient.analyzeDeviceImage(image, prompt)
+                response.fold(
+                    onSuccess = { text ->
+                        val cleanedJson = extractJson(text)
+                        val result = json.decodeFromString(cleanedJson)
+                        Result.success(result)
+                    },
+                    onFailure = { e -> Result.failure(e) }
+                )
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+        }
+    
+    suspend fun detectDamage(image: Bitmap): Result<List> = 
+        withContext(Dispatchers.IO) {
+            val prompt = """
+                Analyze this device image and identify ALL visible damage, defects, or wear.
+                
+                Return a JSON array of damage items:
+                [
+                  {
+                    "damageType": "type of damage",
+                    "severity": "Minor|Moderate|Severe",
+                    "location": "where on the device",
+                    "description": "detailed description",
+                    "repairability": "Easy|Moderate|Difficult|Not Repairable",
+                    "estimatedCost": "${'}XX-${'}XX range"
+                  }
+                ]
+                
+                Common damage types:
+                - Cracked screen
+                - Scratched display
+                - Dented/bent frame
+                - Water damage indicators
+                - Broken buttons
+                - Damaged charging port
+                - Camera lens scratches
+                - Missing components
+                - Corrosion
+                - Burn marks
+            """.trimIndent()
+            
+            try {
+                val response = geminiClient.analyzeDeviceImage(image, prompt)
+                response.fold(
+                    onSuccess = { text ->
+                        val cleanedJson = extractJson(text)
+                        val damages = json.decodeFromString<List>(cleanedJson)
+                        Result.success(damages)
+                    },
+                    onFailure = { e -> Result.failure(e) }
+                )
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+        }
+    
+    private fun extractJson(text: String): String {
+        // Remove markdown code blocks if present
+        var cleaned = text.trim()
+        if (cleaned.startsWith("```json")) {
+            cleaned = cleaned.removePrefix("```json").removeSuffix("```").trim()
+        } else if (cleaned.startsWith("```")) {
+            cleaned = cleaned.removePrefix("```").removeSuffix("```").trim()
+        }
+        return cleaned
+    }
+}
+
+@Serializable
+data class DeviceRecognitionResult(
+    val brand: String,
+    val model: String,
+    val deviceType: String,
+    val detectedDamage: List,
+    val condition: String,
+    val confidence: Float,
+    val estimatedValue: String,
+    val serialNumberVisible: Boolean = false,
+    val additionalNotes: String = ""
+)
+
+@Serializable
+data class DamageReport(
+    val damageType: String,
+    val severity: String,
+    val location: String,
+    val description: String,
+    val repairability: String,
+    val estimatedCost: String
+)
+```
+
+### 6.3 Diagnostic Agent with Multi-Turn Conversation
+
+**File: `ai/gemini/DiagnosticAgent.kt`**
+
+```kotlin
+package com.techrepairpro.app.ai.gemini
+
+import com.google.ai.client.generativeai.Chat
+import com.google.ai.client.generativeai.GenerativeModel
+import com.google.ai.client.generativeai.type.content
+import com.techrepairpro.app.BuildConfig
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class DiagnosticAgent @Inject constructor() {
+    
+    private val model = GenerativeModel(
+        modelName = "gemini-1.5-flash-latest",
+        apiKey = BuildConfig.GEMINI_API_KEY
+    )
+    
+    private var activeChat: Chat? = null
+    
+    /**
+     * Start a diagnostic conversation session
+     */
+    fun startDiagnosticSession(
+        deviceInfo: String,
+        initialComplaint: String
+    ): Chat {
+        val systemPrompt = """
+            You are an expert tech repair assistant specializing in Samsung, Apple, Google devices,
+            and major home appliances. You're helping diagnose a repair issue.
+            
+            DEVICE: $deviceInfo
+            INITIAL COMPLAINT: $initialComplaint
+            
+            Your role:
+            - Ask clarifying questions to narrow down the root cause
+            - Suggest diagnostic tests the technician can perform
+            - Recommend specific repair procedures
+            - Provide parts information when relevant
+            - Keep responses concise and actionable
+            
+            Always respond in a professional, helpful manner. If you're unsure, admit it and
+            suggest alternative diagnostic paths.
+        """.trimIndent()
+        
+        activeChat = model.startChat(
+            history = listOf(
+                content(role = "user") { text(systemPrompt) },
+                content(role = "model") { 
+                    text("Understood. I'm ready to help diagnose this ${deviceInfo}. What specific symptoms are you observing?")
+                }
+            )
+        )
+        
+        return activeChat!!
+    }
+    
+    /**
+     * Send message and get streaming response
+     */
+    suspend fun sendMessage(message: String): Flow = flow {
+        activeChat?.let { chat ->
+            val response = chat.sendMessageStream(message)
+            response.collect { chunk ->
+                emit(chunk.text ?: "")
+            }
+        } ?: run {
+            emit("Error: No active diagnostic session. Please start a new session.")
+        }
+    }
+    
+    /**
+     * End diagnostic session
+     */
+    fun endSession() {
+        activeChat = null
+    }
+    
+    /**
+     * Get conversation history
+     */
+    fun getHistory(): List {
+        return activeChat?.history ?: emptyList()
+    }
+}
+```
+
+---
+
+## 7. FEATURE IMPLEMENTATION
+
+### 7.1 Camera Capture with CameraX
+
+**File: `presentation/components/camera/CameraCapture.kt`**
+
+```kotlin
+package com.techrepairpro.app.presentation.components.camera
+
+import android.net.Uri
+import androidx.camera.core.*
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Camera
+import androidx.compose.material.icons.filled.FlipCameraAndroid
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
+
+@Composable
+fun CameraCapture(
+    onImageCaptured: (Uri) -> Unit,
+    onError: (Exception) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
+    
+    val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
+    val previewView = remember { PreviewView(context) }
+    
+    var imageCapture by remember { mutableStateOf(null) }
+    var lensFacing by remember { mutableStateOf(CameraSelector.LENS_FACING_BACK) }
+    var flashMode by remember { mutableStateOf(ImageCapture.FLASH_MODE_AUTO) }
+    
+    LaunchedEffect(lensFacing) {
+        val cameraProvider = cameraProviderFuture.get()
+        
+        val preview = Preview.Builder().build().also {
+            it.setSurfaceProvider(previewView.surfaceProvider)
+        }
+        
+        imageCapture = ImageCapture.Builder()
+            .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
+            .setFlashMode(flashMode)
+            .setTargetRotation(previewView.display.rotation)
+            .build()
+        
+        val cameraSelector = CameraSelector.Builder()
+            .requireLensFacing(lensFacing)
+            .build()
+        
+        try {
+            cameraProvider.unbindAll()
+            cameraProvider.bindToLifecycle(
+                lifecycleOwner,
+                cameraSelector,
+                preview,
+                imageCapture
+            )
+        } catch (e: Exception) {
+            onError(e)
+        }
+    }
+    
+    Box(modifier = modifier.fillMaxSize()) {
+        AndroidView(
+            factory = { previewView },
+            modifier = Modifier.fillMaxSize()
+        )
+        
+        // Camera controls overlay
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            // Top controls (flash toggle)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
+                IconButton(
+                    onClick = {
+                        flashMode = when (flashMode) {
+                            ImageCapture.FLASH_MODE_AUTO -> ImageCapture.FLASH_MODE_ON
+                            ImageCapture.FLASH_MODE_ON -> ImageCapture.FLASH_MODE_OFF
+                            else -> ImageCapture.FLASH_MODE_AUTO
+                        }
+                        imageCapture?.flashMode = flashMode
+                    },
+                    modifier = Modifier
+                        .background(Color.Black.copy(alpha = 0.5f), CircleShape)
+                ) {
+                    Icon(
+                        imageVector = when (flashMode) {
+                            ImageCapture.FLASH_MODE_ON -> Icons.Default.FlipCameraAndroid
+                            else -> Icons.Default.Camera
+                        },
+                        contentDescription = "Flash mode",
+                        tint = Color.White
+                    )
+                }
+            }
+            
+            // Bottom controls (capture & flip)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                // Flip camera
+                IconButton(
+                    onClick = {
+                        lensFacing = if (lensFacing == CameraSelector.LENS_FACING_BACK) {
+                            CameraSelector.LENS_FACING_FRONT
+                        } else {
+                            CameraSelector.LENS_FACING_BACK
+                        }
+                    },
+                    modifier = Modifier
+                        .size(60.dp)
+                        .background(Color.Black.copy(alpha = 0.5f), CircleShape)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.FlipCameraAndroid,
+                        contentDescription = "Flip camera",
+                        tint = Color.White,
+                        modifier = Modifier.size(32.dp)
+                    )
+                }
+                
+                // Capture button
+                FloatingActionButton(
+                    onClick = {
+                        val photoFile = File(
+                            context.cacheDir,
+                            SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US)
+                                .format(System.currentTimeMillis()) + ".jpg"
+                        )
+                        
+                        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+                        
+                        imageCapture?.takePicture(
+                            outputOptions,
+                            ContextCompat.getMainExecutor(context),
+                            object : ImageCapture.OnImageSavedCallback {
+                                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                                    onImageCaptured(Uri.fromFile(photoFile))
+                                }
+                                
+                                override fun onError(exception: ImageCaptureException) {
+                                    onError(exception)
+                                }
+                            }
+                        )
+                    },
+                    modifier = Modifier.size(80.dp),
+                    containerColor = MaterialTheme.colorScheme.primary
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Camera,
+                        contentDescription = "Take picture",
+                        modifier = Modifier.size(40.dp)
+                    )
+                }
+                
+                // Placeholder for symmetry
+                Spacer(modifier = Modifier.size(60.dp))
+            }
+        }
+    }
+}
+```
+
+### 7.2 Device Intake Screen
+
+**File: `presentation/screens/customer/NewRepairScreen.kt`**
+
+```kotlin
+package com.techrepairpro.app.presentation.screens.customer
+
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.techrepairpro.app.presentation.components.camera.CameraCapture
+import com.techrepairpro.app.presentation.viewmodels.RepairViewModel
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun NewRepairScreen(
+    viewModel: RepairViewModel = hiltViewModel(),
+    onNavigateBack: () -> Unit
+) {
+    val uiState by viewModel.newRepairUiState.collectAsState()
+    var showCamera by remember { mutableStateOf(false) }
+    var issueDescription by remember { mutableStateOf("") }
+    var selectedIssueType by remember { mutableStateOf(null) }
+    
+    val galleryLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let { viewModel.addPhoto(it) }
+    }
+    
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("New Repair Request") },
+                navigationIcon = {
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(Icons.Default.ArrowBack, "Back")
+                    }
+                }
+            )
+        }
+    ) { padding ->
+        if (showCamera) {
+            CameraCapture(
+                onImageCaptured = { uri ->
+                    viewModel.addPhoto(uri)
+                    viewModel.analyzeDevice(uri)
+                    showCamera = false
+                },
+                onError = { error ->
+                    // Handle error
+                    showCamera = false
+                },
+                modifier = Modifier.fillMaxSize()
+            )
+        } else {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .verticalScroll(rememberScrollState())
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Device recognition result
+                uiState.recognizedDevice?.let { device ->
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                        )
+                    ) {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Text(
+                                "Device Detected",
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text("${device.brand} ${device.model}")
+                            Text(
+                                "Confidence: ${(device.confidence * 100).toInt()}%",
+                                style = MaterialTheme.typography.bodySmall
+                            )
+                        }
+                    }
+                }
+                
+                // Photo capture section
+                Text(
+                    "Device Photos",
+                    style = MaterialTheme.typography.titleLarge
+                )
+                
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    OutlinedButton(
+                        onClick = { showCamera = true },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Icon(Icons.Default.Camera, "Camera")
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("Take Photo")
+                    }
+                    
+                    OutlinedButton(
+                        onClick = { galleryLauncher.launch("image/*") },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Icon(Icons.Default.PhotoLibrary, "Gallery")
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("From Gallery")
+                    }
+                }
+                
+                // Display captured photos
+                // (Photo grid implementation)
+                
+                // Issue type selection
+                Text(
+                    "What's the problem?",
+                    style = MaterialTheme.typography.titleLarge
+                )
+                
+                val issueTypes = listOf(
+                    "Screen Damage" to Icons.Default.PhoneAndroid,
+                    "Battery Issues" to Icons.Default.BatteryAlert,
+                    "Charging Problems" to Icons.Default.Power,
+                    "Water Damage" to Icons.Default.WaterDrop,
+                    "Won't Turn On" to Icons.Default.PowerOff,
+                    "Software Issues" to Icons.Default.Settings,
+                    "Other" to Icons.Default.HelpOutline
+                )
+                
+                issueTypes.chunked(2).forEach { rowItems ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        rowItems.forEach { (label, icon) ->
+                            FilterChip(
+                                selected = selectedIssueType == label,
+                                onClick = { selectedIssueType = label },
+                                label = { Text(label) },
+                                leadingIcon = {
+                                    Icon(icon, label, modifier = Modifier.size(18.dp))
+                                },
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+                        if (rowItems.size == 1) {
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
+                    }
+                }
+                
+                // Issue description
+                OutlinedTextField(
+                    value = issueDescription,
+                    onValueChange = { issueDescription = it },
+                    label = { Text("Describe the issue in detail") },
+                    modifier = Modifier.fillMaxWidth(),
+                    minLines = 4,
+                    maxLines = 8
+                )
+                
+                // AI Diagnostic button
+                if (uiState.recognizedDevice != null && issueDescription.isNotEmpty()) {
+                    Button(
+                        onClick = {
+                            viewModel.generateDiagnostic(
+                                deviceInfo = "${uiState.recognizedDevice!!.brand} ${uiState.recognizedDevice!!.model}",
+                                complaint = issueDescription,
+                                issueType = selectedIssueType ?: "Unknown"
+                            )
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(Icons.Default.Science, "AI Diagnostic")
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("Get AI Diagnostic")
+                    }
+                }
+                
+                // Diagnostic results
+                uiState.diagnostic?.let { diagnostic ->
+                    Card(modifier = Modifier.fillMaxWidth()) {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Text(
+                                "AI Diagnostic Results",
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(diagnostic)
+                        }
+                    }
+                }
+                
+                // Submit button
+                Button(
+                    onClick = {
+                        viewModel.submitRepairRequest(
+                            issueType = selectedIssueType ?: "Other",
+                            description = issueDescription
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = uiState.photos.isNotEmpty() && issueDescription.isNotEmpty()
+                ) {
+                    Text("Submit Repair Request")
+                }
+                
+                if (uiState.isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                }
+            }
+        }
+    }
+}
+```
+
+---
+
+## 8. DATABASE SCHEMA
+
+### 8.1 Room Database Setup
+
+**File: `data/local/database/AppDatabase.kt`**
+
+```kotlin
+package com.techrepairpro.app.data.local.database
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.techrepairpro.app.data.local.database.dao.*
+import com.techrepairpro.app.data.local.database.entity.*
+
+@Database(
+    entities = [
+        UserEntity::class,
+        DeviceEntity::class,
+        RepairEntity::class,
+        PartEntity::class,
+        AppointmentEntity::class,
+        WorkOrderEntity::class,
+        PaymentEntity::class
+    ],
+    version = 1,
+    exportSchema = false
+)
+@TypeConverters(Converters::class)
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun userDao(): UserDao
+    abstract fun deviceDao(): DeviceDao
+    abstract fun repairDao(): RepairDao
+    abstract fun partDao(): PartDao
+    abstract fun appointmentDao(): AppointmentDao
+    abstract fun workOrderDao(): WorkOrderDao
+    abstract fun paymentDao(): PaymentDao
+}
+```
+
+**File: `data/local/database/Converters.kt`**
+
+```kotlin
+package com.techrepairpro.app.data.local.database
+
+import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.util.Date
+
+class Converters {
+    
+    private val gson = Gson()
+    
+    @TypeConverter
+    fun fromTimestamp(value: Long?): Date? {
+        return value?.let { Date(it) }
+    }
+    
+    @TypeConverter
+    fun dateToTimestamp(date: Date?): Long? {
+        return date?.time
+    }
+    
+    @TypeConverter
+    fun fromStringList(value: String?): List? {
+        val listType = object : TypeToken<List>() {}.type
+        return gson.fromJson(value, listType)
+    }
+    
+    @TypeConverter
+    fun toStringList(list: List?): String? {
+        return gson.toJson(list)
+    }
+    
+    @TypeConverter
+    fun fromMap(value: String?): Map? {
+        val mapType = object : TypeToken<Map>() {}.type
+        return gson.fromJson(value, mapType)
+    }
+    
+    @TypeConverter
+    fun toMap(map: Map?): String? {
+        return gson.toJson(map)
+    }
+}
+```
+
+### 8.2 Entity Definitions
+
+**File: `data/local/database/entity/RepairEntity.kt`**
+
+```kotlin
+package com.techrepairpro.app.data.local.database.entity
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.util.Date
+
+@Entity(tableName = "repairs")
+data class RepairEntity(
+    @PrimaryKey
+    val id: String,
+    val customerId: String,
+    val deviceId: String,
+    val technicianId: String?,
+    val status: String, // RECEIVED, DIAGNOSING, AWAITING_PARTS, IN_REPAIR, QUALITY_CHECK, READY, COMPLETED
+    val issueType: String,
+    val issueDescription: String,
+    val diagnosticNotes: String?,
+    val photoUrls: List,
+    val partsUsed: List, // List of part IDs
+    val laborHours: Float,
+    val partsCost: Double,
+    val laborCost: Double,
+    val totalCost: Double,
+    val customerAuthorized: Boolean,
+    val signatureUrl: String?,
+    val estimatedCompletionDate: Date?,
+    val createdAt: Date,
+    val updatedAt: Date,
+    val completedAt: Date?,
+    val warranty: Int?, // Warranty period in days
+    val priorityLevel: String // NORMAL, URGENT, RUSH
+)
+
+@Entity(tableName = "devices")
+data class DeviceEntity(
+    @PrimaryKey
+    val id: String,
+    val customerId: String,
+    val brand: String,
+    val model: String,
+    val deviceType: String, // SMARTPHONE, TABLET, LAPTOP, APPLIANCE, etc.
+    val serialNumber: String?,
+    val imei: String?,
+    val purchaseDate: Date?,
+    val warrantyExpiry: Date?,
+    val photoUrls: List,
+    val condition: String, // EXCELLENT, GOOD, FAIR, POOR
+    val estimatedValue: Double?,
+    val createdAt: Date,
+    val updatedAt: Date
+)
+
+@Entity(tableName = "parts")
+data class PartEntity(
+    @PrimaryKey
+    val id: String,
+    val sku: String,
+    val name: String,
+    val category: String,
+    val compatibleDevices: List, // List of device models
+    val quantityInStock: Int,
+    val reorderLevel: Int,
+    val cost: Double,
+    val retailPrice: Double,
+    val supplierId: String?,
+    val supplierPartNumber: String?,
+    val location: String?, // Warehouse location
+    val createdAt: Date,
+    val updatedAt: Date
+)
+```
+
+### 8.3 DAO Implementations
+
+**File: `data/local/database/dao/RepairDao.kt`**
+
+```kotlin
+package com.techrepairpro.app.data.local.database.dao
+
+import androidx.room.*
+import com.techrepairpro.app.data.local.database.entity.RepairEntity
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface RepairDao {
+    
+    @Query("SELECT * FROM repairs ORDER BY createdAt DESC")
+    fun getAllRepairs(): Flow<List>
+    
+    @Query("SELECT * FROM repairs WHERE id = :repairId")
+    fun getRepairById(repairId: String): Flow
+    
+    @Query("SELECT * FROM repairs WHERE customerId = :customerId ORDER BY createdAt DESC")
+    fun getRepairsByCustomer(customerId: String): Flow<List>
+    
+    @Query("SELECT * FROM repairs WHERE technicianId = :technicianId AND status IN (:statuses)")
+    fun getActiveRepairsByTechnician(
+        technicianId: String,
+        statuses: List
+    ): Flow<List>
+    
+    @Query("SELECT * FROM repairs WHERE status = :status")
+    fun getRepairsByStatus(status: String): Flow<List>
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertRepair(repair: RepairEntity)
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(repairs: List)
+    
+    @Update
+    suspend fun updateRepair(repair: RepairEntity)
+    
+    @Query("UPDATE repairs SET status = :status, updatedAt = :updatedAt WHERE id = :repairId")
+    suspend fun updateStatus(repairId: String, status: String, updatedAt: Long)
+    
+    @Delete
+    suspend fun deleteRepair(repair: RepairEntity)
+    
+    @Query("DELETE FROM repairs WHERE id = :repairId")
+    suspend fun deleteById(repairId: String)
+    
+    @Query("SELECT COUNT(*) FROM repairs WHERE status = :status")
+    fun getCountByStatus(status: String): Flow
+    
+    @Query("""
+        SELECT * FROM repairs 
+        WHERE createdAt BETWEEN :startDate AND :endDate
+        ORDER BY createdAt DESC
+    """)
+    fun getRepairsByDateRange(startDate: Long, endDate: Long): Flow<List>
+}
+```
+
+---
+
+## 9. UI/UX DESIGN
+
+### 9.1 Material 3 Theme Setup
+
+**File: `presentation/theme/Theme.kt`**
+
+```kotlin
+package com.techrepairpro.app.presentation.theme
+
+import android.app.Activity
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
+
+private val DarkColorScheme = darkColorScheme(
+    primary = TechBlue80,
+    onPrimary = TechBlue20,
+    primaryContainer = TechBlue30,
+    onPrimaryContainer = TechBlue90,
+    secondary = TechGreen80,
+    onSecondary = TechGreen20,
+    secondaryContainer = TechGreen30,
+    onSecondaryContainer = TechGreen90,
+    tertiary = TechOrange80,
+    onTertiary = TechOrange20,
+    tertiaryContainer = TechOrange30,
+    onTertiaryContainer = TechOrange90,
+    error = ErrorRed80,
+    onError = ErrorRed20,
+    errorContainer = ErrorRed30,
+    onErrorContainer = ErrorRed90,
+    background = Grey10,
+    onBackground = Grey90,
+    surface = Grey10,
+    onSurface = Grey90,
+    surfaceVariant = GreyVariant30,
+    onSurfaceVariant = GreyVariant80
+)
+
+private val LightColorScheme = lightColorScheme(
+    primary = TechBlue40,
+    onPrimary = White,
+    primaryContainer = TechBlue90,
+    onPrimaryContainer = TechBlue10,
+    secondary = TechGreen40,
+    onSecondary = White,
+    secondaryContainer = TechGreen90,
+    onSecondaryContainer = TechGreen10,
+    tertiary = TechOrange40,
+    onTertiary = White,
+    tertiaryContainer = TechOrange90,
+    onTertiaryContainer = TechOrange10,
+    error = ErrorRed40,
+    onError = White,
+    errorContainer = ErrorRed90,
+    onErrorContainer = ErrorRed10,
+    background = Grey99,
+    onBackground = Grey10,
+    surface = Grey99,
+    onSurface = Grey10,
+    surfaceVariant = GreyVariant90,
+    onSurfaceVariant = GreyVariant30
+)
+
+@Composable
+fun TechRepairProTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = true,
+    content: @Composable () -> Unit
+) {
+    val colorScheme = when {
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
+    
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            window.statusBarColor = colorScheme.primary.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+        }
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        shapes = Shapes,
+        content = content
+    )
+}
+```
+
+**File: `presentation/theme/Color.kt`**
+
+```kotlin
+package com.techrepairpro.app.presentation.theme
+
+import androidx.compose.ui.graphics.Color
+
+// Primary - Tech Blue
+val TechBlue10 = Color(0xFF001F33)
+val TechBlue20 = Color(0xFF003D66)
+val TechBlue30 = Color(0xFF005C99)
+val TechBlue40 = Color(0xFF007ACC)
+val TechBlue80 = Color(0xFF99CCFF)
+val TechBlue90 = Color(0xFFCCE5FF)
+
+// Secondary - Tech Green
+val TechGreen10 = Color(0xFF003314)
+val TechGreen20 = Color(0xFF006628)
+val TechGreen30 = Color(0xFF00993C)
+val TechGreen40 = Color(0xFF00CC50)
+val TechGreen80 = Color(0xFF99FFB8)
+val TechGreen90 = Color(0xFFCCFFDC)
+
+// Tertiary - Tech Orange
+val TechOrange10 = Color(0xFF331400)
+val TechOrange20 = Color(0xFF662800)
+val TechOrange30 = Color(0xFF993C00)
+val TechOrange40 = Color(0xFFCC5000)
+val TechOrange80 = Color(0xFFFFB899)
+val TechOrange90 = Color(0xFFFFDCCC)
+
+// Error
+val ErrorRed10 = Color(0xFF330000)
+val ErrorRed20 = Color(0xFF660000)
+val ErrorRed30 = Color(0xFF990000)
+val ErrorRed40 = Color(0xFFCC0000)
+val ErrorRed80 = Color(0xFFFF9999)
+val ErrorRed90 = Color(0xFFFFCCCC)
+
+// Neutral
+val Grey10 = Color(0xFF1A1C1E)
+val Grey20 = Color(0xFF2F3033)
+val Grey30 = Color(0xFF45464A)
+val Grey40 = Color(0xFF5C5D61)
+val Grey90 = Color(0xFFE2E2E6)
+val Grey99 = Color(0xFFFDFCFF)
+val White = Color(0xFFFFFFFF)
+
+val GreyVariant30 = Color(0xFF43474E)
+val GreyVariant80 = Color(0xFFC3C6CF)
+val GreyVariant90 = Color(0xFFDFE2EB)
+
+// Status colors
+val StatusReceived = Color(0xFF2196F3)
+val StatusDiagnosing = Color(0xFFFFC107)
+val StatusInRepair = Color(0xFFFF9800)
+val StatusReady = Color(0xFF4CAF50)
+val StatusCompleted = Color(0xFF8BC34A)
+```
+
+**File: `presentation/theme/Type.kt`**
+
+```kotlin
+package com.techrepairpro.app.presentation.theme
+
+import androidx.compose.material3.Typography
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import com.techrepairpro.app.R
+
+val InterFont = FontFamily(
+    Font(R.font.inter_regular, FontWeight.Normal),
+    Font(R.font.inter_medium, FontWeight.Medium),
+    Font(R.font.inter_semibold, FontWeight.SemiBold),
+    Font(R.font.inter_bold, FontWeight.Bold)
+)
+
+val Typography = Typography(
+    displayLarge = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.Bold,
+        fontSize = 57.sp,
+        lineHeight = 64.sp,
+        letterSpacing = (-0.25).sp
+    ),
+    displayMedium = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.Bold,
+        fontSize = 45.sp,
+        lineHeight = 52.sp,
+        letterSpacing = 0.sp
+    ),
+    displaySmall = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.Bold,
+        fontSize = 36.sp,
+        lineHeight = 44.sp,
+        letterSpacing = 0.sp
+    ),
+    headlineLarge = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 32.sp,
+        lineHeight = 40.sp,
+        letterSpacing = 0.sp
+    ),
+    headlineMedium = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 28.sp,
+        lineHeight = 36.sp,
+        letterSpacing = 0.sp
+    ),
+    headlineSmall = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 24.sp,
+        lineHeight = 32.sp,
+        letterSpacing = 0.sp
+    ),
+    titleLarge = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 22.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp
+    ),
+    titleMedium = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.15.sp
+    ),
+    titleSmall = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.1.sp
+    ),
+    bodyLarge = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.25.sp
+    ),
+    bodySmall = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.4.sp
+    ),
+    labelLarge = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.1.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.Medium,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.5.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = InterFont,
+        fontWeight = FontWeight.Medium,
+        fontSize = 11.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.5.sp
+    )
+)
+```
+
+---
+
+## 10. SECURITY & BEST PRACTICES
+
+### 10.1 ProGuard Rules
+
+**File: `app/proguard-rules.pro`**
+
+```proguard
+# Add project specific ProGuard rules here.
+# You can control the set of applied configuration files using the
+# proguardFiles setting in build.gradle.
+
+# Keep data classes used with Firebase
+-keepclassmembers class com.techrepairpro.app.domain.model.** {
+    *;
+}
+
+# Keep Room entities
+-keep class com.techrepairpro.app.data.local.database.entity.** { *; }
+
+# Keep Retrofit interfaces
+-keep interface com.techrepairpro.app.data.remote.api.** { *; }
+
+# Gson
+-keepattributes Signature
+-keepattributes *Annotation*
+-dontwarn sun.misc.**
+-keep class com.google.gson.** { *; }
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+
+# Kotlin serialization
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.AnnotationsKt
+-keepclassmembers class kotlinx.serialization.json.** {
+    *** Companion;
+}
+-keepclasseswithmembers class kotlinx.serialization.json.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# TensorFlow Lite
+-keep class org.tensorflow.lite.** { *; }
+-keep class org.tensorflow.lite.gpu.** { *; }
+
+# ML Kit
+-keep class com.google.mlkit.** { *; }
+
+# Firebase
+-keep class com.google.firebase.** { *; }
+-dontwarn com.google.firebase.**
+
+# Hilt
+-keep class dagger.hilt.** { *; }
+-keep class javax.inject.** { *; }
+-keep class * extends dagger.hilt.android.internal.managers.ViewComponentManager$FragmentContextWrapper { *; }
+
+# Coroutines
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
+-keepclassmembers class kotlinx.coroutines.** {
+    volatile <fields>;
+}
+
+# Stripe
+-keep class com.stripe.android.** { *; }
+
+# CameraX
+-keep class androidx.camera.** { *; }
+
+# Remove logging in release
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+}
+```
+
+### 10.2 Network Security Configuration
+
+**File: `res/xml/network_security_config.xml`**
+
+```xml
+
+
+    
+    
+        
+            
+        
+    
+    
+    
+    
+        localhost
+        10.0.2.2
+    
+    
+    
+    
+        api.techrepairpro.com
+        
+            
+            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+            BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=
+        
+    
+
+```
+
+### 10.3 Secure API Key Storage
+
+**File: `BuildConfig` Usage Example**
+
+```kotlin
+package com.techrepairpro.app.utils
+
+import com.techrepairpro.app.BuildConfig
+
+object ApiKeyManager {
+    
+    fun getGeminiApiKey(): String {
+        // In production, consider using Android Keystore
+        return BuildConfig.GEMINI_API_KEY
+    }
+    
+    fun getStripePublishableKey(): String {
+        return BuildConfig.STRIPE_PUBLISHABLE_KEY
+    }
+    
+    // Never log API keys
+    fun maskApiKey(key: String): String {
+        return if (key.length > 8) {
+            "${key.take(4)}...${key.takeLast(4)}"
+        } else {
+            "****"
+        }
+    }
+}
+```
+
+### 10.4 Firebase Security Rules
+
+**Firestore Security Rules:**
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function isTechnician() {
+      return isSignedIn() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'technician';
+    }
+    
+    function isAdmin() {
+      return isSignedIn() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // Devices collection
+    match /devices/{deviceId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if isOwner(resource.data.customerId) || isTechnician() || isAdmin();
+      allow delete: if isOwner(resource.data.customerId) || isAdmin();
+    }
+    
+    // Repairs collection
+    match /repairs/{repairId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if isOwner(resource.data.customerId) || isTechnician() || isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // Parts inventory
+    match /parts/{partId} {
+      allow read: if isSignedIn();
+      allow write: if isTechnician() || isAdmin();
+    }
+    
+    // Work orders
+    match /workOrders/{orderId} {
+      allow read: if isSignedIn();
+      allow create: if isTechnician() || isAdmin();
+      allow update: if isTechnician() || isAdmin();
+      allow delete: if isAdmin();
+    }
+  }
+}
+```
+
+**Storage Security Rules:**
+
+```javascript
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Device photos
+    match /devices/{userId}/{deviceId}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth.uid == userId && request.resource.size < 5 * 1024 * 1024;
+    }
+    
+    // Repair photos
+    match /repairs/{repairId}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.resource.size < 10 * 1024 * 1024;
+    }
+    
+    // Signatures
+    match /signatures/{repairId}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.resource.size < 1 * 1024 * 1024;
+    }
+    
+    // Invoices/PDFs
+    match /invoices/{repairId}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.resource.size < 2 * 1024 * 1024;
+    }
+  }
+}
+```
+
+---
+
+## 11. TESTING STRATEGY
+
+### 11.1 Unit Testing Example
+
+**File: `test/java/com/techrepairpro/app/viewmodel/RepairViewModelTest.kt`**
+
+```kotlin
+package com.techrepairpro.app.viewmodel
+
+import app.cash.turbine.test
+import com.google.common.truth.Truth.assertThat
+import com.techrepairpro.app.domain.model.Repair
+import com.techrepairpro.app.domain.repository.RepairRepository
+import com.techrepairpro.app.domain.usecase.repair.GetRepairsUseCase
+import com.techrepairpro.app.presentation.viewmodels.RepairViewModel
+import io.mockk.coEvery
+import io.mockk.mockk
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
+
+@OptIn(ExperimentalCoroutinesApi::class)
+class RepairViewModelTest {
+    
+    private val testDispatcher = StandardTestDispatcher()
+    private lateinit var repository: RepairRepository
+    private lateinit var getRepairsUseCase: GetRepairsUseCase
+    private lateinit var viewModel: RepairViewModel
+    
+    @Before
+    fun setup() {
+        Dispatchers.setMain(testDispatcher)
+        repository = mockk()
+        getRepairsUseCase = GetRepairsUseCase(repository)
+        viewModel = RepairViewModel(getRepairsUseCase)
+    }
+    
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
+    }
+    
+    @Test
+    fun `getRepairs emits success state when repository returns data`() = runTest {
+        // Given
+        val mockRepairs = listOf(
+            Repair(id = "1", customerId = "user1", status = "RECEIVED"),
+            Repair(id = "2", customerId = "user2", status = "IN_REPAIR")
+        )
+        coEvery { repository.getRepairs() } returns flowOf(mockRepairs)
+        
+        // When
+        viewModel.uiState.test {
+            // Then
+            val loadingState = awaitItem()
+            assertThat(loadingState).isInstanceOf(UiState.Loading::class.java)
+            
+            val successState = awaitItem()
+            assertThat(successState).isInstanceOf(UiState.Success::class.java)
+            assertThat((successState as UiState.Success).data).hasSize(2)
+            
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+    
+    @Test
+    fun `getRepairs emits error state when repository throws exception`() = runTest {
+        // Given
+        val errorMessage = "Network error"
+        coEvery { repository.getRepairs() } throws Exception(errorMessage)
+        
+        // When
+        viewModel.uiState.test {
+            // Then
+            val loadingState = awaitItem()
+            assertThat(loadingState).isInstanceOf(UiState.Loading::class.java)
+            
+            val errorState = awaitItem()
+            assertThat(errorState).isInstanceOf(UiState.Error::class.java)
+            assertThat((errorState as UiState.Error).message).contains(errorMessage)
+            
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+}
+```
+
+### 11.2 Integration Testing
+
+**File: `androidTest/java/com/techrepairpro/app/database/RepairDaoTest.kt`**
+
+```kotlin
+package com.techrepairpro.app.database
+
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.cash.turbine.test
+import com.google.common.truth.Truth.assertThat
+import com.techrepairpro.app.data.local.database.AppDatabase
+import com.techrepairpro.app.data.local.database.dao.RepairDao
+import com.techrepairpro.app.data.local.database.entity.RepairEntity
+import kotlinx.coroutines.test.runTest
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import java.util.*
+
+@RunWith(AndroidJUnit4::class)
+class RepairDaoTest {
+    
+    private lateinit var database: AppDatabase
+    private lateinit var repairDao: RepairDao
+    
+    @Before
+    fun setup() {
+        database = Room.inMemoryDatabaseBuilder(
+            ApplicationProvider.getApplicationContext(),
+            AppDatabase::class.java
+        ).allowMainThreadQueries().build()
+        
+        repairDao = database.repairDao()
+    }
+    
+    @After
+    fun tearDown() {
+        database.close()
+    }
+    
+    @Test
+    fun insertAndRetrieveRepair() = runTest {
+        // Given
+        val repair = RepairEntity(
+            id = "repair1",
+            customerId = "customer1",
+            deviceId = "device1",
+            technicianId = null,
+            status = "RECEIVED",
+            issueType = "Screen Damage",
+            issueDescription = "Cracked screen",
+            diagnosticNotes = null,
+            photoUrls = emptyList(),
+            partsUsed = emptyList(),
+            laborHours = 0f,
+            partsCost = 0.0,
+            laborCost = 0.0,
+            totalCost = 0.0,
+            customerAuthorized = false,
+            signatureUrl = null,
+            estimatedCompletionDate = null,
+            createdAt = Date(),
+            updatedAt = Date(),
+            completedAt = null,
+            warranty = null,
+            priorityLevel = "NORMAL"
+        )
+        
+        // When
+        repairDao.insertRepair(repair)
+        
+        // Then
+        repairDao.getRepairById("repair1").test {
+            val retrievedRepair = awaitItem()
+            assertThat(retrievedRepair).isNotNull()
+            assertThat(retrievedRepair?.id).isEqualTo("repair1")
+            assertThat(retrievedRepair?.status).isEqualTo("RECEIVED")
+            cancel()
+        }
+    }
+    
+    @Test
+    fun updateRepairStatus() = runTest {
+        // Given
+        val repair = RepairEntity(
+            id = "repair1",
+            customerId = "customer1",
+            deviceId = "device1",
+            technicianId = null,
+            status = "RECEIVED",
+            issueType = "Battery",
+            issueDescription = "Won't charge",
+            diagnosticNotes = null,
+            photoUrls = emptyList(),
+            partsUsed = emptyList(),
+            laborHours = 0f,
+            partsCost = 0.0,
+            laborCost = 0.0,
+            totalCost = 0.0,
+            customerAuthorized = false,
+            signatureUrl = null,
+            estimatedCompletionDate = null,
+            createdAt = Date(),
+            updatedAt = Date(),
+            completedAt = null,
+            warranty = null,
+            priorityLevel = "NORMAL"
+        )
+        repairDao.insertRepair(repair)
+        
+        // When
+        repairDao.updateStatus("repair1", "IN_REPAIR", System.currentTimeMillis())
+        
+        // Then
+        repairDao.getRepairById("repair1").test {
+            val updatedRepair = awaitItem()
+            assertThat(updatedRepair?.status).isEqualTo("IN_REPAIR")
+            cancel()
+        }
+    }
+}
+```
+
+---
+
+## 12. DEPLOYMENT GUIDE
+
+### 12.1 Gradle Build Configuration for Release
+
+```kotlin
+android {
+    ...
+    
+    signingConfigs {
+        create("release") {
+            storeFile = file(System.getenv("KEYSTORE_FILE") ?: "release-keystore.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("KEY_ALIAS")
+            keyPassword = System.getenv("KEY_PASSWORD")
+        }
+    }
+    
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            
+            // Enable R8 full mode
+            buildConfigField("boolean", "ENABLE_CRASHLYTICS", "true")
+        }
+    }
+}
+```
+
+### 12.2 Play Store Release Checklist
+
+```markdown
+## Pre-Release Checklist
+
+### Code Quality
+- [ ] All unit tests passing
+- [ ] All instrumentation tests passing
+- [ ] No lint errors or warnings
+- [ ] Code review completed
+- [ ] ProGuard rules verified
+- [ ] R8 optimization tested
+
+### Security
+- [ ] API keys removed from code
+- [ ] Network security config set
+- [ ] Firebase security rules deployed
+- [ ] SSL pinning implemented
+- [ ] Data encryption verified
+
+### Performance
+- [ ] App startup time < 2 seconds
+- [ ] Memory leaks checked (LeakCanary)
+- [ ] Battery usage optimized
+- [ ] Network calls optimized
+- [ ] Image compression verified
+
+### UI/UX
+- [ ] All screens tested on various devices
+- [ ] Dark mode tested
+- [ ] Accessibility features tested
+- [ ] Loading states implemented
+- [ ] Error states implemented
+- [ ] Empty states implemented
+
+### Play Store Assets
+- [ ] App icon (512x512)
+- [ ] Feature graphic (1024x500)
+- [ ] Screenshots (phone & tablet)
+- [ ] Promotional video (optional)
+- [ ] Short description (80 chars)
+- [ ] Full description (4000 chars)
+- [ ] Privacy policy URL
+- [ ] Support email/website
+
+### Versioning
+- [ ] Version code incremented
+- [ ] Version name updated
+- [ ] Release notes written
+- [ ] Changelog updated
+
+### Legal
+- [ ] Privacy policy updated
+- [ ] Terms of service updated
+- [ ] Data handling questionnaire completed
+- [ ] Content rating questionnaire completed
+```
+
+---
+
+## 13. PERFORMANCE OPTIMIZATION
+
+### 13.1 Image Compression Utility
+
+**File: `utils/ImageUtils.kt`**
+
+```kotlin
+package com.techrepairpro.app.utils
+
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
+import android.net.Uri
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.default
+import id.zelory.compressor.constraint.destination
+import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.resolution
+import id.zelory.compressor.constraint.size
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+
+object ImageUtils {
+    
+    /**
+     * Compress image to reduce file size while maintaining quality
+     */
+    suspend fun compressImage(
+        context: Context,
+        imageFile: File,
+        maxSizeKB: Long = 1024, // 1 MB
+        quality: Int = 80
+    ): File = withContext(Dispatchers.IO) {
+        Compressor.compress(context, imageFile) {
+            quality(quality)
+            size(maxSizeKB * 1024) // Convert KB to bytes
+            destination(File(context.cacheDir, "compressed_${imageFile.name}"))
+        }
+    }
+    
+    /**
+     * Resize bitmap to specific dimensions
+     */
+    fun resizeBitmap(
+        bitmap: Bitmap,
+        maxWidth: Int = 1080,
+        maxHeight: Int = 1080
+    ): Bitmap {
+        val width = bitmap.width
+        val height = bitmap.height
+
+        if (width <= maxWidth && height <= maxHeight) return bitmap
+
+        val ratio = minOf(maxWidth.toFloat() / width, maxHeight.toFloat() / height)
+        val newWidth = (width * ratio).toInt()
+        val newHeight = (height * ratio).toInt()
+
+        return Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true)
+    }
+
+    /**
+     * Fix EXIF rotation issues for camera/gallery images
+     */
+    fun fixImageRotation(context: Context, uri: Uri, bitmap: Bitmap): Bitmap {
+        return try {
+            val inputStream = context.contentResolver.openInputStream(uri) ?: return bitmap
+            val tempFile = File.createTempFile("exif", ".jpg", context.cacheDir)
+
+            tempFile.outputStream().use { output ->
+                inputStream.copyTo(output)
+            }
+
+            val exif = ExifInterface(tempFile.absolutePath)
+            val orientation = exif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL
+            )
+
+            val matrix = Matrix()
+            when (orientation) {
+                ExifInterface.ORIENTATION_ROTATE_90 -> matrix.postRotate(90f)
+                ExifInterface.ORIENTATION_ROTATE_180 -> matrix.postRotate(180f)
+                ExifInterface.ORIENTATION_ROTATE_270 -> matrix.postRotate(270f)
+            }
+
+            Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+        } catch (e: Exception) {
+            bitmap
+        }
+    }
+
+    /**
+     * Convert a content Uri into a local cache File (useful for compression/upload pipelines)
+     */
+    suspend fun uriToFile(context: Context, uri: Uri): File = withContext(Dispatchers.IO) {
+        val inputStream = context.contentResolver.openInputStream(uri)
+            ?: throw IOException("Unable to open input stream for uri: $uri")
+
+        val file = File(context.cacheDir, "upload_${System.currentTimeMillis()}.jpg")
+        FileOutputStream(file).use { output ->
+            inputStream.use { input -> input.copyTo(output) }
+        }
+        file
+    }
+}
+```
+
+---
+
+### 13.2 Network Optimization (OkHttp + Caching + Timeouts)
+
+**File: `di/NetworkModule.kt`**
+
+```kotlin
+package com.techrepairpro.app.di
+
+import android.content.Context
+import com.techrepairpro.app.BuildConfig
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import java.io.File
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
+        val cacheSize = 10L * 1024 * 1024 // 10 MB
+        val cache = Cache(File(context.cacheDir, "http_cache"), cacheSize)
+
+        return OkHttpClient.Builder()
+            .cache(cache)
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+                        else HttpLoggingInterceptor.Level.NONE
+            })
+            .addNetworkInterceptor { chain ->
+                val response = chain.proceed(chain.request())
+                response.newBuilder()
+                    .header("Cache-Control", "public, max-age=60") // 1 minute
+                    .build()
+            }
+            .build()
+    }
+}
+```
+
+**Best Practices**
+- Prefer server-driven paging (Firestore pagination, REST cursor paging)
+- Batch writes where possible
+- Never upload raw camera images—compress first with `ImageUtils.compressImage()`
+
+---
+
+### 13.3 Jetpack Compose Performance Checklist
+
+**Golden Rules**
+- Use `remember` for derived values & expensive objects
+- Use `LazyColumn` instead of `Column + verticalScroll` for long lists
+- Keep state at the lowest level possible (avoid passing large mutable objects)
+- Use stable/immutable UI models
+
+**Example: stable UI model**
+
+```kotlin
+import androidx.compose.runtime.Immutable
+
+@Immutable
+data class RepairListItemUi(
+    val id: String,
+    val title: String,
+    val status: String,
+    val updatedAt: Long
+)
+```
+
+**Use keys in lists**
+
+```kotlin
+LazyColumn {
+    items(items = repairs, key = { it.id }) { item ->
+        RepairRow(item)
+    }
+}
+```
+
+---
+
+### 13.4 Local-First Sync (Room + Firestore)
+
+**Pattern**
+1) Load from Room immediately
+2) Refresh from Firestore
+3) Write refreshed results into Room
+4) UI observes Room continuously
+
+**Tip:** store `syncedAt` timestamps per collection to support incremental sync and reduce bandwidth.
+
+---
+
+### 13.5 WorkManager Constraints (Battery + Network Friendly)
+
+**File: `workers/SyncWorker.kt` (snippet)**
+
+```kotlin
+val constraints = Constraints.Builder()
+    .setRequiredNetworkType(NetworkType.CONNECTED)
+    .setRequiresBatteryNotLow(true)
+    .build()
+
+val syncRequest = PeriodicWorkRequestBuilder<SyncWorker>(6, TimeUnit.HOURS)
+    .setConstraints(constraints)
+    .build()
+
+WorkManager.getInstance(context)
+    .enqueueUniquePeriodicWork(
+        "periodic_sync",
+        ExistingPeriodicWorkPolicy.KEEP,
+        syncRequest
+    )
+```
+
+---
+
+### 13.6 App Startup + Baseline Profiles (Fast Cold Start)
+
+**Do this**
+- Keep heavy initialization work off the main thread
+- Lazy-init expensive SDKs where possible
+- Use the AndroidX SplashScreen API for consistent startup
+
+**Baseline Profiles (optional, top-tier performance)**
+- Add a `baselineprofile` module
+- Record critical user journeys (Launch → Home → New Repair → Track Repair)
+- Ship the profile with release builds
+
+---
+
+### 13.7 Monitoring & Metrics (Crashlytics + Performance)
+
+**Recommended**
+- Crashlytics for crash grouping
+- Firebase Performance Monitoring for network traces
+- Add custom logs for key flows:
+  - Repair request creation
+  - Photo upload pipeline
+  - Payment intent creation
+  - Repair status updates
+
+---
+
+## 14. FAQ & DEBUGGING
+
+### 14.1 “BuildConfig.GEMINI_API_KEY is empty / unresolved”
+
+**Cause:** `local.properties` not loaded or key name mismatch.
+
+**Fix:**
+- Ensure `local.properties` contains:
+  - `GEMINI_API_KEY=...`
+  - `STRIPE_KEY=...`
+- Confirm your Gradle reads the exact same property names.
+
+---
+
+### 14.2 “google-services.json missing / Firebase not initializing”
+
+**Fix checklist**
+- `google-services.json` must be located at: `app/google-services.json`
+- Ensure plugin is applied: `id("com.google.gms.google-services")`
+- Sync Gradle and rebuild
+
+---
+
+### 14.3 Firestore: “Missing or insufficient permissions”
+
+**Cause:** Security rules rejected the request.
+
+**Fix**
+- Confirm user is signed in: `request.auth != null`
+- Verify ownership fields match your rules (e.g., `ownerId`, `customerId`)
+- Use the Firebase Emulator Suite while iterating on rules (recommended)
+
+---
+
+### 14.4 CameraX preview black screen / crash
+
+**Common causes**
+- Missing permissions in manifest
+- Runtime permission not requested
+- Emulator without camera support
+
+**Fix**
+- Add permission: `android.permission.CAMERA`
+- Request runtime permission before showing CameraX
+- Test on a real device
+
+---
+
+### 14.5 Images rotated incorrectly after upload
+
+**Cause:** EXIF orientation not handled.
+
+**Fix:** Use `ImageUtils.fixImageRotation()` before compressing/uploading.
+
+---
+
+### 14.6 Stripe payment failing
+
+**Typical causes**
+- Live keys used in debug (or vice versa)
+- Missing server-side PaymentIntent creation
+- Network / config issues
+
+**Fix**
+- Keep Stripe secret key ONLY on backend (Cloud Functions)
+- Client uses publishable key only
+- Ensure backend returns a valid `client_secret`
+
+---
+
+### 14.7 Release build crashes but Debug works
+
+**Cause:** R8/Proguard stripping classes (often via reflection/serialization).
+
+**Fix**
+- Add Proguard rules for:
+  - Firebase
+  - Retrofit converters (Moshi/Gson)
+  - Kotlinx Serialization
+  - Stripe SDK
+
+**Quick triage**
+- Temporarily set `isMinifyEnabled = false` for release to confirm R8 is the issue
+- Re-enable and add targeted rules
+
+---
+
+### 14.8 “App not installing” / `INSTALL_FAILED_UPDATE_INCOMPATIBLE`
+
+**Cause:** Different signing keys between installed build and new build.
+
+**Fix**
+- Uninstall the old app from the device
+- Reinstall from the current build
+
+---
+
+### 14.9 Push notifications not received
+
+**Checklist**
+- Firebase Messaging enabled
+- Device has Play Services
+- Notification permission requested (Android 13+)
+- Token is stored for the user in Firestore
+- Backend sends to the correct token
+
+---
+
+### 14.10 Gemini errors / blocked content / empty responses
+
+**Common causes**
+- Safety filters triggered
+- Prompt too long
+- Network timeout
+
+**Fix**
+- Keep prompts structured and short
+- Add retry/backoff on transient failures
+- Log the model response and error payload in debug builds

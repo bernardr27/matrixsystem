@@ -1,0 +1,16 @@
+{
+  "role": "verifier",
+  "role_name": "Verifier",
+  "purpose": "Runs focused quality checks and returns pass/fail evidence.",
+  "started_at": "2026-02-23T04:28:23.806Z",
+  "policy": {
+    "timeout_ms": 150000,
+    "command_stage_limit": 5
+  },
+  "stage_status": "pass",
+  "command": "npm run skills:doctor",
+  "status": 0,
+  "duration_ms": 4545,
+  "warning_hits": 0,
+  "output_preview": "> skills:doctor\n> powershell -ExecutionPolicy Bypass -File scripts\\tools\\skills_doctor.ps1\n\n[skills-doctor] repo_root=G:\\matrix\n[skills-doctor] codex_skills=C:\\Users\\DRAGON DAD\\.codex\\skills\n[skills-doctor] discovered=5\n[skills-doctor] duplicate_names=1\n[skills-doctor] missing_agents_yaml=0\n[skills-doctor] qmd_agent=True\n[skills-doctor] qmd_ralph=True\n[skills-doctor] qmd_codex=True\n[skills-doctor] duplicate qmd: G:\\matrix\\.agent\\skills\\qmd | G:\\matrix\\quarantine\\ralph\\skills\\qmd"
+}

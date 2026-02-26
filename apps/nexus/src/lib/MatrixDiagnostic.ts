@@ -1,0 +1,314 @@
+/**
+ * Matrix Diagnostic System
+ * 
+ * Cross-app diagnostic and improvement analysis framework.
+ * Logs actions, analyzes performance, and generates improvement suggestions.
+ */
+
+import { supabase } from './supabase';
+import { uuidv4 } from '@/lib/uuid';
+
+export type AppName = 'reflect' | 'ghost' | 'nexus' | 'runner' | 'sentinel';
+export type DiagnosticCategory = 'action' | 'error' | 'performance' | 'navigation' | 'api' | 'render';
+export type SeverityLevel = 'info' | 'warning' | 'critical';
+
+export interface DiagnosticEntry {
+    id: string;
+    timestamp: number;
+    app: AppName;
+    category: DiagnosticCategory;
+    severity: SeverityLevel;
+    action: string;
+    duration?: number;  // ms
+    metadata?: Record<string, any>;
+    userAgent?: string;
+    sessionId?: string;
+}
+
+export interface PerformanceMetric {
+    app: AppName;
+    averageResponseTime: number;
+    errorRate: number;
+    totalActions: number;
+    slowOperations: number;
+}
+
+export interface ImprovementSuggestion {
+    priority: 'high' | 'medium' | 'low';
+    category: 'performance' | 'ui' | 'ux' | 'feature' | 'bug';
+    title: string;
+    description: string;
+    affectedApp: AppName;
+    evidence: string[];
+}
+
+// In-memory buffer for batching writes
+const diagnosticBuffer: DiagnosticEntry[] = [];
+const FLUSH_INTERVAL = 5000; // 5s
+const MAX_BUFFER_SIZE = 50;
+
+// Session ID for tracking
+const SESSION_ID = Math.random().toString(36).substring(7);
+
+// Performance tracking
+const performanceStart: Record<string, number> = {};
+
+/**
+ * MatrixDiagnostic - Core diagnostic and analytics system
+ */
+export const MatrixDiagnostic = {
+    /**
+     * Log an action or event
+     */
+    log(
+        app: AppName,
+        category: DiagnosticCategory,
+        action: string,
+        metadata?: Record<string, any>,
+        severity: SeverityLevel = 'info'
+    ): void {
+        const entry: DiagnosticEntry = {
+            id: uuidv4(),
+            timestamp: Date.now(),
+            app,
+            category,
+            severity,
+            action,
+            metadata,
+            sessionId: SESSION_ID,
+            userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'server',
+        };
+
+        diagnosticBuffer.push(entry);
+
+        // Console logging for development
+        if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+            const color = severity === 'critical' ? '🔴' : severity === 'warning' ? '🟡' : '🔵';
+        }
+
+        // Flush if buffer is full
+        if (diagnosticBuffer.length >= MAX_BUFFER_SIZE) {
+            this.flush();
+        }
+    },
+
+    /**
+     * Start timing an operation
+     */
+    startTimer(operationId: string): void {
+        performanceStart[operationId] = performance.now();
+    },
+
+    /**
+     * End timing and log the result
+     */
+    endTimer(
+        app: AppName,
+        operationId: string,
+        action: string,
+        metadata?: Record<string, any>
+    ): number {
+        const start = performanceStart[operationId];
+        if (!start) return 0;
+
+        const duration = Math.round(performance.now() - start);
+        delete performanceStart[operationId];
+
+        const severity: SeverityLevel = duration > 3000 ? 'critical' : duration > 1000 ? 'warning' : 'info';
+
+        this.log(app, 'performance', action, { ...metadata, duration }, severity);
+
+        return duration;
+    },
+
+    /**
+     * Log an error
+     */
+    error(
+        app: AppName,
+        action: string,
+        error: Error | string,
+        metadata?: Record<string, any>
+    ): void {
+        const errorMessage = error instanceof Error ? error.message : error;
+        const errorStack = error instanceof Error ? error.stack : undefined;
+
+        this.log(app, 'error', action, {
+            ...metadata,
+            error: errorMessage,
+            stack: errorStack,
+        }, 'critical');
+    },
+
+    /**
+     * Log a navigation event
+     */
+    navigate(app: AppName, from: string, to: string): void {
+        this.log(app, 'navigation', `${from} → ${to}`, { from, to });
+    },
+
+    /**
+     * Log an API call
+     */
+    api(
+        app: AppName,
+        endpoint: string,
+        method: string,
+        status: number,
+        duration: number
+    ): void {
+        const severity: SeverityLevel = status >= 500 ? 'critical' : status >= 400 ? 'warning' : 'info';
+        this.log(app, 'api', `${method} ${endpoint}`, { status, duration }, severity);
+    },
+
+    /**
+     * Flush buffer to Supabase
+     */
+    async flush(): Promise<void> {
+        if (diagnosticBuffer.length === 0) return;
+
+        const entries = [...diagnosticBuffer];
+        diagnosticBuffer.length = 0;
+
+        try {
+            await supabase.from('matrix_diagnostics').insert(
+                entries.map(e => ({
+                    id: e.id,
+                    timestamp: new Date(e.timestamp).toISOString(),
+                    app: e.app,
+                    category: e.category,
+                    severity: e.severity,
+                    action: e.action,
+                    duration: e.duration,
+                    metadata: e.metadata,
+                    session_id: e.sessionId,
+                    user_agent: e.userAgent,
+                }))
+            );
+        } catch (error) {
+            // Re-add to buffer on failure
+            diagnosticBuffer.push(...entries);
+            console.error('[MatrixDiagnostic] Flush failed:', error);
+        }
+    },
+
+    /**
+     * Get recent diagnostics for an app
+     */
+    async getRecent(app?: AppName, limit = 100): Promise<DiagnosticEntry[]> {
+        let query = supabase
+            .from('matrix_diagnostics')
+            .select('*')
+            .order('timestamp', { ascending: false })
+            .limit(limit);
+
+        if (app) {
+            query = query.eq('app', app);
+        }
+
+        const { data, error } = await query;
+        if (error) throw error;
+
+        return data as DiagnosticEntry[];
+    },
+
+    /**
+     * Analyze performance metrics
+     */
+    async analyzePerformance(app: AppName): Promise<PerformanceMetric> {
+        const { data, error } = await supabase
+            .from('matrix_diagnostics')
+            .select('*')
+            .eq('app', app)
+            .gte('timestamp', new Date(Date.now() - 3600000).toISOString()); // Last hour
+
+        if (error) throw error;
+
+        const entries = data as DiagnosticEntry[];
+        const performanceEntries = entries.filter(e => e.category === 'performance' && e.duration);
+        const errorEntries = entries.filter(e => e.category === 'error');
+
+        const avgResponseTime = performanceEntries.length > 0
+            ? performanceEntries.reduce((sum, e) => sum + (e.duration || 0), 0) / performanceEntries.length
+            : 0;
+
+        return {
+            app,
+            averageResponseTime: Math.round(avgResponseTime),
+            errorRate: entries.length > 0 ? (errorEntries.length / entries.length) * 100 : 0,
+            totalActions: entries.length,
+            slowOperations: performanceEntries.filter(e => (e.duration || 0) > 500).length,
+        };
+    },
+
+    /**
+     * Generate improvement suggestions based on diagnostics
+     */
+    async suggestImprovements(app?: AppName): Promise<ImprovementSuggestion[]> {
+        const suggestions: ImprovementSuggestion[] = [];
+
+        // Get recent data
+        const entries = await this.getRecent(app, 500);
+        const errors = entries.filter(e => e.category === 'error');
+        const slowOps = entries.filter(e => e.category === 'performance' && (e.duration || 0) > 500);
+
+        // Analyze error patterns
+        const errorCounts: Record<string, number> = {};
+        errors.forEach(e => {
+            const key = `${e.app}:${e.action}`;
+            errorCounts[key] = (errorCounts[key] || 0) + 1;
+        });
+
+        Object.entries(errorCounts).forEach(([key, count]) => {
+            if (count >= 3) {
+                const [appName, action] = key.split(':');
+                suggestions.push({
+                    priority: count >= 10 ? 'high' : 'medium',
+                    category: 'bug',
+                    title: `Frequent Error: ${action}`,
+                    description: `This error occurred ${count} times in the last hour.`,
+                    affectedApp: appName as AppName,
+                    evidence: [`${count} occurrences`, `Last seen: recent`],
+                });
+            }
+        });
+
+        // Analyze slow operations
+        if (slowOps.length > 10) {
+            const groupedByApp: Record<string, number> = {};
+            slowOps.forEach(e => {
+                groupedByApp[e.app] = (groupedByApp[e.app] || 0) + 1;
+            });
+
+            Object.entries(groupedByApp).forEach(([appName, count]) => {
+                suggestions.push({
+                    priority: count >= 20 ? 'high' : 'medium',
+                    category: 'performance',
+                    title: `Slow Operations in ${appName}`,
+                    description: `${count} operations took >500ms in the last hour.`,
+                    affectedApp: appName as AppName,
+                    evidence: [`${count} slow operations`],
+                });
+            });
+        }
+
+        return suggestions;
+    },
+
+    /**
+     * Get session ID
+     */
+    getSessionId(): string {
+        return SESSION_ID;
+    },
+};
+
+// Auto-flush on interval
+if (typeof window !== 'undefined') {
+    setInterval(() => MatrixDiagnostic.flush(), FLUSH_INTERVAL);
+
+    // Flush on page unload
+    window.addEventListener('beforeunload', () => MatrixDiagnostic.flush());
+}
+
+export default MatrixDiagnostic;

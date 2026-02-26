@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-02-23T09:31:09.731Z",
+  "mode": "validate",
+  "viewport": "mobile",
+  "targets": [
+    "reflect_dashboard",
+    "reflect_journal",
+    "reflect_settings",
+    "reflect_developer",
+    "reflect_data",
+    "reflect_graph",
+    "reflect_sage",
+    "reflect_archive",
+    "reflect_session_list",
+    "nexus_cockpit",
+    "nexus_diagnostics",
+    "ghost_command",
+    "ghost_architect",
+    "ghost_vault"
+  ],
+  "issues": {
+    "ghost_command@mobile": [],
+    "ghost_architect@mobile": [],
+    "ghost_vault@mobile": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <input>: 398x40px (min: 44px)",
+        "selector": "input.bg-slate-800/40"
+      }
+    ]
+  },
+  "summary": {
+    "totalTargets": 3,
+    "totalErrors": 0,
+    "totalWarnings": 1,
+    "clean": 2
+  }
+}

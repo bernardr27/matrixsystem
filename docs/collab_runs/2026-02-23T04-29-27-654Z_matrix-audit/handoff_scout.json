@@ -1,0 +1,16 @@
+{
+  "role": "scout",
+  "role_name": "Scout",
+  "purpose": "Collects fast diagnostics and surface-level risk signals.",
+  "started_at": "2026-02-23T04:29:28.529Z",
+  "policy": {
+    "timeout_ms": 240000,
+    "command_stage_limit": 7
+  },
+  "stage_status": "pass",
+  "command": "npm run scan:collab",
+  "status": 0,
+  "duration_ms": 40175,
+  "warning_hits": 0,
+  "output_preview": "> scan:collab\n> node scripts/tools/collab_scan.cjs\n\n{\n  \"ok\": true,\n  \"out_path\": \"G:\\\\matrix\\\\docs\\\\diagnostics\\\\collab_scan_2026-02-23T04-30-08-862Z.md\",\n  \"summary\": {\n    \"started_at\": \"2026-02-23T04:29:29.131Z\",\n    \"finished_at\": \"2026-02-23T04:30:08.862Z\",\n    \"skills_doctor\": {\n      \"discovered\": \"5\",\n      \"duplicate_names\": \"1\",\n      \"missing_agents_yaml\": \"0\",\n      \"qmd_agent\": \"True\",\n      \"qmd_ralph\": \"True\",\n      \"qmd_codex\": \"True\"\n    },\n    \"mcp_keys_present\": 3,\n    \"smoke_ok\": true,\n    \"fast_ok\": true,\n    \"hardcoded_env_hits\": 0,\n    \"todo_fixme_hits\": 6\n  }\n}"
+}

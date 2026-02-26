@@ -1,0 +1,4 @@
+
+> rocket-command-pro@2.0.0 lint
+> eslint "src/**/*.ts" "src/**/*.tsx"
+

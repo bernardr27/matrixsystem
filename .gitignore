@@ -1,0 +1,82 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Next.js build output
+.next/
+.next_old/
+out/
+build/
+dist/
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.env.*
+
+# Vercel
+.vercel
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Matrix specific
+downloads/
+uploads/
+backups/
+logs/
+.backups/
+.deploys/
+.analytics/
+.triage/
+.achievements/
+.matrix_pids/
+test_results/
+coverage/
+.gemini/
+.system_generated/
+brain share/
+docs/brain_cache/
+
+# Large binaries (exclude from repo)
+*.exe
+*.dll
+*.so
+*.dylib
+*.zip
+*.tar
+*.gz
+*.7z
+*.rar
+*.iso
+*.bin
+*.db
+*.sqlite
+*.sqlite3
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.mp3
+*.wav

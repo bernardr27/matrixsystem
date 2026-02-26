@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Reflect — Think Clearly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    h1 { font-weight: 600; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin: 16px 0; }
+    textarea { width: 100%; min-height: 120px; }
+    select, button { padding: 8px 12px; }
+    .row { display: flex; gap: 8px; align-items: center; }
+    .label { font-size: 12px; color: #666; margin-bottom: 4px; }
+    .section h3 { margin: 8px 0; }
+    .archive-item { padding: 8px 0; border-bottom: 1px solid #eee; }
+  </style>
+</head>
+<body>
+  <h1>Reflect</h1>
+  <p>5 minutes. One question. Clearer thinking.</p>
+
+  <div class="card">
+    <div class="label">Mode</div>
+    <select id="mode">
+      <option value="mindset">Mindset</option>
+      <option value="career">Career</option>
+      <option value="money">Money</option>
+      <option value="relationships">Relationships</option>
+      <option value="discipline">Discipline</option>
+    </select>
+    <div class="label" style="margin-top:8px;">What’s the hardest thing you’re sitting with right now?</div>
+    <textarea id="input" placeholder="Type your situation..."></textarea>
+    <div class="row">
+      <button id="start">Start Reflecting</button>
+      <button id="refresh">Refresh Archive</button>
+    </div>
+  </div>
+
+  <div id="response" class="card" style="display:none;"></div>
+
+  <div id="answerCard" class="card" style="display:none;">
+    <div class="label">Your Answer to the Reframe</div>
+    <textarea id="answer" placeholder="Answer the question..."></textarea>
+    <div class="row">
+      <button id="finish">Save & Finish</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Archive</h2>
+    <div id="archive"></div>
+  </div>
+
+<script>
+const API = 'http://localhost:3333';
+let currentSessionId = null;
+
+async function startReflecting() {
+  const text = document.getElementById('input').value.trim();
+  const mode = document.getElementById('mode').value;
+  if (!text) { alert('Please type your situation.'); return; }
+  const r = await fetch(API + '/api/session/start', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text, mode })
+  });
+  const data = await r.json();
+  if (!r.ok) { alert('Error: ' + (data.error||'Unknown')); return; }
+  currentSessionId = data.id;
+  const { mirror, pattern, reframeQuestion } = data.response;
+  const respEl = document.getElementById('response');
+  respEl.innerHTML = `
+    <div class="section"><h3>Mirror</h3><p>${mirror}</p></div>
+    <div class="section"><h3>Pattern</h3><p>${pattern}</p></div>
+    <div class="section"><h3>Reframe</h3><p><strong>${reframeQuestion}</strong></p></div>
+  `;
+  respEl.style.display = 'block';
+  document.getElementById('answerCard').style.display = 'block';
+}
+
+async function saveAnswer() {
+  if (!currentSessionId) return;
+  const answer = document.getElementById('answer').value.trim();
+  if (!answer) { alert('Please write your answer.'); return; }
+  const r = await fetch(API + '/api/session/' + currentSessionId + '/answer', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ answer })
+  });
+  const data = await r.json();
+  if (!r.ok) { alert('Error: ' + (data.error||'Unknown')); return; }
+  alert('Session saved.');
+  currentSessionId = null;
+  document.getElementById('response').style.display = 'none';
+  document.getElementById('answerCard').style.display = 'none';
+  document.getElementById('answer').value = '';
+  refreshArchive();
+}
+
+async function refreshArchive() {
+  const r = await fetch(API + '/api/sessions');
+  const data = await r.json();
+  const list = data.sessions || [];
+  const el = document.getElementById('archive');
+  el.innerHTML = list.map(s => `
+    <div class="archive-item">
+      <div><strong>#${s.id}</strong> [${s.mode}] ${s.started_at} ${s.completed_at ? '✓' : ''}</div>
+    </div>
+  `).join('');
+}
+
+document.getElementById('start').addEventListener('click', startReflecting);
+document.getElementById('finish').addEventListener('click', saveAnswer);
+document.getElementById('refresh').addEventListener('click', refreshArchive);
+refreshArchive();
+</script>
+</body>
+</html>

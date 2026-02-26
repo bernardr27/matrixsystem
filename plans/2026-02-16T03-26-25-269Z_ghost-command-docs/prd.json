@@ -1,0 +1,45 @@
+{
+  "branchName": "ralph/ghost-command-docs",
+  "stories": [
+    {
+      "id": "S1",
+      "title": "Analyze System Core",
+      "description": "Read 'apps/ghost-command/core/handlers/ai-handler.js' and 'apps/ghost-command/core/handlers/ralph-loop.cjs' to understand the architecture.",
+      "passes": false,
+      "acceptanceCriteria": [
+        "Read ai-handler.js",
+        "Read ralph-loop.cjs"
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "Create Architecture Documentation",
+      "description": "Create 'apps/ghost-command/docs/ARCHITECTURE.md'. Describe the relationship between Sage (Planner), Ralph (Executor), and Ghost Bridge (Database Log). Use a Mermaid diagram if possible.",
+      "passes": false,
+      "acceptanceCriteria": [
+        "docs/ARCHITECTURE.md exists",
+        "Contains Sage/Ralph/Bridge description"
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "Create API Documentation",
+      "description": "Create 'apps/ghost-command/docs/API.md'. List all commands found in AiHandler.js (e.g., sage:blueprint, sage:delegate, sage:list_blueprints).",
+      "passes": false,
+      "acceptanceCriteria": [
+        "docs/API.md exists",
+        "Lists sage: commands"
+      ]
+    },
+    {
+      "id": "S4",
+      "title": "Create Ralph Manual",
+      "description": "Create 'apps/ghost-command/docs/RALPH.md'. Explain how Ralph's recursive loop works, including the new Self-Healing mechanism.",
+      "passes": false,
+      "acceptanceCriteria": [
+        "docs/RALPH.md exists",
+        "Mentions Self-Healing"
+      ]
+    }
+  ]
+}

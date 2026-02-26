@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-02-23T09:33:38.865Z",
+  "mode": "validate",
+  "viewport": "mobile",
+  "targets": [
+    "ghost_command",
+    "ghost_architect",
+    "ghost_vault"
+  ],
+  "issues": {
+    "ghost_command@mobile": [],
+    "ghost_architect@mobile": [],
+    "ghost_vault@mobile": []
+  },
+  "summary": {
+    "totalTargets": 3,
+    "totalErrors": 0,
+    "totalWarnings": 0,
+    "clean": 3
+  }
+}

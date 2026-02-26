@@ -1,0 +1,105 @@
+{
+  "timestamp": "2026-02-23T09:48:14.911Z",
+  "mode": "validate",
+  "viewport": "mobile",
+  "targets": [
+    "reflect_dashboard",
+    "reflect_journal",
+    "reflect_settings",
+    "reflect_developer",
+    "reflect_data",
+    "reflect_graph",
+    "reflect_sage",
+    "reflect_archive",
+    "reflect_session_list",
+    "nexus_cockpit",
+    "nexus_diagnostics",
+    "citadel_home",
+    "citadel_dashboard",
+    "ghost_command",
+    "ghost_architect",
+    "ghost_vault",
+    "rocket_home",
+    "rocket_console"
+  ],
+  "issues": {
+    "reflect_dashboard@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "1 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_journal@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "7 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_settings@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_developer@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_data@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "4 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_graph@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_sage@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_archive@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_session_list@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "nexus_cockpit@mobile": [],
+    "nexus_diagnostics@mobile": [],
+    "citadel_home@mobile": [],
+    "citadel_dashboard@mobile": [],
+    "ghost_command@mobile": [],
+    "ghost_architect@mobile": [],
+    "ghost_vault@mobile": [],
+    "rocket_home@mobile": [],
+    "rocket_console@mobile": []
+  },
+  "summary": {
+    "totalTargets": 18,
+    "totalErrors": 0,
+    "totalWarnings": 0,
+    "clean": 9
+  }
+}

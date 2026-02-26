@@ -1,0 +1,13 @@
+/* loading.module.css */
+/* Currently utilizing inline styles for the main layout, but keeping this file for future module-based expansions
+   and to satisfy the import in page.tsx */
+
+.container {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

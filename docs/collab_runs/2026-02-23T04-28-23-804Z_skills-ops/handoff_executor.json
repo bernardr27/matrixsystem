@@ -1,0 +1,12 @@
+{
+  "role": "executor",
+  "role_name": "Executor",
+  "purpose": "Runs approved final command and emits completion artifact.",
+  "started_at": "2026-02-23T04:28:28.352Z",
+  "policy": {
+    "timeout_ms": 150000,
+    "command_stage_limit": 5
+  },
+  "stage_status": "pass",
+  "note": "Final execution skipped (use --execute-final to enable)."
+}

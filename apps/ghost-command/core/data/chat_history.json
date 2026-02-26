@@ -1,0 +1,50 @@
+[
+  {
+    "role": "user",
+    "content": "clear"
+  },
+  {
+    "role": "assistant",
+    "content": "[[EXEC: cls]] \nSystem context updated."
+  },
+  {
+    "role": "user",
+    "content": "List commands"
+  },
+  {
+    "role": "assistant",
+    "content": "Available commands: \n[[EXEC: <command>]], [[LOG: <filter>]], [[SYS: <info>]], [[SEC: <protocol>]]. \nUse with caution."
+  },
+  {
+    "role": "user",
+    "content": "Scan matrix"
+  },
+  {
+    "role": "assistant",
+    "content": "[[EXEC: scan_matrix]] \nMatrix scan initiated: no anomalies detected, system nominal."
+  },
+  {
+    "role": "user",
+    "content": "Starting Triage sequence: ORACLE on ALL SYSTEMS"
+  },
+  {
+    "role": "assistant",
+    "content": "[[EXEC: triage_sequence_oracle]] \nTriage sequence initiated: diagnosing subsystems, compiling oracle report..."
+  },
+  {
+    "role": "user",
+    "content": "Starting Triage sequence: ORACLE on ALL SYSTEMS"
+  },
+  {
+    "role": "assistant",
+    "content": "[[EXEC: triage_oracle]] \nTriage sequence initiated: ORACLE diagnostics running on all systems, analyzing CPU, RAM, and GATE_STATUS."
+  },
+  {
+    "role": "user",
+    "content": "Starting Triage sequence: ORACLE on reflect"
+  },
+  {
+    "role": "assistant",
+    "content": "[[EXEC: triage_oracle_reflect]] \nTriage sequence initiated: ORACLE diagnostics running on reflect subsystem, checking for mirror integrity and synchronization."
+  }
+]

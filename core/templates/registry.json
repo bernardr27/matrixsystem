@@ -1,0 +1,45 @@
+{
+    "version": "1.0.0",
+    "last_updated": "2026-02-14T14:25:00Z",
+    "templates": [
+        {
+            "id": "hero-sleek-01",
+            "name": "Hero Sleek 01",
+            "category": "Hero",
+            "description": "Two-column landing page hero with glassmorphism surfacing and neural aesthetics.",
+            "path": "core/templates/HeroSleek01.tsx",
+            "source": "Treact (Refactored)",
+            "tags": [
+                "premium",
+                "glassmorphism",
+                "responsive"
+            ]
+        },
+        {
+            "id": "stats-sleek-01",
+            "name": "Stats Sleek 01",
+            "category": "Stats",
+            "description": "Grid-based metrics display with glowing accents and industrial surfacing.",
+            "path": "core/templates/StatsSleek01.tsx",
+            "source": "Matrix Original (Shadcn Structure)",
+            "tags": [
+                "metrics",
+                "industrial",
+                "glassmorphism"
+            ]
+        },
+        {
+            "id": "features-sleek-01",
+            "name": "Features Sleek 01",
+            "category": "Features",
+            "description": "Industrial 3-column feature grid with interactive hover glow and glassmorphism.",
+            "path": "core/templates/FeaturesSleek01.tsx",
+            "source": "Matrix Original",
+            "tags": [
+                "grid",
+                "industrial",
+                "premium"
+            ]
+        }
+    ]
+}

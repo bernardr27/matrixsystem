@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "ghost",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": false,
+    "startedAt": "2026-02-23T08:51:00.807Z",
+    "finishedAt": "2026-02-23T08:51:08.210Z",
+    "total": 2,
+    "passed": 2,
+    "failed": 0
+  },
+  "selectedApps": [
+    "ghost"
+  ],
+  "readiness": {
+    "ghost": true
+  },
+  "startedProcesses": [],
+  "health": [
+    {
+      "app": "ghost",
+      "url": "http://localhost:5173/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "ghost_home",
+      "url": "http://localhost:5173/",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\ghost_home_matrix_fast.png"
+    },
+    {
+      "name": "ghost_vault",
+      "url": "http://localhost:5173/vault",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\ghost_vault_matrix_fast.png"
+    }
+  ]
+}

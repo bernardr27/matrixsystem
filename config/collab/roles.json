@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "roles": [
+    {
+      "id": "coordinator",
+      "name": "Coordinator",
+      "purpose": "Owns mission scope, stage routing, and handoff integrity.",
+      "outputs": ["mission_brief", "stage_plan"]
+    },
+    {
+      "id": "scout",
+      "name": "Scout",
+      "purpose": "Collects fast diagnostics and surface-level risk signals.",
+      "outputs": ["scan_summary", "risk_signals"]
+    },
+    {
+      "id": "planner",
+      "name": "Planner",
+      "purpose": "Selects capability lanes and execution path.",
+      "outputs": ["lane_selection", "execution_plan"]
+    },
+    {
+      "id": "builder",
+      "name": "Builder",
+      "purpose": "Applies tactical fixes and targeted improvements.",
+      "outputs": ["fix_log", "changed_surfaces"]
+    },
+    {
+      "id": "verifier",
+      "name": "Verifier",
+      "purpose": "Runs focused quality checks and returns pass/fail evidence.",
+      "outputs": ["validation_results", "regression_risks"]
+    },
+    {
+      "id": "reviewer",
+      "name": "Reviewer",
+      "purpose": "Approves or blocks final execution using gate evidence.",
+      "outputs": ["review_decision", "blockers"]
+    },
+    {
+      "id": "executor",
+      "name": "Executor",
+      "purpose": "Runs approved final command and emits completion artifact.",
+      "outputs": ["execution_receipt", "next_steps"]
+    }
+  ]
+}

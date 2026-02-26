@@ -1,0 +1,62 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "ghost",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": true,
+    "startedAt": "2026-02-23T08:40:02.473Z",
+    "finishedAt": "2026-02-23T08:41:09.341Z",
+    "total": 2,
+    "passed": 0,
+    "failed": 2
+  },
+  "selectedApps": [
+    "ghost"
+  ],
+  "readiness": {
+    "ghost": false
+  },
+  "startedProcesses": [
+    {
+      "name": "ghost",
+      "pid": 12412,
+      "cwd": "apps\\ghost-command",
+      "method": "cmd-start"
+    }
+  ],
+  "health": [
+    {
+      "app": "ghost",
+      "url": "http://localhost:5173/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "ghost_home",
+      "url": "http://localhost:5173/",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:5173/",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\ghost_home_matrix_fast.png"
+    },
+    {
+      "name": "ghost_vault",
+      "url": "http://localhost:5173/vault",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:5173/vault",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\ghost_vault_matrix_fast.png"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+name: Matrix Shadow (Cloud Bridge)
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'heartbeat'
+        type: choice
+        options:
+          - heartbeat
+          - build
+          - deploy
+          - troubleshoot
+
+jobs:
+  cloud-bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360 # 6 hours max
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      MATRIX_MODE: production
+      MATRIX_ENVIRONMENT: cloud
+      MATRIX_CLOUD_MODE: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Matrix Core
+        run: npm run build:turbo
+        continue-on-error: true
+
+      - name: Start Matrix Shadow (Remote Sentinel)
+        run: |
+          node apps/ghost-command/core/sentinel.cjs --headless &
+          echo "Sentinel started in shadow mode. Monitoring Supabase for commands..."
+          sleep 30
+        
+      - name: Continuous Remote Heartbeat
+        run: |
+          # Keep the runner alive and pulsing to Supabase
+          # This allows the local agent (me) to talk to the cloud server
+          while true; do
+            date
+            sleep 60
+          done

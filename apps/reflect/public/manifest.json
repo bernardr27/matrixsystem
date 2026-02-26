@@ -1,0 +1,59 @@
+{
+    "name": "Reflect OS // V5.2",
+    "short_name": "Reflect",
+    "description": "Neural journaling for deeper self-awareness",
+    "icons": [
+        {
+            "src": "/reflect_logo_v3.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/reflect_logo_v3.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/reflect_logo_v3.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/reflect_logo_v3.png",
+            "sizes": "1024x1024",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#0a0a0a",
+    "background_color": "#0a0a0a",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "categories": [
+        "productivity",
+        "lifestyle",
+        "health"
+    ],
+    "shortcuts": [
+        {
+            "name": "New Entry",
+            "short_name": "New",
+            "description": "Create a new journal entry",
+            "url": "/journal?action=new"
+        },
+        {
+            "name": "Dashboard",
+            "short_name": "Dashboard",
+            "description": "View your dashboard",
+            "url": "/dashboard"
+        },
+        {
+            "name": "Voice Entry",
+            "short_name": "Voice",
+            "description": "Record a voice entry",
+            "url": "/voice"
+        }
+    ],
+    "prefer_related_applications": false
+}

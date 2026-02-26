@@ -1,0 +1,103 @@
+@import "./tokens.css";
+
+/* 
+ * MATRIX BASE STYLES v1.0
+ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+    color-scheme: dark light;
+}
+
+html,
+body {
+    min-height: 100vh;
+    background-color: var(--m-bg-primary);
+    color: var(--m-fg-primary);
+    font-family: var(--m-font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Glassmorphism Utility */
+.m-glass {
+    background: var(--m-surface);
+    backdrop-filter: var(--m-blur-md);
+    -webkit-backdrop-filter: var(--m-blur-md);
+    border: 1px solid var(--m-surface-border);
+}
+
+/* Global Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--m-surface-border);
+    border-radius: var(--m-radius-full);
+    border: 2px solid var(--m-bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--m-fg-muted);
+}
+
+/* Premium Selection */
+::selection {
+    background-color: var(--m-accent-cyan);
+    color: var(--matrix-black);
+}
+
+/* Typography Base */
+h1,
+h2,
+h3,
+h4,
+.display-font {
+    font-family: var(--m-font-display);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: var(--m-text-4xl);
+}
+
+h2 {
+    font-size: var(--m-text-2xl);
+}
+
+h3 {
+    font-size: var(--m-text-xl);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s var(--m-ease-fluid);
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+}

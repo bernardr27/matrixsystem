@@ -1,0 +1,10 @@
+{
+  "role": "planner",
+  "role_name": "Planner",
+  "purpose": "Selects capability lanes and execution path.",
+  "started_at": "2026-02-23T04:24:05.938Z",
+  "stage_status": "pass",
+  "command": "node apps/ghost-command/core/capability-engine.cjs list",
+  "status": 0,
+  "output_preview": "[\n  {\n    \"id\": \"antigravity_web_production\",\n    \"name\": \"Antigravity Web Production Pipeline\",\n    \"type\": \"delegate\",\n    \"target_default\": \"apps/reflect\",\n    \"summary\": \"Turns idea-to-production website flow into a delegated implementation mission with visual quality gates.\"\n  },\n  {\n    \"id\": \"spline_3d_experience\",\n    \"name\": \"3D Interaction Surface Upgrade\",\n    \"type\": \"delegate\",\n    \"target_default\": \"apps/reflect\",\n    \"summary\": \"Adds purposeful 3D experience surfaces and interaction choreography for flagship pages.\"\n  },\n  {\n    \"id\": \"flutter_mobile_prototype\",\n    \"name\": \"Mobile App Capability Pipeline\",\n    \"type\": \"delegate\",\n    \"target_default\": \"apps/rocket-command\",\n    \"summary\": \"Converts feature ideas into mobile-first prototype missions with explicit screen/state mapping.\"\n  },\n  {\n    \"id\": \"gemini_design_sprint\",\n    \"name\": \"Gemini Prompt Design Sprint\",\n    \"type\": \"delegate\",\n    \"target_default\": \"apps/citadel\",\n    \"summary\": \"Introduces structured design sprint prompts for faster ideation with clear output constraints.\"\n  },\n  {\n    \"id\": \"ai_quality_guardrails\",\n    \"name\": \"AI Coding Guardrails\",\n    \"type\": \"gate\",\n    \"target_default\": \"monorepo\",\n    \"summary\": \"Enforces repeatable quality checks to reduce regressions from high-velocity AI coding.\"\n  },\n  {\n    \"id\": \"ai_quality_guardrails_fast\",\n    \"name\": \"AI Coding Guardrails (Fast Loop)\",\n    \"type\": \"gate\","
+}

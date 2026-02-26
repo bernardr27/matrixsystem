@@ -1,0 +1,49 @@
+
+> nexus@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.12
+   - Environments: .env.production.local, .env.local
+   - Experiments (use with caution):
+     · optimizePackageImports
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (143kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ✓ Compiled successfully in 47s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/14) ...
+   Generating static pages (3/14) 
+   Generating static pages (6/14) 
+   Generating static pages (10/14) 
+ ✓ Generating static pages (14/14)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                     5.8 kB         108 kB
+├ ○ /_not-found                            993 B         104 kB
+├ ○ /analytics                           1.46 kB         104 kB
+├ ƒ /api/analytics                         139 B         103 kB
+├ ƒ /api/health                            139 B         103 kB
+├ ƒ /api/pipeline                          139 B         103 kB
+├ ƒ /api/sage-chat                         139 B         103 kB
+├ ƒ /api/sage-recall                       139 B         103 kB
+├ ○ /dashboard                             139 B         103 kB
+├ ○ /diagnostics                           14 kB         227 kB
+├ ○ /gate                                14.3 kB         228 kB
+├ ○ /integrations                        4.99 kB         215 kB
+├ ○ /knowledge                           9.76 kB         163 kB
+├ ○ /nexus                                 139 B         103 kB
+└ ○ /settings                            8.18 kB         221 kB
++ First Load JS shared by all             103 kB
+  ├ chunks/18-670f90a6930d0bcc.js        46.1 kB
+  ├ chunks/87c73c54-dd8d81ac9604067c.js  54.2 kB
+  └ other shared chunks (total)          2.23 kB
+
+
+ƒ Middleware                             96.9 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

@@ -1,0 +1,196 @@
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: #888;
+  font-size: 1rem;
+}
+
+.legend {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.sessionDot {
+  background: #4a9eff;
+}
+
+.patternDot {
+  background: #ff6b6b;
+}
+
+.graph {
+  width: 100%;
+  height: 600px;
+  background: #0a0a0a;
+  border: 1px solid #222;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.edge {
+  stroke: #333;
+  stroke-width: 1.5;
+  stroke-opacity: 0.6;
+}
+
+.sessionNode {
+  fill: #4a9eff;
+  stroke: #2d7dd2;
+  stroke-width: 2;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sessionNode:hover {
+  fill: #6bb5ff;
+  r: 10;
+}
+
+.patternNode {
+  fill: #ff6b6b;
+  stroke: #d63636;
+  stroke-width: 2;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.patternNode:hover {
+  fill: #ff8787;
+  r: 14;
+}
+
+.nodeLabel {
+  fill: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  pointer-events: none;
+  user-select: none;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  color: #888;
+}
+
+.empty {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  background: #111;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.empty p {
+  margin: 0.5rem 0;
+}
+
+.patternList {
+  margin-top: 3rem;
+}
+
+.patternList h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.patternGroup {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.patternHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.patternHeader strong {
+  font-size: 1.1rem;
+  color: #ff6b6b;
+}
+
+.patternCount {
+  background: #222;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.patternSessions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sessionLink {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #4a9eff;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.sessionLink:hover {
+  background: #222;
+  border-color: #4a9eff;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h2 {
+    font-size: 1.5rem;
+  }
+
+  .graph {
+    height: 400px;
+  }
+
+  .legend {
+    gap: 1rem;
+    font-size: 0.8rem;
+  }
+}

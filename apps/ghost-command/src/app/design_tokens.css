@@ -1,0 +1,286 @@
+/**
+ * GHOST COMMAND DESIGN TOKENS v2.0
+ * Synthesized from: OpenAI Apps SDK UI, AG-UI Protocol, Onyx, Ink
+ * ──────────────────────────────────────────────────────────────
+ */
+
+:root {
+    /* ── PREMIUM DARK PALETTE ── */
+    --matrix-bg: #020202;
+    --glass-bg: rgba(5, 5, 5, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.05);
+
+    /* ── NEON ACCENTS ── */
+    --neon-green: #4ade80;
+    --neon-cyan: #00f0ff;
+    --neon-violet: #8b5cf6;
+    --neon-amber: #f59e0b;
+
+    /* ── OPENAI SDK: ALPHA LAYERS ── */
+    --alpha-05: rgba(255, 255, 255, 0.02);
+    --alpha-08: rgba(255, 255, 255, 0.03);
+    --alpha-10: rgba(255, 255, 255, 0.04);
+    --alpha-15: rgba(255, 255, 255, 0.06);
+    --alpha-20: rgba(255, 255, 255, 0.08);
+    --alpha-30: rgba(255, 255, 255, 0.12);
+    --alpha-40: rgba(255, 255, 255, 0.16);
+    --alpha-50: rgba(255, 255, 255, 0.20);
+
+    /* ── OPENAI SDK: SEMANTIC SURFACES ── */
+    --surface-primary: #020202;
+    --surface-secondary: #050505;
+    --surface-tertiary: #0a0a0f;
+    --surface-elevated: rgba(255, 255, 255, 0.03);
+    --surface-hover: rgba(255, 255, 255, 0.05);
+    --surface-active: rgba(255, 255, 255, 0.08);
+    --surface-overlay: rgba(0, 0, 0, 0.6);
+
+    /* ── OPENAI SDK: SEMANTIC BORDERS ── */
+    --border-default: rgba(255, 255, 255, 0.08);
+    --border-subtle: rgba(255, 255, 255, 0.04);
+    --border-accent: rgba(34, 211, 238, 0.2);
+    --border-success: rgba(16, 185, 129, 0.2);
+    --border-warning: rgba(245, 158, 11, 0.2);
+    --border-danger: rgba(239, 68, 68, 0.2);
+
+    /* ── OPENAI SDK: GLOW SHADOWS ── */
+    --shadow-glow-cyan: 0 0 15px rgba(34, 211, 238, 0.15);
+    --shadow-glow-emerald: 0 0 15px rgba(16, 185, 129, 0.15);
+    --shadow-glow-violet: 0 0 15px rgba(139, 92, 246, 0.15);
+    --shadow-glow-amber: 0 0 15px rgba(245, 158, 11, 0.15);
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--border-subtle);
+    --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-default);
+
+    /* ── AG-UI: STATE COLORS ── */
+    --state-streaming: #22d3ee;
+    --state-thinking: #8b5cf6;
+    --state-complete: #10b981;
+    --state-error: #ef4444;
+    --state-warning: #f59e0b;
+    --state-idle: rgba(255, 255, 255, 0.3);
+
+    /* ── INK: TERMINAL COLORS ── */
+    --terminal-green: #4ade80;
+    --terminal-cyan: #22d3ee;
+    --terminal-red: #f87171;
+    --terminal-yellow: #fbbf24;
+    --terminal-dim: rgba(255, 255, 255, 0.2);
+    --terminal-prompt: #8b5cf6;
+
+    /* ── TEXTURES & BLURS ── */
+    --premium-blur: 24px;
+    --industrial-grid-opacity: 0.015;
+}
+
+/* =====================================================
+ * UTILITY CLASSES (OpenAI SDK Pattern)
+ * ===================================================== */
+
+/* Premium Glass (base) */
+.premium-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--premium-blur));
+    -webkit-backdrop-filter: blur(var(--premium-blur));
+    border: 1px solid var(--glass-border);
+}
+
+/* Surface Card (OpenAI SDK pattern) */
+.surface-card {
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-default);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.surface-card:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-elevated);
+    transform: translateY(-1px);
+}
+
+/* Elevated Surface */
+.surface-elevated {
+    background: var(--surface-secondary);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border: 1px solid var(--border-subtle);
+}
+
+/* ── NEON GLOWS ── */
+.neon-glow-green {
+    text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
+}
+
+.neon-glow-cyan {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.neon-glow-violet {
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+}
+
+/* ── AG-UI: STREAMING STATES ── */
+.state-streaming {
+    color: var(--state-streaming);
+    text-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
+}
+
+.state-thinking {
+    color: var(--state-thinking);
+    animation: pulse-think 2s ease-in-out infinite;
+}
+
+.state-complete {
+    color: var(--state-complete);
+}
+
+.state-error {
+    color: var(--state-error);
+    text-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+}
+
+/* ── INK: TERMINAL PROGRESS BAR ── */
+.terminal-progress {
+    height: 3px;
+    background: var(--alpha-10);
+    border-radius: 9999px;
+    overflow: hidden;
+    position: relative;
+}
+
+.terminal-progress-fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.terminal-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+    animation: progress-shimmer 1.5s ease-in-out infinite;
+}
+
+/* ── INK: TASK LIST ── */
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    font-family: var(--m-font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.75rem;
+    color: var(--terminal-dim);
+    transition: color 0.3s;
+}
+
+.task-item.active {
+    color: var(--terminal-cyan);
+}
+
+.task-item.complete {
+    color: var(--terminal-green);
+}
+
+.task-item.failed {
+    color: var(--terminal-red);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes pulse-think {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes progress-shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(200%);
+    }
+}
+
+@keyframes streaming-cursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes terminal-blink {
+
+    0%,
+    100% {
+        border-color: var(--terminal-green);
+    }
+
+    50% {
+        border-color: transparent;
+    }
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── INK: SPINNER ── */
+.terminal-spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--alpha-20);
+    border-top-color: var(--terminal-cyan);
+    border-radius: 50%;
+    animation: spin-slow 0.8s linear infinite;
+}
+
+/* ── SCROLLBAR (OpenAI SDK pattern) ── */
+.custom-scrollbar {
+    scrollbar-color: var(--alpha-30) transparent;
+    scrollbar-width: thin;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--alpha-20);
+    border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--alpha-40);
+}

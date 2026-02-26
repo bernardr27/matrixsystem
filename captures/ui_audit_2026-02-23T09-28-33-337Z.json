@@ -1,0 +1,290 @@
+{
+  "timestamp": "2026-02-23T09:28:33.339Z",
+  "mode": "validate",
+  "viewport": "mobile",
+  "targets": [
+    "reflect_dashboard",
+    "reflect_journal",
+    "reflect_settings",
+    "reflect_developer",
+    "reflect_data",
+    "reflect_graph",
+    "reflect_sage",
+    "reflect_archive",
+    "reflect_session_list",
+    "nexus_cockpit",
+    "nexus_diagnostics",
+    "ghost_command",
+    "ghost_architect",
+    "ghost_vault"
+  ],
+  "issues": {
+    "reflect_dashboard@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "1 high z-index elements (max: 10000)"
+      }
+    ],
+    "reflect_journal@mobile": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=430x1031 vs client=430x932",
+        "selector": "html"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 69x28px (min: 44px)",
+        "selector": "button.Header-module__0kkASG__getAppButton"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 84x37px (min: 44px)",
+        "selector": "a.Header-module__0kkASG__signInButton"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"System Status: Resonating in H\" at 9.6px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"03:26 AM\" at 9.6px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+4 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "3 high z-index elements (max: 10000)"
+      }
+    ],
+    "reflect_settings@mobile": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=430x1515 vs client=430x932",
+        "selector": "html"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 340x11px (min: 44px)",
+        "selector": "button"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 113x15px (min: 44px)",
+        "selector": "button"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "1 high z-index elements (max: 10000)"
+      }
+    ],
+    "reflect_developer@mobile": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 84x37px (min: 44px)",
+        "selector": "a.Header-module__0kkASG__signInButton"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <a>: 366x24px (min: 44px)",
+        "selector": "a"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 149x31px (min: 44px)",
+        "selector": "button"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Session\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Journal\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Archive\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+2 more tiny text elements"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "2 high z-index elements (max: 10000)"
+      }
+    ],
+    "nexus_cockpit@mobile": [
+      {
+        "type": "OVERFLOW",
+        "severity": "error",
+        "message": "Horizontal overflow detected: 473px > 430px"
+      },
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=473x1026 vs client=430x932",
+        "selector": "html"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 284x42px (min: 44px)",
+        "selector": "button.px-8"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 284x42px (min: 44px)",
+        "selector": "button.px-8"
+      }
+    ],
+    "nexus_diagnostics@mobile": [
+      {
+        "type": "OVERFLOW",
+        "severity": "error",
+        "message": "Horizontal overflow detected: 473px > 430px"
+      },
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=473x1026 vs client=430x932",
+        "selector": "html"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 284x42px (min: 44px)",
+        "selector": "button.px-8"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 284x42px (min: 44px)",
+        "selector": "button.px-8"
+      }
+    ],
+    "ghost_command@mobile": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 30x30px (min: 44px)",
+        "selector": "button.md:hidden"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 27x27px (min: 44px)",
+        "selector": "button.p-1.5"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 27x27px (min: 44px)",
+        "selector": "button.p-1.5"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "info",
+        "message": "+7 more small touch targets"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"COMMAND\" at 8px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"OFF\" at 9px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Chat\" at 7px (min: 10px)"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "info",
+        "message": "+4 more tiny text elements"
+      }
+    ],
+    "ghost_architect@mobile": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 358x36px (min: 44px)",
+        "selector": "button.flex-1"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 32x36px (min: 44px)",
+        "selector": "button.p-2"
+      },
+      {
+        "type": "FONT_SIZE",
+        "severity": "warning",
+        "message": "Text \"Blueprint Control · Synced 03:\" at 9px (min: 10px)"
+      }
+    ],
+    "ghost_vault@mobile": [
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <input>: 398x35px (min: 44px)",
+        "selector": "input.bg-slate-800/40"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 32x23px (min: 44px)",
+        "selector": "button.px-2.5"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "warning",
+        "message": "Small touch target <button>: 44x25px (min: 44px)",
+        "selector": "button.px-2.5"
+      },
+      {
+        "type": "TOUCH_TARGET",
+        "severity": "info",
+        "message": "+1 more small touch targets"
+      }
+    ]
+  },
+  "summary": {
+    "totalTargets": 9,
+    "totalErrors": 2,
+    "totalWarnings": 37,
+    "clean": 0
+  }
+}

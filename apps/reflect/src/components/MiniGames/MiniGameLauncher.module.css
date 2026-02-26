@@ -1,0 +1,244 @@
+.launcherCard {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: 3px solid #8e2de2;
+    padding: 1.5rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.launcherCard:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.iconContainer {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #8e2de2, #4a00e0);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(142, 45, 226, 0.3);
+}
+
+.content {
+    flex: 1;
+}
+
+.label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    color: #8e2de2;
+    margin-bottom: 0.4rem;
+}
+
+.description {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 300;
+}
+
+.status {
+    font-size: 0.6rem;
+    font-weight: 800;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+}
+
+/* Modal Styles */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    animation: fadeIn 0.3s ease-out;
+    pointer-events: auto;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modalContent {
+    width: 100%;
+    max-width: 900px;
+    height: 90vh;
+    max-height: 900px;
+    background: #050505;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.9), 0 0 40px rgba(142, 45, 226, 0.1);
+    position: relative;
+    pointer-events: auto;
+}
+
+.modalHeader {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modalHeader h2 {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.headerTitle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pulse {
+    width: 8px;
+    height: 8px;
+    background: #8e2de2;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #8e2de2;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.95);
+        opacity: 0.5;
+    }
+}
+
+.closeBtn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.closeBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.gameArea {
+    flex: 1;
+    overflow-y: visible;
+    padding: clamp(1.5rem, 5vw, 3rem);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameArea::-webkit-scrollbar {
+    display: none;
+}
+
+.selectionGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    width: 100%;
+    max-width: 800px;
+}
+
+@media (max-width: 768px) {
+    .selectionGrid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.gameOption {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.gameIcon {
+    font-size: 3rem;
+}
+
+.gameInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.gameTitle {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.gameDesc {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.4;
+}
+
+.gameWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+}

@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-02-23T10:09:35.661Z",
+  "results": [
+    {
+      "app": "reflect",
+      "port": 3000,
+      "ok": true
+    },
+    {
+      "app": "nexus",
+      "port": 3001,
+      "ok": true
+    },
+    {
+      "app": "citadel",
+      "port": 3005,
+      "ok": true
+    },
+    {
+      "app": "ghost-command",
+      "port": 5173,
+      "ok": true
+    },
+    {
+      "app": "rocket-command",
+      "port": 4000,
+      "ok": true
+    }
+  ]
+}

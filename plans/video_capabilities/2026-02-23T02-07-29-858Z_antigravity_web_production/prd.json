@@ -1,0 +1,19 @@
+{
+  "title": "Antigravity Web Production Pipeline",
+  "objective": "Turns idea-to-production website flow into a delegated implementation mission with visual quality gates.",
+  "target": "apps/reflect",
+  "outcomes": [
+    "Hero + section architecture with stronger visual identity",
+    "Animation pass and responsive validation",
+    "Deployment-readiness checklist"
+  ],
+  "steps": [
+    "Capture style references and constraints",
+    "Scaffold section layout and content hierarchy",
+    "Apply motion and interaction polish",
+    "Run mobile/desktop verification before merge"
+  ],
+  "source": "video_capability_registry",
+  "capability_id": "antigravity_web_production",
+  "created_at": "2026-02-23T02:07:29.860Z"
+}

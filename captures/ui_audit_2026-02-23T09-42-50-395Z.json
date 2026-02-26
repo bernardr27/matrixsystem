@@ -1,0 +1,67 @@
+{
+  "timestamp": "2026-02-23T09:42:50.396Z",
+  "mode": "validate",
+  "viewport": "mobile",
+  "targets": [
+    "nexus_cockpit",
+    "nexus_diagnostics"
+  ],
+  "issues": {
+    "nexus_cockpit@mobile": [
+      {
+        "type": "OVERFLOW",
+        "severity": "error",
+        "message": "Horizontal overflow detected: 473px > 430px",
+        "details": [
+          {
+            "tag": "html",
+            "class": "",
+            "width": 473
+          },
+          {
+            "tag": "div",
+            "class": "absolute inset-0 pointer-events-none",
+            "width": 473
+          }
+        ]
+      },
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=473x1026 vs client=430x932",
+        "selector": "html"
+      }
+    ],
+    "nexus_diagnostics@mobile": [
+      {
+        "type": "OVERFLOW",
+        "severity": "error",
+        "message": "Horizontal overflow detected: 473px > 430px",
+        "details": [
+          {
+            "tag": "html",
+            "class": "",
+            "width": 473
+          },
+          {
+            "tag": "div",
+            "class": "absolute inset-0 pointer-events-none",
+            "width": 473
+          }
+        ]
+      },
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=473x1026 vs client=430x932",
+        "selector": "html"
+      }
+    ]
+  },
+  "summary": {
+    "totalTargets": 2,
+    "totalErrors": 2,
+    "totalWarnings": 2,
+    "clean": 0
+  }
+}

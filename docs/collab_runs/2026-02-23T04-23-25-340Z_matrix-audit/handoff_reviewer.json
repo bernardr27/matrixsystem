@@ -1,0 +1,9 @@
+{
+  "role": "reviewer",
+  "role_name": "Reviewer",
+  "purpose": "Approves or blocks final execution using gate evidence.",
+  "started_at": "2026-02-23T04:24:21.669Z",
+  "approved": true,
+  "blockers": [],
+  "stage_status": "pass"
+}

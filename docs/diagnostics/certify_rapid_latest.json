@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "startedAt": "2026-02-23T08:24:51.501Z",
+  "finishedAt": "2026-02-23T08:26:05.889Z",
+  "maxAttempts": 2,
+  "attemptsUsed": 1,
+  "runs": [
+    {
+      "stage": "initial",
+      "command": "app_certification --app=all",
+      "code": 0,
+      "ok": true,
+      "app": "all"
+    }
+  ],
+  "finalArtifacts": {
+    "latestCertification": "docs/diagnostics/app_certification_latest.json",
+    "latestFailures": "docs/diagnostics/app_certification_failures_latest.json"
+  }
+}

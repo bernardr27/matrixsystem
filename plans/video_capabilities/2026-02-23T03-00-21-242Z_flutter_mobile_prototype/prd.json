@@ -1,0 +1,19 @@
+{
+  "title": "Mobile App Capability Pipeline",
+  "objective": "Converts feature ideas into mobile-first prototype missions with explicit screen/state mapping.",
+  "target": "apps/reflect",
+  "outcomes": [
+    "Screen map and user flow",
+    "State transitions and edge-case handling",
+    "Backend integration contract"
+  ],
+  "steps": [
+    "Define user journey and screen inventory",
+    "Generate component/page scaffold",
+    "Integrate state + Supabase contracts",
+    "Run mobile QA and defect triage"
+  ],
+  "source": "video_capability_registry",
+  "capability_id": "flutter_mobile_prototype",
+  "created_at": "2026-02-23T03:00:21.244Z"
+}

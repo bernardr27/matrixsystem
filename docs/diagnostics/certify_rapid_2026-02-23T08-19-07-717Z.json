@@ -1,0 +1,34 @@
+{
+  "ok": false,
+  "startedAt": "2026-02-23T08:10:05.513Z",
+  "finishedAt": "2026-02-23T08:19:07.717Z",
+  "maxAttempts": 2,
+  "attemptsUsed": 3,
+  "runs": [
+    {
+      "stage": "initial",
+      "command": "app_certification --app=all",
+      "code": 1,
+      "ok": false,
+      "app": "all"
+    },
+    {
+      "stage": "retry_1",
+      "command": "app_certification --failed-only",
+      "code": 1,
+      "ok": false,
+      "app": "reflect,citadel,ghost,rocket"
+    },
+    {
+      "stage": "retry_2",
+      "command": "app_certification --failed-only",
+      "code": 1,
+      "ok": false,
+      "app": "reflect,citadel,rocket"
+    }
+  ],
+  "finalArtifacts": {
+    "latestCertification": "docs/diagnostics/app_certification_latest.json",
+    "latestFailures": "docs/diagnostics/app_certification_failures_latest.json"
+  }
+}

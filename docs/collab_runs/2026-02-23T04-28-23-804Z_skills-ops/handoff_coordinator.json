@@ -1,0 +1,12 @@
+{
+  "role": "coordinator",
+  "role_name": "Coordinator",
+  "purpose": "Owns mission scope, stage routing, and handoff integrity.",
+  "started_at": "2026-02-23T04:28:23.805Z",
+  "policy": {
+    "timeout_ms": 150000,
+    "command_stage_limit": 5
+  },
+  "note": "Task triaged with collab_score=2; mode=solo; workflow=skills-ops",
+  "stage_status": "pass"
+}

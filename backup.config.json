@@ -1,0 +1,15 @@
+{
+    "schedule": {
+        "enabled": true,
+        "cron": "0 4 * * *"
+    },
+    "retention": {
+        "local": 7,
+        "cloud": 30
+    },
+    "cloud": {
+        "enabled": false,
+        "bucket": "matrix-backups"
+    },
+    "apps": ["rocket-command"]
+}

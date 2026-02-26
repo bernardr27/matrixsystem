@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-02-23T09:43:15.925Z",
+  "mode": "validate",
+  "viewport": "mobile",
+  "targets": [
+    "nexus_cockpit",
+    "nexus_diagnostics"
+  ],
+  "issues": {
+    "nexus_cockpit@mobile": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=430x971 vs client=430x932",
+        "selector": "html"
+      }
+    ],
+    "nexus_diagnostics@mobile": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=430x971 vs client=430x932",
+        "selector": "html"
+      }
+    ]
+  },
+  "summary": {
+    "totalTargets": 2,
+    "totalErrors": 0,
+    "totalWarnings": 2,
+    "clean": 0
+  }
+}

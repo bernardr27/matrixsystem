@@ -1,0 +1,63 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "citadel",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": false,
+    "startedAt": "2026-02-23T08:57:38.359Z",
+    "finishedAt": "2026-02-23T08:58:45.006Z",
+    "total": 2,
+    "passed": 0,
+    "failed": 2
+  },
+  "selectedApps": [
+    "citadel"
+  ],
+  "readiness": {
+    "citadel": false
+  },
+  "startedProcesses": [],
+  "health": [
+    {
+      "app": "citadel",
+      "url": "http://localhost:3005/api/health",
+      "ok": false,
+      "status": 0
+    }
+  ],
+  "results": [
+    {
+      "name": "citadel_home",
+      "url": "http://localhost:3005/",
+      "ok": false,
+      "responseStatus": 500,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "./apps/citadel/src/app/globals.css:2021:35\nParsing CSS source code failed\n  2019 | }\n  2020 | .shadow-\\[0_0_8px_rgba\\(var\\(--\\$\\{mood\\.color\\}-500-rgb\\)\\2c 0\\.6\\)\\] {\n> 2021 |   --tw-shadow: 0 0 8px rgba(var(--${mood.color}-500-rgb),0.6);\n       |                                   ^\n  2022 |   --tw-shadow-colored: 0 0 8px var(--tw-shadow-color);\n  2023 |   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  2024 | }\n\nUnexpected token Delim('$')\n\nImport trace:\n  Client Component Browser:\n    ./apps/citadel/src/app/globals.css [Client Component Browser]\n    ./apps/citadel/src/app/layout.tsx [Server Component]\n\n\n<unknown> (Error: ./apps/citadel/src/app/globals.css:2021:35)\nObject.getCompilationErrors (file://G:\\matrix\\node_modules\\next\\dist\\server\\dev\\hot-reloader-turbopack.js:775:59)\nDevBundlerService.getCompilationError (file://G:\\matrix\\node_modules\\next\\dist\\server\\lib\\dev-bundler-service.js:39:55)\nDevServer.getCompilationError (file://G:\\matrix\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:721:42)"
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+      ],
+      "screenshot": "temp_mobile_verification\\citadel_home_matrix_fast.png"
+    },
+    {
+      "name": "citadel_dashboard",
+      "url": "http://localhost:3005/dashboard",
+      "ok": false,
+      "responseStatus": 500,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "./apps/citadel/src/app/globals.css:2021:35\nParsing CSS source code failed\n  2019 | }\n  2020 | .shadow-\\[0_0_8px_rgba\\(var\\(--\\$\\{mood\\.color\\}-500-rgb\\)\\2c 0\\.6\\)\\] {\n> 2021 |   --tw-shadow: 0 0 8px rgba(var(--${mood.color}-500-rgb),0.6);\n       |                                   ^\n  2022 |   --tw-shadow-colored: 0 0 8px var(--tw-shadow-color);\n  2023 |   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  2024 | }\n\nUnexpected token Delim('$')\n\nImport trace:\n  Client Component Browser:\n    ./apps/citadel/src/app/globals.css [Client Component Browser]\n    ./apps/citadel/src/app/layout.tsx [Server Component]\n\n\n<unknown> (Error: ./apps/citadel/src/app/globals.css:2021:35)\nObject.getCompilationErrors (file://G:\\matrix\\node_modules\\next\\dist\\server\\dev\\hot-reloader-turbopack.js:775:59)\nDevBundlerService.getCompilationError (file://G:\\matrix\\node_modules\\next\\dist\\server\\lib\\dev-bundler-service.js:39:55)\nDevServer.getCompilationError (file://G:\\matrix\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:721:42)"
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+      ],
+      "screenshot": "temp_mobile_verification\\citadel_dashboard_matrix_fast.png"
+    }
+  ]
+}

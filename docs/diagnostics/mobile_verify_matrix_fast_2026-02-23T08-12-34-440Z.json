@@ -1,0 +1,132 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "all",
+    "ultra": true,
+    "screenshots": false,
+    "autoStart": true,
+    "startedAt": "2026-02-23T08:11:12.987Z",
+    "finishedAt": "2026-02-23T08:12:34.440Z",
+    "total": 5,
+    "passed": 0,
+    "failed": 5
+  },
+  "selectedApps": [
+    "reflect",
+    "nexus",
+    "citadel",
+    "ghost",
+    "rocket"
+  ],
+  "readiness": {
+    "reflect": true,
+    "nexus": false,
+    "citadel": true,
+    "ghost": true,
+    "rocket": true
+  },
+  "startedProcesses": [],
+  "health": [
+    {
+      "app": "reflect",
+      "url": "http://localhost:3000/api/health",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "app": "nexus",
+      "url": "http://localhost:3001/api/health",
+      "ok": false,
+      "status": 0
+    },
+    {
+      "app": "citadel",
+      "url": "http://localhost:3005/api/health",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "app": "ghost",
+      "url": "http://localhost:5173/api/health",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "app": "rocket",
+      "url": "http://localhost:4000/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "reflect_session",
+      "url": "http://localhost:3000/session",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api"
+      ],
+      "consoleErrors": [],
+      "screenshot": null
+    },
+    {
+      "name": "nexus_home",
+      "url": "http://localhost:3001/",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": null
+    },
+    {
+      "name": "citadel_home",
+      "url": "http://localhost:3005/",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api"
+      ],
+      "consoleErrors": [],
+      "screenshot": null
+    },
+    {
+      "name": "ghost_home",
+      "url": "http://localhost:5173/",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api"
+      ],
+      "consoleErrors": [],
+      "screenshot": null
+    },
+    {
+      "name": "rocket_home",
+      "url": "http://localhost:4000/",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": true,
+      "has404": false,
+      "pageErrors": [
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api",
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api\ncreateBrowserClient (webpack-internal:///(app-pages-browser)/../../node_modules/@supabase/ssr/dist/module/createBrowserClient.js:22:15)"
+      ],
+      "consoleErrors": [],
+      "screenshot": null
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+# Vercel Ignore
+node_modules
+.next
+.next_old
+out
+build
+dist
+.vercel
+*.log
+.env*
+.DS_Store
+# Large assets
+*.mp4
+*.mov
+*.zip
+*.tar
+*.gz
+*.7z

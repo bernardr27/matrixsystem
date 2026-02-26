@@ -1,0 +1,58 @@
+{
+  "ok": false,
+  "app": "nexus",
+  "startedAt": "2026-02-23T07:33:43.600Z",
+  "finishedAt": "2026-02-23T07:33:52.442Z",
+  "mode": "quick-ultra-with-targeted-retry",
+  "mobilePasses": [
+    {
+      "stage": "ultra",
+      "apps": null,
+      "summary": {
+        "mode": "matrix-fast",
+        "app": "nexus",
+        "ultra": true,
+        "screenshots": false,
+        "autoStart": true,
+        "startedAt": "2026-02-23T07:33:44.268Z",
+        "finishedAt": "2026-02-23T07:33:48.236Z",
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      }
+    }
+  ],
+  "apps": [
+    {
+      "app": "nexus",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "failures": [],
+      "certified": true
+    }
+  ],
+  "mobileSummary": {
+    "mode": "matrix-fast",
+    "app": "nexus",
+    "ultra": true,
+    "screenshots": false,
+    "autoStart": true,
+    "startedAt": "2026-02-23T07:33:44.268Z",
+    "finishedAt": "2026-02-23T07:33:48.236Z",
+    "total": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  "opsSummary": {
+    "ok": false,
+    "score": 85,
+    "failedChecks": [
+      "services"
+    ]
+  },
+  "artifacts": {
+    "mobile": "docs/diagnostics/mobile_verify_matrix_fast_latest.json",
+    "ops": "docs/diagnostics/ops_autopilot_latest.json"
+  }
+}

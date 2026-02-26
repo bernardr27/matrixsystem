@@ -1,0 +1,4 @@
+schema_version: v1
+display_name: QMD
+short_description: Matrix-wide quick mode for token-efficient, high-throughput execution.
+default_prompt: Execute in QMD mode with minimal context usage, compact diffs, and focused validation.

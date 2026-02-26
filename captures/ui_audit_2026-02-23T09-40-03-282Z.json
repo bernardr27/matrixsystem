@@ -1,0 +1,87 @@
+{
+  "timestamp": "2026-02-23T09:40:03.283Z",
+  "mode": "validate",
+  "viewport": "mobile",
+  "targets": [
+    "reflect_dashboard",
+    "reflect_journal",
+    "reflect_settings",
+    "reflect_developer",
+    "reflect_data",
+    "reflect_graph",
+    "reflect_sage",
+    "reflect_archive",
+    "reflect_session_list"
+  ],
+  "issues": {
+    "reflect_dashboard@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "1 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_journal@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "7 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_settings@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_developer@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_data@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "4 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_graph@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_sage@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_archive@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ],
+    "reflect_session_list@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "info",
+        "message": "3 high z-index elements (max: 1000)"
+      }
+    ]
+  },
+  "summary": {
+    "totalTargets": 9,
+    "totalErrors": 0,
+    "totalWarnings": 0,
+    "clean": 0
+  }
+}

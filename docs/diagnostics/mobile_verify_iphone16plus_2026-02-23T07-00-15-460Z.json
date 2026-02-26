@@ -1,0 +1,120 @@
+{
+  "summary": {
+    "device": "iPhone 16 Plus (430x932)",
+    "startedAt": "2026-02-23T06:58:11.984Z",
+    "finishedAt": "2026-02-23T07:00:15.460Z",
+    "total": 9,
+    "passed": 1,
+    "failed": 8
+  },
+  "results": [
+    {
+      "name": "nexus_dashboard",
+      "url": "http://localhost:3001/",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_dashboard_iphone16plus.png"
+    },
+    {
+      "name": "nexus_diagnostics",
+      "url": "http://localhost:3001/diagnostics",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/diagnostics",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_diagnostics_iphone16plus.png"
+    },
+    {
+      "name": "nexus_analytics",
+      "url": "http://localhost:3001/analytics",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/analytics",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_analytics_iphone16plus.png"
+    },
+    {
+      "name": "nexus_integrations",
+      "url": "http://localhost:3001/integrations",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/integrations",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_integrations_iphone16plus.png"
+    },
+    {
+      "name": "nexus_settings",
+      "url": "http://localhost:3001/settings",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/settings",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_settings_iphone16plus.png"
+    },
+    {
+      "name": "reflect_setup",
+      "url": "http://localhost:3000/setup/initial",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3000/setup/initial",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_setup_iphone16plus.png"
+    },
+    {
+      "name": "reflect_auth",
+      "url": "http://localhost:3000/auth",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3000/auth",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_auth_iphone16plus.png"
+    },
+    {
+      "name": "reflect_tutorial",
+      "url": "http://localhost:3000/tutorial",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3000/tutorial",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_tutorial_iphone16plus.png"
+    },
+    {
+      "name": "reflect_session",
+      "url": "http://localhost:3000/session",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_session_iphone16plus.png"
+    }
+  ]
+}

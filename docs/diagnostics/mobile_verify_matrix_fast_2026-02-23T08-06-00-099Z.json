@@ -1,0 +1,43 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "nexus",
+    "ultra": true,
+    "screenshots": false,
+    "autoStart": true,
+    "startedAt": "2026-02-23T08:04:13.578Z",
+    "finishedAt": "2026-02-23T08:06:00.099Z",
+    "total": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  "selectedApps": [
+    "nexus"
+  ],
+  "readiness": {
+    "nexus": false
+  },
+  "startedProcesses": [],
+  "health": [
+    {
+      "app": "nexus",
+      "url": "http://localhost:3001/api/health",
+      "ok": false,
+      "status": 0
+    }
+  ],
+  "results": [
+    {
+      "name": "nexus_home",
+      "url": "http://localhost:3001/",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": null
+    }
+  ]
+}

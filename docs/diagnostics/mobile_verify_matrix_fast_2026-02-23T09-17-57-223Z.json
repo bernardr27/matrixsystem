@@ -1,0 +1,196 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "all",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": true,
+    "startedAt": "2026-02-23T09:15:54.649Z",
+    "finishedAt": "2026-02-23T09:17:57.223Z",
+    "total": 10,
+    "passed": 10,
+    "failed": 0
+  },
+  "selectedApps": [
+    "reflect",
+    "nexus",
+    "citadel",
+    "ghost",
+    "rocket"
+  ],
+  "readiness": {
+    "reflect": true,
+    "nexus": true,
+    "citadel": true,
+    "ghost": true,
+    "rocket": true
+  },
+  "startedProcesses": [
+    {
+      "name": "nexus",
+      "pid": 11808,
+      "cwd": "apps\\nexus",
+      "method": "cmd-detached-hidden"
+    },
+    {
+      "name": "ghost",
+      "pid": 19184,
+      "cwd": "apps\\ghost-command",
+      "method": "cmd-detached-hidden"
+    }
+  ],
+  "health": [
+    {
+      "app": "reflect",
+      "url": "http://localhost:3000/api/health",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "app": "nexus",
+      "url": "http://localhost:3001/api/health",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "app": "citadel",
+      "url": "http://localhost:3005/api/health",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "app": "ghost",
+      "url": "http://localhost:5173/api/health",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "app": "rocket",
+      "url": "http://localhost:4000/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "reflect_session",
+      "url": "http://localhost:3000/session",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_session_matrix_fast.png"
+    },
+    {
+      "name": "reflect_auth",
+      "url": "http://localhost:3000/auth",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_auth_matrix_fast.png"
+    },
+    {
+      "name": "nexus_home",
+      "url": "http://localhost:3001/",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_home_matrix_fast.png"
+    },
+    {
+      "name": "nexus_diagnostics",
+      "url": "http://localhost:3001/diagnostics",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_diagnostics_matrix_fast.png"
+    },
+    {
+      "name": "citadel_home",
+      "url": "http://localhost:3005/",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\citadel_home_matrix_fast.png"
+    },
+    {
+      "name": "citadel_dashboard",
+      "url": "http://localhost:3005/dashboard",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\citadel_dashboard_matrix_fast.png"
+    },
+    {
+      "name": "ghost_home",
+      "url": "http://localhost:5173/",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\ghost_home_matrix_fast.png"
+    },
+    {
+      "name": "ghost_vault",
+      "url": "http://localhost:5173/vault",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\ghost_vault_matrix_fast.png"
+    },
+    {
+      "name": "rocket_home",
+      "url": "http://localhost:4000/",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\rocket_home_matrix_fast.png"
+    },
+    {
+      "name": "rocket_operations",
+      "url": "http://localhost:4000/operations",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\rocket_operations_matrix_fast.png"
+    }
+  ]
+}

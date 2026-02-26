@@ -1,0 +1,13 @@
+{
+  "role": "reviewer",
+  "role_name": "Reviewer",
+  "purpose": "Approves or blocks final execution using gate evidence.",
+  "started_at": "2026-02-23T05:41:14.180Z",
+  "policy": {
+    "timeout_ms": 240000,
+    "command_stage_limit": 7
+  },
+  "approved": true,
+  "blockers": [],
+  "stage_status": "pass"
+}

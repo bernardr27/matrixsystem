@@ -1,0 +1,110 @@
+{
+  "ok": true,
+  "app": "all",
+  "startedAt": "2026-02-23T07:45:32.573Z",
+  "finishedAt": "2026-02-23T07:47:25.224Z",
+  "mode": "quick-ultra-with-targeted-retry",
+  "policy": {
+    "mode": "quick-ultra-with-targeted-retry",
+    "requireOpsHealthy": false
+  },
+  "warnings": [
+    "Ops autopilot is degraded (services)"
+  ],
+  "remediation": [],
+  "mobilePasses": [
+    {
+      "stage": "ultra",
+      "apps": null,
+      "summary": {
+        "mode": "matrix-fast",
+        "app": "nexus",
+        "ultra": true,
+        "screenshots": false,
+        "autoStart": true,
+        "startedAt": "2026-02-23T07:43:54.045Z",
+        "finishedAt": "2026-02-23T07:44:12.243Z",
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      }
+    }
+  ],
+  "apps": [
+    {
+      "app": "nexus",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "failures": [],
+      "certified": true
+    }
+  ],
+  "legacyDocs": [
+    {
+      "file": "APP_VALIDATION_CHECKLIST.md",
+      "exists": true,
+      "total": 296,
+      "done": 0,
+      "pending": 296,
+      "completionRate": 0
+    },
+    {
+      "file": "APP_VALIDATION_TEST_REPORT.md",
+      "exists": true,
+      "total": 66,
+      "done": 54,
+      "pending": 12,
+      "completionRate": 81.8
+    },
+    {
+      "file": "APP_VALIDATION_FINAL_ASSESSMENT.md",
+      "exists": true,
+      "total": 43,
+      "done": 0,
+      "pending": 43,
+      "completionRate": 0
+    },
+    {
+      "file": "docs/archive/VERIFICATION_REPORT.md",
+      "exists": true,
+      "total": 0,
+      "done": 0,
+      "pending": 0,
+      "completionRate": null
+    },
+    {
+      "file": "get_started/AI_APP_DEV_BLUEPRINT.md",
+      "exists": true,
+      "total": 0,
+      "done": 0,
+      "pending": 0,
+      "completionRate": null
+    }
+  ],
+  "mobileSummary": {
+    "mode": "matrix-fast",
+    "app": "nexus",
+    "ultra": true,
+    "screenshots": false,
+    "autoStart": true,
+    "startedAt": "2026-02-23T07:43:54.045Z",
+    "finishedAt": "2026-02-23T07:44:12.243Z",
+    "total": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  "opsSummary": {
+    "ok": false,
+    "score": 40,
+    "failedChecks": [
+      "services"
+    ]
+  },
+  "artifacts": {
+    "mobile": "docs/diagnostics/mobile_verify_matrix_fast_latest.json",
+    "ops": "docs/diagnostics/ops_autopilot_latest.json",
+    "protocol": "docs/APP_CERTIFICATION_PROTOCOL.md",
+    "standardsMap": "docs/CERTIFICATION_STANDARDS_MAP.md"
+  }
+}

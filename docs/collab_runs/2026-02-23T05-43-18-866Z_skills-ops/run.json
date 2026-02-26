@@ -1,0 +1,74 @@
+{
+  "run_id": "2026-02-23T05-43-18-866Z_skills-ops",
+  "started_at": "2026-02-23T05:43:18.902Z",
+  "mode_requested": "collab",
+  "mode_effective": "collab",
+  "collab_score": 3,
+  "execute_final": false,
+  "task": "repair/verify all skills and agent metadata",
+  "workflow_id": "skills-ops",
+  "workflow_description": "Skill ecosystem repair, sync, and readiness checks.",
+  "policy": {
+    "profile": "skills_fast",
+    "command_timeout_ms": 150000,
+    "command_stage_limit": 5,
+    "require_reviewer_approval": true,
+    "require_verifier_stage": true,
+    "require_all_command_stages_pass": true,
+    "max_warning_hits": 200
+  },
+  "stages": [
+    {
+      "role": "coordinator",
+      "ok": true,
+      "note": "Task triaged with collab_score=3; mode=collab; workflow=skills-ops"
+    },
+    {
+      "role": "scout",
+      "ok": true,
+      "command": "npm run skills:doctor",
+      "status": 0,
+      "duration_ms": 9563,
+      "warning_hits": 0,
+      "output_preview": "> skills:doctor\n> powershell -ExecutionPolicy Bypass -File scripts\\tools\\skills_doctor.ps1\n\n[skills-doctor] repo_root=G:\\matrix\n[skills-doctor] codex_skills=C:\\Users\\DRAGON DAD\\.codex\\skills\n[skills-doctor] discovered=5\n[skills-doctor] duplicate_names=1\n[skills-doctor] missing_agents_yaml=0\n[skills-doctor] qmd_agent=True\n[skills-doctor] qmd_ralph=True\n[skills-doctor] qmd_codex=True\n[skills-doctor] duplicate qmd: G:\\matrix\\.agent\\skills\\qmd | G:\\matrix\\quarantine\\ralph\\skills\\qmd"
+    },
+    {
+      "role": "builder",
+      "ok": true,
+      "command": "npm run skills:repair",
+      "status": 0,
+      "duration_ms": 11401,
+      "warning_hits": 0,
+      "output_preview": "> skills:repair\n> powershell -ExecutionPolicy Bypass -File scripts\\tools\\skills_repair.ps1\n\n[skills-repair] repo_root=G:\\matrix\n[skills-repair] codex_skills=C:\\Users\\DRAGON DAD\\.codex\\skills\n[skills-repair] metadata_created=0\n[skills-sync] repo_root=G:\\matrix\n[skills-sync] codex_skills=C:\\Users\\DRAGON DAD\\.codex\\skills\n[skills-sync] discovered=5\n[skills-sync] unique_skills=4\n[skills-sync] dry_run=False\n[skills-sync] planned_copy=4\n[skills-sync] installed_or_updated=4\n[skills-sync] skipped_existing=0\n[skills-sync] metadata_created=0\n[skills-sync] + qmd <= G:\\matrix\\.agent\\skills\\qmd\n[skills-sync] + ui-engine <= G:\\matrix\\.agent\\skills\\ui-engine\n[skills-sync] + prd <= G:\\matrix\\quarantine\\ralph\\skills\\prd\n[skills-sync] + ralph <= G:\\matrix\\quarantine\\ralph\\skills\\ralph"
+    },
+    {
+      "role": "verifier",
+      "ok": true,
+      "command": "npm run skills:doctor",
+      "status": 0,
+      "duration_ms": 4314,
+      "warning_hits": 0,
+      "output_preview": "> skills:doctor\n> powershell -ExecutionPolicy Bypass -File scripts\\tools\\skills_doctor.ps1\n\n[skills-doctor] repo_root=G:\\matrix\n[skills-doctor] codex_skills=C:\\Users\\DRAGON DAD\\.codex\\skills\n[skills-doctor] discovered=5\n[skills-doctor] duplicate_names=1\n[skills-doctor] missing_agents_yaml=0\n[skills-doctor] qmd_agent=True\n[skills-doctor] qmd_ralph=True\n[skills-doctor] qmd_codex=True\n[skills-doctor] duplicate qmd: G:\\matrix\\.agent\\skills\\qmd | G:\\matrix\\quarantine\\ralph\\skills\\qmd"
+    },
+    {
+      "role": "reviewer",
+      "ok": true,
+      "note": "All policy gates passed. Approved for final execution."
+    },
+    {
+      "role": "executor",
+      "ok": true,
+      "note": "Final execution skipped (use --execute-final to enable)."
+    }
+  ],
+  "bridge": {
+    "mode": "auto",
+    "enabled": true
+  },
+  "review": {
+    "approved": true,
+    "blockers": []
+  },
+  "finished_at": "2026-02-23T05:43:47.329Z",
+  "ok": true
+}

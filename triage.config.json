@@ -1,0 +1,67 @@
+{
+    "version": "1.0",
+    "apps": {
+        "reflect": {
+            "enabled": true,
+            "exclusions": [
+                "**/*.test.tsx",
+                "**/__tests__/**",
+                "**/__mocks__/**"
+            ],
+            "customPatterns": []
+        },
+        "nexus": {
+            "enabled": true,
+            "exclusions": [],
+            "customPatterns": []
+        },
+        "ghost-command": {
+            "enabled": true,
+            "exclusions": [],
+            "customPatterns": []
+        },
+        "rocket-command": {
+            "enabled": true,
+            "exclusions": [],
+            "customPatterns": []
+        }
+    },
+    "thresholds": {
+        "low": 10,
+        "medium": 50,
+        "high": 100
+    },
+    "snapshots": {
+        "keepCount": 5,
+        "autoCleanup": true
+    },
+    "notifications": {
+        "enabled": false,
+        "webhook": "",
+        "events": [
+            "triage:complete",
+            "triage:error",
+            "health:critical"
+        ]
+    },
+    "schedule": {
+        "enabled": false,
+        "cron": "0 6 * * *",
+        "apps": [
+            "reflect",
+            "nexus",
+            "rocket-command"
+        ]
+    },
+    "scoring": {
+        "weights": {
+            "info": 1,
+            "low": 2,
+            "medium": 5,
+            "high": 10,
+            "critical": 25
+        },
+        "baseScore": 100,
+        "maxDeductions": 100
+    }
+}

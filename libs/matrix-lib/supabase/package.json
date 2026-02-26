@@ -1,0 +1,71 @@
+{
+  "name": "@matrix-lib/supabase",
+  "version": "1.0.0",
+  "description": "Shared Supabase client and utilities for Matrix V9 Singularity",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
+    },
+    "./hooks": {
+      "types": "./dist/hooks.d.ts",
+      "default": "./dist/hooks.js"
+    },
+    "./admin": {
+      "types": "./dist/admin.d.ts",
+      "default": "./dist/admin.js"
+    },
+    "./next": {
+      "types": "./dist/next.d.ts",
+      "default": "./dist/next.js"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./auth-helpers": {
+      "types": "./dist/auth-helpers.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./next-middleware": {
+      "types": "./dist/next-middleware.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "supabase",
+    "database",
+    "client",
+    "matrix",
+    "singularity"
+  ],
+  "author": "Matrix Development Team",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/auth-js": "^2.67.3",
+    "@supabase/postgrest-js": "^1.18.2",
+    "@supabase/realtime-js": "^2.11.2",
+    "@supabase/storage-js": "^2.7.1",
+    "@supabase/supabase-js": "^2.97.0"
+  },
+  "peerDependencies": {
+    "@supabase/supabase-js": "^2.97.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "defaults": {
+    "command_timeout_ms": 180000,
+    "command_stage_limit": 6,
+    "require_reviewer_approval": true,
+    "require_verifier_stage": true,
+    "require_all_command_stages_pass": true,
+    "max_warning_hits": 120
+  },
+  "profiles": {
+    "default": {
+      "command_timeout_ms": 180000,
+      "command_stage_limit": 6,
+      "max_warning_hits": 120
+    },
+    "audit_strict": {
+      "command_timeout_ms": 240000,
+      "command_stage_limit": 7,
+      "max_warning_hits": 80
+    },
+    "skills_fast": {
+      "command_timeout_ms": 120000,
+      "command_stage_limit": 5,
+      "max_warning_hits": 200
+    }
+  },
+  "mode_overrides": {
+    "solo": {
+      "command_stage_limit": 4
+    }
+  },
+  "workflow_overrides": {
+    "matrix-audit": {
+      "command_timeout_ms": 240000,
+      "command_stage_limit": 7
+    },
+    "skills-ops": {
+      "command_timeout_ms": 150000,
+      "command_stage_limit": 5
+    }
+  }
+}

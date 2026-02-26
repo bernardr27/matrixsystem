@@ -1,0 +1,79 @@
+{
+  "ok": false,
+  "mode": "check",
+  "startedAt": "2026-02-24T15:19:30.935Z",
+  "checks": {
+    "services": [
+      {
+        "name": "reflect",
+        "url": "http://127.0.0.1:3000/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 31,
+        "reason": "fetch failed"
+      },
+      {
+        "name": "nexus",
+        "url": "http://127.0.0.1:3001/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 6,
+        "reason": "fetch failed"
+      },
+      {
+        "name": "ghost",
+        "url": "http://127.0.0.1:5173/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 5,
+        "reason": "fetch failed"
+      },
+      {
+        "name": "citadel",
+        "url": "http://127.0.0.1:3005/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 6,
+        "reason": "fetch failed"
+      }
+    ],
+    "supabase": {
+      "ok": true,
+      "latencyMs": 484,
+      "reason": "Supabase query ok"
+    },
+    "redis": {
+      "ok": true,
+      "latencyMs": 258,
+      "reason": "Redis ping=PONG"
+    },
+    "env": {
+      "ok": true,
+      "reason": "Environment check passed"
+    },
+    "prodReadiness": {
+      "ok": true,
+      "reason": "Production readiness passed"
+    },
+    "lint": {
+      "ok": false,
+      "reason": "node:internal/modules/cjs/loader:1424\r\n  throw err;\r\n  ^\r\n\r\nError: Cannot find module 'G:\\matrix\\node_modules\\npm\\bin\\npm-prefix.js'\r\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)\r\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)\r\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)\r\n    at Module._load (node:internal/modules/cjs/loader:1227:37)\r\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)\r\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\r\n    at node:internal/main/run_main_module:33:47 {\r\n  code: 'MODULE_NOT_FOUND',\r\n  requireStack: []\r\n}\r\n\r\nNode.js v24.13.0\r\nnode:internal/modules/cjs/loader:1424\r\n  throw err;\r\n  ^\r\n\r\nError: Cannot find module 'G:\\matrix\\node_modules\\npm\\bin\\npm-cli.js'\r\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)\r\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)\r\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)\r\n    at Module._load (node:internal/modules/cjs/loader:1227:37)\r\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)\r\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\r\n    at node:internal/main/run_main_module:33:47 {\r\n  code: 'MODULE_NOT_FOUND',\r\n  requireStack: []\r\n}\r\n\r\nNode.js v24.13.0"
+    }
+  },
+  "actions": [],
+  "artifacts": [],
+  "summary": {
+    "healthScore": 30,
+    "degradedServices": [
+      "reflect",
+      "nexus",
+      "ghost",
+      "citadel"
+    ],
+    "failedChecks": [
+      "services",
+      "lint"
+    ]
+  },
+  "finishedAt": "2026-02-24T15:19:33.479Z"
+}

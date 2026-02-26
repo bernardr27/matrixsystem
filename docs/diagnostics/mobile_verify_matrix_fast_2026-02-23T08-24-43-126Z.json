@@ -1,0 +1,83 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "reflect,citadel,rocket",
+    "ultra": true,
+    "screenshots": true,
+    "autoStart": true,
+    "startedAt": "2026-02-23T08:24:33.678Z",
+    "finishedAt": "2026-02-23T08:24:43.126Z",
+    "total": 3,
+    "passed": 3,
+    "failed": 0
+  },
+  "selectedApps": [
+    "reflect",
+    "citadel",
+    "rocket"
+  ],
+  "readiness": {
+    "reflect": true,
+    "citadel": true,
+    "rocket": true
+  },
+  "startedProcesses": [],
+  "health": [
+    {
+      "app": "reflect",
+      "url": "http://localhost:3000/api/health",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "app": "citadel",
+      "url": "http://localhost:3005/api/health",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "app": "rocket",
+      "url": "http://localhost:4000/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "reflect_session",
+      "url": "http://localhost:3000/session",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_session_matrix_fast.png"
+    },
+    {
+      "name": "citadel_home",
+      "url": "http://localhost:3005/",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\citadel_home_matrix_fast.png"
+    },
+    {
+      "name": "rocket_home",
+      "url": "http://localhost:4000/",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\rocket_home_matrix_fast.png"
+    }
+  ]
+}

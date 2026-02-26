@@ -1,0 +1,24 @@
+{
+    "project": "Architect Demo",
+    "version": "1.0.0",
+    "stories": [
+        {
+            "id": "S1",
+            "title": "Initialization",
+            "description": "Initialize the demo app.",
+            "passes": true,
+            "acceptanceCriteria": [
+                "App initialized"
+            ]
+        },
+        {
+            "id": "S2",
+            "title": "Build UI",
+            "description": "Build the main interface.",
+            "passes": false,
+            "acceptanceCriteria": [
+                "UI built"
+            ]
+        }
+    ]
+}

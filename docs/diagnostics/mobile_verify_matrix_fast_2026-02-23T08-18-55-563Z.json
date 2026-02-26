@@ -1,0 +1,137 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "reflect,citadel,rocket",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": true,
+    "startedAt": "2026-02-23T08:18:41.867Z",
+    "finishedAt": "2026-02-23T08:18:55.563Z",
+    "total": 6,
+    "passed": 0,
+    "failed": 6
+  },
+  "selectedApps": [
+    "reflect",
+    "citadel",
+    "rocket"
+  ],
+  "readiness": {
+    "reflect": true,
+    "citadel": true,
+    "rocket": true
+  },
+  "startedProcesses": [],
+  "health": [
+    {
+      "app": "reflect",
+      "url": "http://localhost:3000/api/health",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "app": "citadel",
+      "url": "http://localhost:3005/api/health",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "app": "rocket",
+      "url": "http://localhost:4000/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "reflect_session",
+      "url": "http://localhost:3000/session",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": true,
+      "has404": false,
+      "pageErrors": [
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api",
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api\ncreateBrowserClient (webpack-internal:///(app-pages-browser)/../../node_modules/@supabase/ssr/dist/module/createBrowserClient.js:22:15)"
+      ],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_session_matrix_fast.png"
+    },
+    {
+      "name": "reflect_auth",
+      "url": "http://localhost:3000/auth",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": true,
+      "has404": false,
+      "pageErrors": [
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api",
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api\ncreateBrowserClient (webpack-internal:///(app-pages-browser)/../../node_modules/@supabase/ssr/dist/module/createBrowserClient.js:22:15)"
+      ],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_auth_matrix_fast.png"
+    },
+    {
+      "name": "citadel_home",
+      "url": "http://localhost:3005/",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api",
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api\ncreateBrowserClient (webpack-internal:///(app-pages-browser)/../../node_modules/@supabase/ssr/dist/module/createBrowserClient.js:22:15)"
+      ],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\citadel_home_matrix_fast.png"
+    },
+    {
+      "name": "citadel_dashboard",
+      "url": "http://localhost:3005/dashboard",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": true,
+      "has404": false,
+      "pageErrors": [
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api",
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api\ncreateBrowserClient (webpack-internal:///(app-pages-browser)/../../node_modules/@supabase/ssr/dist/module/createBrowserClient.js:22:15)"
+      ],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\citadel_dashboard_matrix_fast.png"
+    },
+    {
+      "name": "rocket_home",
+      "url": "http://localhost:4000/",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": true,
+      "has404": false,
+      "pageErrors": [
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api",
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api\ncreateBrowserClient (webpack-internal:///(app-pages-browser)/../../node_modules/@supabase/ssr/dist/module/createBrowserClient.js:22:15)"
+      ],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\rocket_home_matrix_fast.png"
+    },
+    {
+      "name": "rocket_operations",
+      "url": "http://localhost:4000/operations",
+      "ok": false,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api",
+        "@supabase/ssr: Your project's URL and API key are required to create a Supabase client!\n\nCheck your Supabase project's API settings to find these values\n\nhttps://supabase.com/dashboard/project/_/settings/api\ncreateBrowserClient (webpack-internal:///(app-pages-browser)/../../node_modules/@supabase/ssr/dist/module/createBrowserClient.js:22:15)"
+      ],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\rocket_operations_matrix_fast.png"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "ok": false,
+  "app": "all",
+  "startedAt": "2026-02-23T07:34:22.938Z",
+  "finishedAt": "2026-02-23T07:36:22.455Z",
+  "mode": "quick-ultra-with-targeted-retry",
+  "mobilePasses": [
+    {
+      "stage": "ultra",
+      "apps": null,
+      "summary": {
+        "mode": "matrix-fast",
+        "app": "all",
+        "ultra": true,
+        "screenshots": false,
+        "autoStart": true,
+        "startedAt": "2026-02-23T07:34:23.418Z",
+        "finishedAt": "2026-02-23T07:35:29.701Z",
+        "total": 5,
+        "passed": 4,
+        "failed": 1
+      }
+    },
+    {
+      "stage": "retry_failed_apps",
+      "apps": [
+        "reflect"
+      ],
+      "summary": {
+        "mode": "matrix-fast",
+        "app": "reflect",
+        "ultra": false,
+        "screenshots": true,
+        "autoStart": false,
+        "startedAt": "2026-02-23T07:35:31.338Z",
+        "finishedAt": "2026-02-23T07:36:13.547Z",
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      }
+    }
+  ],
+  "apps": [
+    {
+      "app": "reflect",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "failures": [],
+      "certified": true
+    },
+    {
+      "app": "nexus",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "failures": [],
+      "certified": true
+    },
+    {
+      "app": "citadel",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "failures": [],
+      "certified": true
+    },
+    {
+      "app": "ghost",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "failures": [],
+      "certified": true
+    },
+    {
+      "app": "rocket",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "failures": [],
+      "certified": true
+    }
+  ],
+  "mobileSummary": {
+    "mode": "matrix-fast",
+    "app": "all",
+    "ultra": true,
+    "screenshots": false,
+    "autoStart": true,
+    "startedAt": "2026-02-23T07:34:23.418Z",
+    "finishedAt": "2026-02-23T07:35:29.701Z",
+    "total": 5,
+    "passed": 4,
+    "failed": 1,
+    "secondPassApps": [
+      "reflect"
+    ],
+    "secondPassTotal": 2
+  },
+  "opsSummary": {
+    "ok": false,
+    "score": 55,
+    "failedChecks": [
+      "services"
+    ]
+  },
+  "artifacts": {
+    "mobile": "docs/diagnostics/mobile_verify_matrix_fast_latest.json",
+    "ops": "docs/diagnostics/ops_autopilot_latest.json"
+  }
+}

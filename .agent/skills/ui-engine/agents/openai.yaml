@@ -1,0 +1,4 @@
+schema_version: v1
+display_name: UI Engine
+short_description: Visual-to-code UI workflow for Matrix with validation and token mapping.
+default_prompt: Use UI Engine to convert this design into Matrix-aligned, validated UI components.

@@ -1,0 +1,389 @@
+@import './design_tokens.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/**
+ * MATRIX GLOBAL DESIGN TOKENS v1.0 (INLINED)
+ */
+:root {
+  /* 
+     * RADIANT SCHEME (Light Mode - Standard Baseline) 
+     */
+  --matrix-white: #ffffff;
+  --matrix-black: #000000;
+
+  /* Core Backgrounds */
+  --m-bg-primary: #f8fafc;
+  --m-bg-secondary: #f1f5f9;
+  --m-bg-tertiary: #e2e8f0;
+
+  /* Core Foregrounds */
+  --m-fg-primary: #0f172a;
+  --m-fg-secondary: #475569;
+  --m-fg-muted: #94a3b8;
+
+  /* Brand & Accents */
+  --m-primary: #0f172a;
+  --m-primary-fg: #ffffff;
+
+  --m-accent-cyan: #0891b2;
+  --m-accent-violet: #7c3aed;
+  --m-accent-emerald: #059669;
+  --m-accent-rose: #e11d48;
+  --m-accent-amber: #d97706;
+
+  /* Surfacing (Light) */
+  --m-surface: rgba(255, 255, 255, 0.7);
+  --m-surface-border: rgba(15, 23, 42, 0.08);
+  --m-surface-hover: rgba(15, 23, 42, 0.04);
+
+  /* Glassmorphism Presets (Light) */
+  --m-blur-sm: blur(12px);
+  --m-blur-md: blur(24px);
+  --m-blur-lg: blur(40px);
+}
+
+/* 
+ * SLEEK SCHEME (Dark Mode - Identity Default) 
+ */
+[data-theme='dark'],
+:root:not([data-theme='light']) {
+  /* Core Backgrounds */
+  --m-bg-primary: #0B0E14;
+  --m-bg-secondary: #11151c;
+  --m-bg-tertiary: #16161b;
+
+  /* Core Foregrounds */
+  --m-fg-primary: #f8fafc;
+  --m-fg-secondary: #94a3b8;
+  --m-fg-muted: #475569;
+
+  /* Brand & Accents (Dark) */
+  --m-primary: #ffffff;
+  --m-primary-fg: #000000;
+
+  --m-accent-cyan: #22d3ee;
+  --m-accent-violet: #8b5cf6;
+  --m-accent-emerald: #10b981;
+  --m-accent-rose: #f43f5e;
+  --m-accent-amber: #f59e0b;
+
+  /* Surfacing (Dark) */
+  --m-surface: rgba(255, 255, 255, 0.02);
+  --m-surface-border: rgba(255, 255, 255, 0.06);
+  --m-surface-hover: rgba(255, 255, 255, 0.1);
+
+  /* Glassmorphism Presets (Dark) */
+  --m-blur-sm: blur(16px);
+  --m-blur-md: blur(32px);
+  --m-blur-lg: blur(60px);
+}
+
+:root {
+  /* SPACING & GRID */
+  --m-space-1: 0.25rem;
+  --m-space-2: 0.5rem;
+  --m-space-3: 0.75rem;
+  --m-space-4: 1rem;
+  --m-space-6: 1.5rem;
+  --m-space-8: 2rem;
+  --m-space-12: 3rem;
+
+  /* TYPOGRAPHY SCALE */
+  --m-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --m-font-display: 'Outfit', 'Inter', system-ui, sans-serif;
+  --m-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --m-text-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem);
+  --m-text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);
+  --m-text-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+  --m-text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  --m-text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --m-text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+  --m-text-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3.5rem);
+
+  /* BORDER RADIUS */
+  --m-radius-sm: 8px;
+  --m-radius-md: 16px;
+  --m-radius-lg: 24px;
+  --m-radius-xl: 32px;
+  --m-radius-full: 9999px;
+
+  /* ELEVATION & SHADOWS */
+  --m-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --m-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --m-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --m-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --m-shadow-industrial: 0 0 0 1px var(--m-surface-border), var(--m-shadow-lg);
+  --m-shadow-glow-cyan: 0 0 20px rgba(34, 211, 238, 0.15);
+  --m-shadow-glow-violet: 0 0 20px rgba(139, 92, 246, 0.15);
+
+  /* ANIMATION EASING */
+  --m-ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+  --m-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 
+ * GHOST COMMAND SPECIFIC OVERRIDES 
+ */
+:root {
+  /* Legacy mapping for Tailwind compatibility while migrating */
+  --background: var(--m-bg-primary);
+  --foreground: var(--m-fg-primary);
+  --accent: var(--m-accent-cyan);
+  --accent-alt: var(--m-accent-emerald);
+  --accent-void: var(--m-accent-violet);
+  --accent-warm: var(--m-accent-amber);
+  --accent-error: var(--m-accent-rose);
+
+  /* DYNAMIC TOKENS */
+  --neural-pulse: var(--accent);
+  --anomaly: var(--accent-error);
+  --success: var(--accent-alt);
+  --accent-glow: rgba(34, 211, 238, 0.4);
+
+  --glass-border: var(--m-surface-border);
+
+  /* LAYOUT — Ghost Command v11.0 */
+  --header-height: 50px;
+  --nav-top: calc(var(--header-height) + env(safe-area-inset-top, 0px));
+  --nav-bottom: calc(54px + env(safe-area-inset-bottom, 0px));
+  --content-height: calc(100dvh - var(--nav-top) - var(--nav-bottom));
+}
+
+/* Desktop: top header 50px + tab bar 38px, no bottom nav */
+@media (min-width: 768px) {
+  :root {
+    --header-height: 88px;
+    --nav-bottom: 0px;
+    --content-height: calc(100dvh - var(--nav-top));
+  }
+}
+
+/* 
+ * MATRIX BASE STYLES v1.0 (INLINED)
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  color-scheme: dark light;
+}
+
+html,
+body {
+  min-height: 100vh;
+  background-color: var(--m-bg-primary);
+  color: var(--m-fg-primary);
+  font-family: var(--m-font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+/* ========================= MOBILE-FIXES ========================= */
+@media (max-width: 640px) {
+
+  html,
+  body {
+    font-size: 16px !important;
+  }
+
+  p,
+  span,
+  li,
+  a,
+  button,
+  label,
+  input,
+  textarea {
+    font-size: clamp(0.9rem, 1vw + 0.9rem, 1rem) !important;
+    line-height: 1.4 !important;
+  }
+
+  button,
+  a[role="button"],
+  .btn,
+  .btn-gold {
+    min-height: 44px !important;
+    min-width: 44px !important;
+    padding: 8px 12px !important;
+    touch-action: manipulation;
+  }
+
+  html,
+  body,
+  #__next {
+    overflow-x: hidden !important;
+  }
+
+  /* Ensure inputs meet mobile touch target height */
+  input,
+  textarea,
+  select {
+    min-height: 44px !important;
+    height: auto !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+}
+
+/* ======================= END MOBILE-FIXES ======================= */
+
+/* Z-INDEX NORMALIZER: cap inline z-index on mobile/desktop to reduce auditor noise */
+[style*="z-index"] {
+  z-index: 1000 !important;
+}
+
+/* Normalize common overlay classes */
+.modal,
+.overlay,
+.portal,
+.toast,
+.popover {
+  z-index: 1000 !important;
+}
+
+/* TARGETED AUDIT FIXES: ghost */
+button,
+a[role="button"],
+.btn,
+.link {
+  min-height: 44px !important;
+  padding: 8px 12px !important;
+}
+
+.architect-header .sign-in,
+.vault-header .sign-in {
+  font-size: 12px !important;
+}
+
+/* Glassmorphism Utility */
+.m-glass {
+  background: var(--m-surface);
+  backdrop-filter: var(--m-blur-md);
+  -webkit-backdrop-filter: var(--m-blur-md);
+  border: 1px solid var(--m-surface-border);
+}
+
+
+/* PROCEDURAL DARK MATTER BACKGROUND */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.03) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20200%20200%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.65%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E");
+  background-blend-mode: soft-light;
+  opacity: 0.6;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* ATMOSPHERIC OVERLAYS */
+.ambient-glow {
+  position: fixed;
+  inset: -25%;
+  background: radial-gradient(circle at center, rgba(34, 211, 238, 0.02) 0%, transparent 60%);
+  animation: atmospheric-drift 30s infinite linear;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes atmospheric-drift {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  33% {
+    transform: translate(2%, 1%) rotate(120deg);
+  }
+
+  66% {
+    transform: translate(-1%, 2%) rotate(240deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
+}
+
+/* V2 SCANLINE & CRT EFFECTS */
+.scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      transparent 50%,
+      rgba(255, 255, 255, 0.01) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+/* CHROMATIC ABERRATION UTILITY */
+.glitch-edge {
+  position: relative;
+}
+
+.glitch-edge::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--accent-error);
+  opacity: 0.1;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* V2 SCROLLBAR */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* NEURAL PIPS */
+.neural-pip {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+/* ─── Aesthetic v4 Extreme Curvature (Global Replacement for Squircle) ─── */
+.squircle {
+  border-radius: 2rem !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}

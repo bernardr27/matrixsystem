@@ -1,0 +1,8 @@
+{
+  "role": "coordinator",
+  "role_name": "Coordinator",
+  "purpose": "Owns mission scope, stage routing, and handoff integrity.",
+  "started_at": "2026-02-23T04:24:49.105Z",
+  "note": "Task triaged with collab_score=0; mode=collab; workflow=skills-ops",
+  "stage_status": "pass"
+}

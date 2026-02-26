@@ -1,0 +1,157 @@
+{
+  "source": {
+    "label": "User video capability pack",
+    "updated_at": "2026-02-23",
+    "videos": [
+      "https://www.youtube.com/watch?v=-hYE5U6FGk8",
+      "https://www.youtube.com/watch?v=T5LHXiTncp0",
+      "https://www.youtube.com/watch?v=wU8diwt99-s",
+      "https://www.youtube.com/watch?v=csOEsfiBfvo",
+      "https://www.youtube.com/watch?v=bhPHwVsrTo0",
+      "https://www.youtube.com/watch?v=91B_v-wOaws",
+      "https://www.youtube.com/watch?v=1Sxxscn4Vfk",
+      "https://www.youtube.com/watch?v=dEk3LUPAg7s",
+      "https://www.youtube.com/watch?v=YFQGQIZWDcE",
+      "https://www.youtube.com/watch?v=mOqhhDXUgUo"
+    ]
+  },
+  "capabilities": [
+    {
+      "id": "antigravity_web_production",
+      "name": "Antigravity Web Production Pipeline",
+      "type": "delegate",
+      "target_default": "apps/reflect",
+      "summary": "Turns idea-to-production website flow into a delegated implementation mission with visual quality gates.",
+      "outcomes": [
+        "Hero + section architecture with stronger visual identity",
+        "Animation pass and responsive validation",
+        "Deployment-readiness checklist"
+      ],
+      "steps": [
+        "Capture style references and constraints",
+        "Scaffold section layout and content hierarchy",
+        "Apply motion and interaction polish",
+        "Run mobile/desktop verification before merge"
+      ]
+    },
+    {
+      "id": "spline_3d_experience",
+      "name": "3D Interaction Surface Upgrade",
+      "type": "delegate",
+      "target_default": "apps/reflect",
+      "summary": "Adds purposeful 3D experience surfaces and interaction choreography for flagship pages.",
+      "outcomes": [
+        "3D scene integration strategy",
+        "Performance-aware interaction model",
+        "Fallback path for low-powered devices"
+      ],
+      "steps": [
+        "Identify page and conversion goal",
+        "Define 3D scene boundaries and loading behavior",
+        "Implement animation timing + reduced-motion fallback",
+        "Verify frame budget and interaction latency"
+      ]
+    },
+    {
+      "id": "flutter_mobile_prototype",
+      "name": "Mobile App Capability Pipeline",
+      "type": "delegate",
+      "target_default": "apps/rocket-command",
+      "summary": "Converts feature ideas into mobile-first prototype missions with explicit screen/state mapping.",
+      "outcomes": [
+        "Screen map and user flow",
+        "State transitions and edge-case handling",
+        "Backend integration contract"
+      ],
+      "steps": [
+        "Define user journey and screen inventory",
+        "Generate component/page scaffold",
+        "Integrate state + Supabase contracts",
+        "Run mobile QA and defect triage"
+      ]
+    },
+    {
+      "id": "gemini_design_sprint",
+      "name": "Gemini Prompt Design Sprint",
+      "type": "delegate",
+      "target_default": "apps/citadel",
+      "summary": "Introduces structured design sprint prompts for faster ideation with clear output constraints.",
+      "outcomes": [
+        "Prompt templates for IA, UI style, and content tone",
+        "Iteration rubric for visual + UX quality",
+        "Exportable handoff notes"
+      ],
+      "steps": [
+        "Draft constrained prompts per surface",
+        "Run 2-3 variant rounds",
+        "Score variants with rubric",
+        "Promote best variant to implementation mission"
+      ]
+    },
+    {
+      "id": "ai_quality_guardrails",
+      "name": "AI Coding Guardrails",
+      "type": "gate",
+      "target_default": "monorepo",
+      "summary": "Enforces repeatable quality checks to reduce regressions from high-velocity AI coding.",
+      "outcomes": [
+        "Lint/type/test gate execution",
+        "Regression visibility in output logs",
+        "Safer merge baseline"
+      ],
+      "commands": [
+        "npm run lint:turbo",
+        "npm run type-check:turbo",
+        "npm run test:turbo"
+      ]
+    },
+    {
+      "id": "ai_quality_guardrails_fast",
+      "name": "AI Coding Guardrails (Fast Loop)",
+      "type": "gate",
+      "target_default": "apps/reflect",
+      "summary": "Runs lightweight reflect-scoped quality checks for rapid iteration before full monorepo gating.",
+      "outcomes": [
+        "Faster local validation loop",
+        "Early detection of reflect regressions",
+        "Reduced wait time during UI iteration"
+      ],
+      "commands": [
+        "npm run lint --workspace reflect",
+        "npm run test --workspace reflect -- src/tests/capabilities-api.test.ts"
+      ]
+    },
+    {
+      "id": "ai_quality_guardrails_smoke",
+      "name": "AI Coding Guardrails (Smoke)",
+      "type": "gate",
+      "target_default": "apps/reflect",
+      "summary": "Runs the shortest safety check before fast/full gates.",
+      "outcomes": [
+        "Very fast fail-fast signal",
+        "Minimal command runtime for rapid edits"
+      ],
+      "commands": [
+        "npm run lint --workspace reflect -- src/app/page.tsx src/app/api/capabilities/run-guardrails/route.ts src/app/api/capabilities/status/route.ts"
+      ]
+    },
+    {
+      "id": "mcp_toolchain_audit",
+      "name": "MCP + Toolchain Audit",
+      "type": "audit",
+      "target_default": "monorepo",
+      "summary": "Audits key AI toolchain readiness (MCP-style context, providers, and integration dependencies).",
+      "outcomes": [
+        "Tool presence snapshot",
+        "Environment key presence report",
+        "Priority remediation list"
+      ],
+      "checks": [
+        "GROQ_API_KEY",
+        "OPENAI_API_KEY",
+        "SUPABASE_URL",
+        "SUPABASE_KEY"
+      ]
+    }
+  ]
+}

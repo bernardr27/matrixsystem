@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-02-23T09:44:50.288Z",
+  "mode": "validate",
+  "viewport": "mobile",
+  "targets": [
+    "nexus_cockpit",
+    "nexus_diagnostics"
+  ],
+  "issues": {
+    "nexus_cockpit@mobile": [],
+    "nexus_diagnostics@mobile": []
+  },
+  "summary": {
+    "totalTargets": 2,
+    "totalErrors": 0,
+    "totalWarnings": 0,
+    "clean": 2
+  }
+}

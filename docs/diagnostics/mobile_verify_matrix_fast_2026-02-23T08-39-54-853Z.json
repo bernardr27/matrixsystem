@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "reflect",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": false,
+    "startedAt": "2026-02-23T08:39:36.964Z",
+    "finishedAt": "2026-02-23T08:39:54.853Z",
+    "total": 2,
+    "passed": 2,
+    "failed": 0
+  },
+  "selectedApps": [
+    "reflect"
+  ],
+  "readiness": {
+    "reflect": true
+  },
+  "startedProcesses": [],
+  "health": [
+    {
+      "app": "reflect",
+      "url": "http://localhost:3000/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "reflect_session",
+      "url": "http://localhost:3000/session",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_session_matrix_fast.png"
+    },
+    {
+      "name": "reflect_auth",
+      "url": "http://localhost:3000/auth",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_auth_matrix_fast.png"
+    }
+  ]
+}

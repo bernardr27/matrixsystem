@@ -1,0 +1,87 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "nexus,ghost",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": false,
+    "startedAt": "2026-02-23T07:40:24.237Z",
+    "finishedAt": "2026-02-23T07:42:55.542Z",
+    "total": 4,
+    "passed": 0,
+    "failed": 4
+  },
+  "selectedApps": [
+    "nexus",
+    "ghost"
+  ],
+  "readiness": {
+    "nexus": false,
+    "ghost": false
+  },
+  "startedProcesses": [],
+  "health": [
+    {
+      "app": "nexus",
+      "url": "http://localhost:3001/api/health",
+      "ok": false,
+      "status": 0
+    },
+    {
+      "app": "ghost",
+      "url": "http://localhost:5173/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "nexus_home",
+      "url": "http://localhost:3001/",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_home_matrix_fast.png"
+    },
+    {
+      "name": "nexus_diagnostics",
+      "url": "http://localhost:3001/diagnostics",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/diagnostics",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_diagnostics_matrix_fast.png"
+    },
+    {
+      "name": "ghost_home",
+      "url": "http://localhost:5173/",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_RESET at http://localhost:5173/",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\ghost_home_matrix_fast.png"
+    },
+    {
+      "name": "ghost_vault",
+      "url": "http://localhost:5173/vault",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:5173/vault",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\ghost_vault_matrix_fast.png"
+    }
+  ]
+}

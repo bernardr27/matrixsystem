@@ -1,0 +1,19 @@
+{
+  "title": "3D Interaction Surface Upgrade",
+  "objective": "Adds purposeful 3D experience surfaces and interaction choreography for flagship pages.",
+  "target": "apps/reflect",
+  "outcomes": [
+    "3D scene integration strategy",
+    "Performance-aware interaction model",
+    "Fallback path for low-powered devices"
+  ],
+  "steps": [
+    "Identify page and conversion goal",
+    "Define 3D scene boundaries and loading behavior",
+    "Implement animation timing + reduced-motion fallback",
+    "Verify frame budget and interaction latency"
+  ],
+  "source": "video_capability_registry",
+  "capability_id": "spline_3d_experience",
+  "created_at": "2026-02-23T02:49:03.114Z"
+}

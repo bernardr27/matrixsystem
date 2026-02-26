@@ -1,0 +1,60 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "ghost",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": false,
+    "startedAt": "2026-02-23T08:45:10.069Z",
+    "finishedAt": "2026-02-23T08:46:27.454Z",
+    "total": 2,
+    "passed": 1,
+    "failed": 1
+  },
+  "selectedApps": [
+    "ghost"
+  ],
+  "readiness": {
+    "ghost": false
+  },
+  "startedProcesses": [],
+  "health": [
+    {
+      "app": "ghost",
+      "url": "http://localhost:5173/api/health",
+      "ok": false,
+      "status": 0
+    }
+  ],
+  "results": [
+    {
+      "name": "ghost_home",
+      "url": "http://localhost:5173/",
+      "ok": false,
+      "responseStatus": 500,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [
+        "./node_modules/lowlight/lib/core.js:3:12\nModule not found: Can't resolve 'highlight.js/lib/core'\n  1 | 'use strict'\n  2 |\n> 3 | var high = require('highlight.js/lib/core')\n    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  4 | var fault = require('fault')\n  5 |\n  6 | exports.highlight = highlight\n\n\n\nImport traces:\n  Client Component Browser:\n    ./node_modules/lowlight/lib/core.js [Client Component Browser]\n    ./apps/ghost-command/node_modules/react-syntax-highlighter/dist/esm/light.js [Client Component Browser]\n    ./apps/ghost-command/node_modules/react-syntax-highlighter/dist/esm/index.js [Client Component Browser]\n    ./apps/ghost-command/src/components/NeuralChat.tsx [Client Component Browser]\n    ./apps/ghost-command/src/components/console/IndustrialConsole.tsx [Client Component Browser]\n    ./apps/ghost-command/src/app/page.tsx [Client Component Browser]\n    ./apps/ghost-command/src/app/page.tsx [Server Component]\n\n  Client Component SSR:\n    ./node_modules/lowlight/lib/core.js [Client Component SSR]\n    ./apps/ghost-command/node_modules/react-syntax-highlighter/dist/esm/light.js [Client Component SSR]\n    ./apps/ghost-command/node_modules/react-syntax-highlighter/dist/esm/index.js [Client Component SSR]\n    ./apps/ghost-command/src/components/NeuralChat.tsx [Client Component SSR]\n    ./apps/ghost-command/src/components/console/IndustrialConsole.tsx [Client Component SSR]\n    ./apps/ghost-command/src/app/page.tsx [Client Component SSR]\n    ./apps/ghost-command/src/app/page.tsx [Server Component]\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n\n<unknown> (Error: ./node_modules/lowlight/lib/core.js:3:12)\n<unknown> (https://nextjs.org/docs/messages/module-not-found)\nObject.getCompilationErrors (file://G:\\matrix\\node_modules\\next\\dist\\server\\dev\\hot-reloader-turbopack.js:775:59)\nDevBundlerService.getCompilationError (file://G:\\matrix\\node_modules\\next\\dist\\server\\lib\\dev-bundler-service.js:39:55)\nDevServer.getCompilationError (file://G:\\matrix\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:721:42)"
+      ],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+      ],
+      "screenshot": "temp_mobile_verification\\ghost_home_matrix_fast.png"
+    },
+    {
+      "name": "ghost_vault",
+      "url": "http://localhost:5173/vault",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\ghost_vault_matrix_fast.png"
+    }
+  ]
+}

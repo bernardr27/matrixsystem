@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-02-23T10:08:01.950Z",
+  "root": "G:\\matrix",
+  "apps": [
+    {
+      "app": "apps",
+      "pkgExists": false,
+      "devScript": null,
+      "expectedPort": null,
+      "portOpen": false,
+      "authSnapshotExists": false
+    },
+    {
+      "app": "citadel",
+      "pkgExists": true,
+      "devScript": "next dev -p 3005 -H 0.0.0.0",
+      "expectedPort": 3005,
+      "portOpen": true,
+      "authSnapshotExists": false
+    },
+    {
+      "app": "components",
+      "pkgExists": false,
+      "devScript": null,
+      "expectedPort": null,
+      "portOpen": false,
+      "authSnapshotExists": false
+    },
+    {
+      "app": "ghost-command",
+      "pkgExists": true,
+      "devScript": "next dev -p 5173 --turbopack -H 0.0.0.0",
+      "expectedPort": 5173,
+      "portOpen": true,
+      "authSnapshotExists": false
+    },
+    {
+      "app": "lib",
+      "pkgExists": false,
+      "devScript": null,
+      "expectedPort": null,
+      "portOpen": false,
+      "authSnapshotExists": false
+    },
+    {
+      "app": "nexus",
+      "pkgExists": true,
+      "devScript": "next dev -p 3001 --turbopack -H 0.0.0.0",
+      "expectedPort": 3001,
+      "portOpen": true,
+      "authSnapshotExists": false
+    },
+    {
+      "app": "ralph",
+      "pkgExists": false,
+      "devScript": null,
+      "expectedPort": null,
+      "portOpen": false,
+      "authSnapshotExists": false
+    },
+    {
+      "app": "reflect",
+      "pkgExists": true,
+      "devScript": "next dev -p 3000 -H 0.0.0.0",
+      "expectedPort": 3000,
+      "portOpen": true,
+      "authSnapshotExists": false
+    },
+    {
+      "app": "rocket-command",
+      "pkgExists": true,
+      "devScript": "next dev -p 4000 -H 0.0.0.0",
+      "expectedPort": 4000,
+      "portOpen": true,
+      "authSnapshotExists": false
+    }
+  ],
+  "captures": {
+    "count": 377,
+    "size": 79583207
+  },
+  "backupsExist": true,
+  "backupConfigExists": true,
+  "maintenanceScript": true,
+  "authDirExists": true
+}

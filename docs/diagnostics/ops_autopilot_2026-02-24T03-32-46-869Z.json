@@ -1,0 +1,82 @@
+{
+  "ok": false,
+  "mode": "heal",
+  "startedAt": "2026-02-24T03:32:13.453Z",
+  "checks": {
+    "services": [
+      {
+        "name": "reflect",
+        "url": "http://127.0.0.1:3000/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 4548,
+        "reason": "This operation was aborted"
+      },
+      {
+        "name": "nexus",
+        "url": "http://127.0.0.1:3001/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 4540,
+        "reason": "This operation was aborted"
+      },
+      {
+        "name": "ghost",
+        "url": "http://127.0.0.1:5173/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 4539,
+        "reason": "This operation was aborted"
+      },
+      {
+        "name": "citadel",
+        "url": "http://127.0.0.1:3005/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 4537,
+        "reason": "This operation was aborted"
+      }
+    ],
+    "supabase": {
+      "ok": false,
+      "latencyMs": 11026,
+      "reason": "TypeError: fetch failed"
+    },
+    "redis": {
+      "ok": true,
+      "latencyMs": 260,
+      "reason": "Redis ping=PONG"
+    },
+    "env": {
+      "ok": true,
+      "reason": "Environment check passed"
+    },
+    "prodReadiness": {
+      "ok": true,
+      "reason": "Production readiness passed"
+    },
+    "lint": {
+      "ok": true,
+      "reason": "Skipped in quick mode"
+    }
+  },
+  "actions": [
+    "Restart requested for services: reflect, nexus, ghost, citadel",
+    "System restart command queued via bridge"
+  ],
+  "artifacts": [],
+  "summary": {
+    "healthScore": 20,
+    "degradedServices": [
+      "reflect",
+      "nexus",
+      "ghost",
+      "citadel"
+    ],
+    "failedChecks": [
+      "services",
+      "supabase"
+    ]
+  },
+  "finishedAt": "2026-02-24T03:32:46.869Z"
+}

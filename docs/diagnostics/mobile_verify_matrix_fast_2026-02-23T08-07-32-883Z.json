@@ -1,0 +1,62 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "nexus",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": true,
+    "startedAt": "2026-02-23T08:06:00.979Z",
+    "finishedAt": "2026-02-23T08:07:32.883Z",
+    "total": 2,
+    "passed": 2,
+    "failed": 0
+  },
+  "selectedApps": [
+    "nexus"
+  ],
+  "readiness": {
+    "nexus": true
+  },
+  "startedProcesses": [
+    {
+      "name": "nexus",
+      "pid": 5836,
+      "cwd": "apps\\nexus",
+      "method": "cmd-start"
+    }
+  ],
+  "health": [
+    {
+      "app": "nexus",
+      "url": "http://localhost:3001/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "nexus_home",
+      "url": "http://localhost:3001/",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_home_matrix_fast.png"
+    },
+    {
+      "name": "nexus_diagnostics",
+      "url": "http://localhost:3001/diagnostics",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\nexus_diagnostics_matrix_fast.png"
+    }
+  ]
+}

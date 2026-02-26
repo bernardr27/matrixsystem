@@ -1,0 +1,49 @@
+{
+    "name": "NEXUS Command Center",
+    "short_name": "NEXUS",
+    "description": "Advanced AI Orchestration and Matrix Management",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#050510",
+    "theme_color": "#050510",
+    "icons": [
+        {
+            "src": "/nexus_nano_icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/nexus_nano_icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/nexus_nano_icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Dashboard",
+            "url": "/",
+            "icons": [
+                {
+                    "src": "/nexus_nano_icon.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Gate Control",
+            "url": "/gate",
+            "icons": [
+                {
+                    "src": "/nexus_nano_icon.png",
+                    "sizes": "192x192"
+                }
+            ]
+        }
+    ]
+}

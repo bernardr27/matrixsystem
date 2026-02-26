@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "defaults": {
+    "auto_collab_threshold": 3
+  },
+  "workflows": [
+    {
+      "id": "matrix-audit",
+      "description": "General system scan and improvement routing.",
+      "policy_profile": "audit_strict",
+      "trigger_keywords": ["scan", "audit", "fix", "improve", "errors", "performance", "matrix"],
+      "final_command": "npm run scan:collab",
+      "stages": [
+        { "role": "coordinator" },
+        { "role": "scout", "command": "npm run scan:collab" },
+        { "role": "planner", "command": "node apps/ghost-command/core/capability-engine.cjs list" },
+        { "role": "verifier", "command": "node apps/ghost-command/core/capability-engine.cjs run ai_quality_guardrails_smoke" },
+        { "role": "reviewer" },
+        { "role": "executor", "command": "npm run scan:collab" }
+      ]
+    },
+    {
+      "id": "skills-ops",
+      "description": "Skill ecosystem repair, sync, and readiness checks.",
+      "policy_profile": "skills_fast",
+      "trigger_keywords": ["skill", "skills", "agent", "qmd", "codex"],
+      "final_command": "npm run skills:repair",
+      "stages": [
+        { "role": "coordinator" },
+        { "role": "scout", "command": "npm run skills:doctor" },
+        { "role": "builder", "command": "npm run skills:repair" },
+        { "role": "verifier", "command": "npm run skills:doctor" },
+        { "role": "reviewer" },
+        { "role": "executor", "command": "npm run skills:repair" }
+      ]
+    }
+  ]
+}

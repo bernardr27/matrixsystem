@@ -1,0 +1,341 @@
+
+ [1/3] Clearing stale processes...
+
+
+ [ 0)...
+
+--- SHADOW PURGE INITIATED ---
+[PURGE] Scrutinizing Port 3000... [CLEAR]
+[PURGE] Scrutinizing Port 3001... [CLEAR]
+[PURGE] Scrutinizing Port 3005... [BYPASSED PID 0]
+[PURGE] Scrutinizing Port 4000... [CLEAR]
+[PURGE] Scrutinizing Port 5173... [CLEAR]
+[PURGE] Scrutinizing Port 3334... [CLEAR]
+[PURGE] Hunting Zombie Node Instances...
+--- ENVIRONMENT PRISTINE ---
+
+ [+] PURGE COMPLETE. Environment pristine.
+
+
+ [2/3] Verifying production builds...
+      All builds verified.
+
+ [3/3] Launching Core Orchestrators (Production)...
+       - Sentinel: Infrastructure and Gates
+       - Ghost Runner: AI and Command Core
+       - Citadel Guardian: Security and Tailscale
+
+ Sentinel handles boot for Reflect, Nexus, Rocket, and Ghost Apps
+
+[GHOST-CORE] [dotenv@17.3.1] injecting env (10) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+[CITADEL]
+[CITADEL]   ╔══════════════════════════════════════════════════╗
+[CITADEL]   ║   ⛊  CITADEL GUARDIAN  v3.0                      ║
+[CITADEL]   ║   Tailscale Funnel · Stable URL · Always Reachable ║
+[CITADEL]   ╚══════════════════════════════════════════════════╝
+[CITADEL]
+[CITADEL] [00:33:37] Guardian PID: 9088
+[CITADEL] [00:33:37] ───────────────────────────────────────
+[CITADEL] [00:33:37] Starting Citadel server on port 3005...
+[SENTINEL] [dotenv@17.3.1] injecting env (10) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+[SENTINEL] --- MATRIX HUB SENTINEL v3.0 (INFRASTRUCTURE HARDENING) ---
+[SENTINEL] [MODE] HEADLESS SERVER ACTIVE
+[SENTINEL] [CONFIG] Matrix Mode: DEVELOPMENT
+[SENTINEL] [dotenv@17.3.1] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+[GHOST-CORE] [dotenv@17.3.1] injecting env (0) from .env -- tip: ⚡️ secrets for agents: https://dotenvx.com/as2
+[CITADEL] [00:33:38] Citadel process spawned (PID: 15836)
+[CITADEL] [00:33:38] Waiting for Citadel to be ready...
+[SENTINEL] [INTEGRATION_HUB] ✅ Registered plugin: github
+[SENTINEL] [INTEGRATION_HUB] ✅ Registered plugin: telegram
+[SENTINEL] [INTEGRATION_HUB] ✅ Registered plugin: discord
+[SENTINEL] [INTEGRATION_HUB] ✅ Registered plugin: notebooklm
+[SENTINEL]   📝 [EVENT] INFO | nexus_sentinel | boot: nexus_sentinel started successfully
+[GHOST-CORE] [INTEGRATION_HUB] ✅ Registered plugin: slack
+[GHOST-CORE] [INTEGRATION_HUB] ✅ Registered plugin: discord
+[GHOST-CORE] [INTEGRATION_HUB] ✅ Registered plugin: webhook
+[GHOST-CORE] [INTEGRATION_HUB] ✅ Registered plugin: github
+[GHOST-CORE] [INTEGRATION_HUB] ✅ Registered plugin: telegram
+[GHOST-CORE] [INTEGRATION_HUB] ✅ Registered plugin: notebooklm
+[GHOST-CORE] [INTEGRATION_HUB] Arsenal initialized with 6 plugins
+[GHOST-CORE] [SYNC_AGENT] 📡 Global Memory Sync initialized
+[GHOST-CORE] 🧠 [MODEL_REGISTRY] Local Intelligence Discovery Active
+[GHOST-CORE] [MODEL_REGISTRY] 🔍 Probing local model availability (Ollama)...
+[GHOST-CORE] [HIVE_MESSENGER] Registered handler for type: RESEARCH_DELEGATION
+[GHOST-CORE] [SYNERGY] Taking over stale lock from deceased PID 2896.
+[GHOST-CORE] [dotenv@17.3.1] injecting env (0) from .env -- tip: 🛡️ auth for agents: https://vestauth.com
+[GHOST-CORE] [dotenv@17.3.1] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+[GHOST-CORE] 🧠 [GHOST_BRAIN] Autonomous Cognitive Loop Activated
+[GHOST-CORE]    Think Interval: 300s | CPU Threshold: 85% | RAM Threshold: 90%
+[GHOST-CORE]   📝 [EVENT] INFO | ghost_brain | boot: ghost_brain started successfully
+[GHOST-CORE] 📋 [DAILY_DIGEST] Scheduler active — sends at 8:00 daily
+[GHOST-CORE] --- GHOST RUNNER (SOVEREIGN v4.0) INITIALIZED ---
+[GHOST-CORE] Neural Heartbeat & Phantom Mirror Active (Hybrid AI Mode).
+[GHOST-CORE] 🧠 [CORTEX_MONITOR] Initializing Cognitive Oversight...
+[GHOST-CORE] [dotenv@17.3.1] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+[GHOST-CORE] 📊 [UPTIME_LOGGER] Service health tracking started
+[GHOST-CORE]    Interval: 15min | Services: reflect, matrix_hub, ghost_command, ollama
+[GHOST-CORE] [STREAM] 🎥 Local MJPEG Server running on port 3334
+[GHOST-CORE] [MODEL_REGISTRY] Local model probe failed:
+[SENTINEL] [dotenv@17.3.1] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcomma nd`
+[SENTINEL] [VOICE_SOCKET] Listening on port 3006
+[SENTINEL] [dotenv@17.3.1] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+[SENTINEL] [GHOST_VISION] Initialized with model: llama-3.2-11b-vision-preview
+[SENTINEL] [SENTINEL] Ghost Vision service registered.
+[SENTINEL] [PROTOTYPE] Injecting/Updating httpSend polyfill...
+[SENTINEL] [SENTINEL] Stale lockfile detected. Taking over.
+[SENTINEL] [NET] Local Status Hub active on port 3333
+[CITADEL] [00:33:40]   [citadel] ▲ Next.js 15.5.12
+[CITADEL] [00:33:40]   [citadel] - Local:        http://localhost:3005
+[CITADEL]    - Network:      http://0.0.0.0:3005
+[CITADEL]    - Environments: .env.local
+[CITADEL]    - Experiments (use with caution):
+[CITADEL]      · optimizePackageImports
+[CITADEL]
+[CITADEL]  ✓ Starting...
+[GHOST-CORE] [SYNC_AGENT] No peers online. Waiting...
+[GHOST-CORE] [MEMORY] 💾 Loaded 12 messages from local history.
+[GHOST-CORE] ✅ [GHOST_LINK] SECURE CONNECTION ESTABLISHED
+[GHOST-CORE]       Listening for commands on 'ghost_bridge'...
+[GHOST-CORE] [REGISTRY] ♻️ Re-registered as matrix-DESKTOP-7G2NQOU (dev)
+[GHOST-CORE] 🧠 [HIVE_MESSENGER] Mind-to-Mind Synchronization Active
+[GHOST-CORE] [REGISTRY] ♻️ Re-registered as matrix-DESKTOP-7G2NQOU (dev)
+[GHOST-CORE] [HIVE] 🌐 Connected to distributed consciousness
+[GHOST-CORE] ⚡ [INCOMING TRANSMISSION] {
+[GHOST-CORE]   id: 'c3ebe681-2dac-42cb-b453-1f6f6ae4d011',
+[GHOST-CORE]   output: '{"ai_status":"OFFLINE","models":0,"uptime":2.0031556,"launchTime":1771979619570,"sessionId":"tcrhfr","services":{"runner":"online","ghost":"online"},"ai_mode":"ollama","ram":"13.7","cpu":"0.00"}',
+[GHOST-CORE]   source: 'ghost_runner',
+[GHOST-CORE]   status: 'silent',
+[GHOST-CORE]   command: 'sys:heartbeat',
+[GHOST-CORE]   response: null,
+[GHOST-CORE]   created_at: '2026-02-25T00:33:42.516555+00:00',
+[GHOST-CORE]   updated_at: '2026-02-25T00:33:42.516555+00:00'
+[GHOST-CORE] }
+[SENTINEL] [REGISTRY] ♻️ Re-registered as nexus-sentinel (production)
+[SENTINEL] [HIVE] Sentinel Node Registered.
+[SENTINEL] [BOOT] Auto-Ignition Initiated...
+[SENTINEL] [EXECUTING] sys:ignite (ID: boot-1771979621606)
+[SENTINEL] [IGNITION] Sequencing Full System Start...
+[SENTINEL] [BROADCAST] Initiating full system ignition sequence...
+[SENTINEL] [HYGIENE] Purging stale neural fragments...
+[GHOST-CORE] ⚡ [INCOMING TRANSMISSION] {
+[GHOST-CORE]   id: '8bbf44f6-ab51-4a7d-86f0-43bc905f1b90',
+[GHOST-CORE]   output: 'Initiating full system ignition sequence...',
+[GHOST-CORE]   source: 'nexus_sentinel',
+[GHOST-CORE]   status: 'silent',
+[GHOST-CORE]   command: 'sys:broadcast',
+[GHOST-CORE]   response: null,
+[GHOST-CORE]   created_at: '2026-02-25T00:33:44.199925+00:00',
+[GHOST-CORE]   updated_at: '2026-02-25T00:33:44.199925+00:00'
+[GHOST-CORE] }
+[SENTINEL] [START] Igniting RUNNER...
+[SENTINEL] [PERF] Slow pulse detected: 2031ms
+[SENTINEL] [RUNNER] [dotenv@17.3.1] injecting env (0) from ..\..\..\.env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+[SENTINEL] [RUNNER] [dotenv@17.3.1] injecting env (0) from ..\..\..\.env -- tip: 🤖 agentic secret storage: https://dotenvx.com/as2
+[GHOST-CORE] ⚡ [INCOMING TRANSMISSION] {
+[GHOST-CORE]   id: '574b4b67-901d-4f75-9afc-16e5704fcf20',
+[GHOST-CORE]   output: '{"uptime":5.1774753,"launchTime":1771979617759,"pid":2188,"ram":"15","cpu":"44%","pulse_duration":5,"services":{"reflect":"offline","nexus":"offline","ghost":"offline","rocket":"offline","runner":"online","sentinel":"online","gate":"offline"},"serviceStartTimes":{"REFLECT":0,"NEXUS":0,"GHOST":0,"ROCKET":0,"RUNNER":1771979622397},"gateUrls":{"nexus":null,"reflect":null,"ghost":null,"rocket":null},"localIp":"100.69.250.127"}',
+[GHOST-CORE]   source: 'nexus_sentinel',
+[GHOST-CORE]   status: 'silent',
+[GHOST-CORE]   command: 'sys:heartbeat',
+[GHOST-CORE]   response: null,
+[GHOST-CORE]   created_at: '2026-02-25T00:33:44.999623+00:00',
+[GHOST-CORE]   updated_at: '2026-02-25T00:33:44.999623+00:00'
+[GHOST-CORE] }
+[SENTINEL] [START] Igniting REFLECT...
+[SENTINEL] [BOOT] Waiting for REFLECT on port 3000...
+[SENTINEL] [PERF] Slow pulse detected: 2008ms
+[SENTINEL] [RUNNER] [INTEGRATION_HUB] ✅ Registered plugin: slack
+[SENTINEL] [RUNNER] [INTEGRATION_HUB] ✅ Registered plugin: discord
+[SENTINEL] [INTEGRATION_HUB] ✅ Registered plugin: webhook
+[SENTINEL] [INTEGRATION_HUB] ✅ Registered plugin: github
+[SENTINEL] [INTEGRATION_HUB] ✅ Registered plugin: telegram
+[SENTINEL] [INTEGRATION_HUB] ✅ Registered plugin: notebooklm
+[SENTINEL] [INTEGRATION_HUB] Arsenal initialized with 6 plugins
+[SENTINEL] [RUNNER] [SYNC_AGENT] 📡 Global Memory Sync initialized
+[SENTINEL] [RUNNER] 🧠 [MODEL_REGISTRY] Local Intelligence Discovery Active
+[SENTINEL] [RUNNER] [MODEL_REGISTRY] 🔍 Probing local model availability (Ollama)...
+[SENTINEL] [RUNNER] [HIVE_MESSENGER] Registered handler for type: RESEARCH_DELEGATION
+[SENTINEL] [RUNNER] [SYNERGY] Duplicate Runner detected (PID 15460). Exiting.
+[SENTINEL] [RUNNER] Exited with code 0
+[SENTINEL] [BOOT] REFLECT is responsive.
+[SENTINEL] [START] Igniting NEXUS...
+[SENTINEL] [BOOT] Waiting for NEXUS on port 3001...
+[CITADEL] [00:33:47]   [citadel] ✓ Compiled /instrumentation in 637ms (22 modules)
+[CITADEL] [00:33:47]   [citadel] ✓ Ready in 7.9s
+[CITADEL] [00:33:48]   [citadel] ✓ Compiled /middleware in 228ms (176 modules)
+[CITADEL] [00:33:48]   [citadel] ○ Compiling / ...
+[SENTINEL] [BOOT] NEXUS is responsive.
+[SENTINEL] [START] Igniting GHOST...
+[SENTINEL] [NEXUS]    ▲ Next.js 15.5.12
+[SENTINEL] [NEXUS]    - Local:        http://localhost:3001
+[SENTINEL] [NEXUS]    - Network:      http://0.0.0.0:3001
+[SENTINEL] [NEXUS]    - Environments: .env.development.local, .env.local
+[SENTINEL] [NEXUS]    - Experiments (use with caution):
+[SENTINEL] [NEXUS]      · optimizePackageImports
+[SENTINEL] [NEXUS]
+[SENTINEL] [NEXUS]  ✓ Starting...
+[SENTINEL] [BOOT] Waiting for GHOST on port 5173...
+[CITADEL] [00:33:49]   [citadel] ✓ Compiled /api/health in 1314ms (736 modules)
+[GHOST-CORE] [ARCHITECT] Initiating diagnostic sweep...
+[SENTINEL] [TRIAGE] Running auto-triage on boot...
+[SENTINEL] [dotenv@17.3.1] injecting env (3) from apps\ghost-command\.env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[SENTINEL] [dotenv@17.3.1] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+[SENTINEL] [ORACLE] Generating comprehensive audit for apps...
+[SENTINEL] [EVOLVE] Scanning apps for improvement opportunities...
+[SENTINEL] [EVOLVE] Found 0 improvement opportunities
+[SENTINEL] [PURGE] Running code cleanup scan on apps...
+[SENTINEL] [PURGE] Running ESLint...
+[CITADEL] [00:33:49]   [citadel] GET /api/health 200 in 1025ms
+[CITADEL] [00:33:50] Citadel is ONLINE ✓
+[CITADEL] [00:33:50] Starting Tailscale Funnel → localhost:3005...
+[CITADEL] [00:33:50] Stable URL: https://desktop-7g2nqou.tailb29398.ts.net
+[CITADEL] [00:33:50] Funnel (public internet) configured successfully.
+[CITADEL] [00:33:50]   Funnel URL written to .tunnel-url
+[CITADEL] [00:33:50] Funnel configured and URL updated
+[CITADEL] [00:33:50]   [citadel] GET / 200 in 2142ms
+[SENTINEL] [PURGE] Running TypeScript type check...
+[GHOST-CORE] [ARCHITECT] Diagnosis Complete. Status: NOMINAL
+[GHOST-CORE] ⚡ [INCOMING TRANSMISSION] {
+[GHOST-CORE]   id: 'aebedcc9-1179-4a27-a35d-7f3e7e1b8bc5',
+[GHOST-CORE]   output: '{"type":"optimization","title":"System Diagnostic Scan","description":"Architect Agent performed a heuristics check.","metrics":{"cpuLoad":"OPTIMAL","ramPercent":"STABLE"},"timestamp":1771979632366}',
+[GHOST-CORE]   source: 'optimization_cortex',
+[GHOST-CORE]   status: 'executed',
+[GHOST-CORE]   command: 'sys:broadcast',
+[GHOST-CORE]   response: null,
+[GHOST-CORE]   created_at: '2026-02-25T00:33:54.576908+00:00',
+[GHOST-CORE]   updated_at: '2026-02-25T00:33:54.576908+00:00'
+[GHOST-CORE] }
+[SENTINEL] [PURGE] Scanning for dead code...
+[SENTINEL] [PURGE] [DRY RUN] Cleaning console.log statements...
+[SENTINEL] [PURGE] Found 176 issues
+[SENTINEL] [CONFIG] Loaded config from G:\matrix\triage.config.json
+[SENTINEL] [ORACLE] Health Score: 80/100
+[SENTINEL] [TRIAGE] ✅ apps: 80/100
+[SENTINEL] [REFLECT]    ▲ Next.js 15.5.12
+[SENTINEL]    - Local:        http://localhost:3000
+[SENTINEL]    - Network:      http://0.0.0.0:3000
+[SENTINEL]    - Environments: .env.development.local, .env.local, .env
+[SENTINEL]    - Experiments (use with caution):
+[SENTINEL]      · optimizePackageImports
+[SENTINEL]
+[SENTINEL]  ✓ Starting...
+[SENTINEL]
+[SENTINEL] [NEXUS]
+[SENTINEL] [NEXUS] Exited with code 0
+[SENTINEL] [REFLECT] Exited with code 0
+[SENTINEL] [BOOT] GHOST is responsive.
+[SENTINEL] [START] Igniting ROCKET...
+[SENTINEL] [ORACLE] Generating comprehensive audit for citadel...
+[SENTINEL] [EVOLVE] Scanning citadel for improvement opportunities...
+[SENTINEL] [EVOLVE] Excluded 1 files (tests, mocks, etc.)
+[SENTINEL] [EVOLVE] Found 19 improvement opportunities
+[SENTINEL] [PURGE] Running code cleanup scan on citadel...
+[SENTINEL] [PURGE] Running ESLint...
+[GHOST-CORE] ⚡ [INCOMING TRANSMISSION] {
+[GHOST-CORE]   id: '52446163-fbe5-4c2d-af12-acc02935d4bc',
+[GHOST-CORE]   output: '{"ai_status":"OFFLINE","models":0,"uptime":21.9897033,"launchTime":1771979619570,"sessionId":"tcrhfr","services":{"runner":"online","ghost":"online"},"ai_mode":"ollama","ram":"14.9","cpu":"0.00"}',
+[GHOST-CORE]   source: 'ghost_runner',
+[GHOST-CORE]   status: 'silent',
+[GHOST-CORE]   command: 'sys:heartbeat',
+[GHOST-CORE]   response: null,
+[GHOST-CORE]   created_at: '2026-02-25T00:34:02.204593+00:00',
+[GHOST-CORE]   updated_at: '2026-02-25T00:34:02.204593+00:00'
+[GHOST-CORE] }
+[CITADEL] [00:34:02]   Push notification error: getaddrinfo ENOTFOUND ntfy.sh
+[SENTINEL] [PURGE] Running TypeScript type check...
+[SENTINEL] [PURGE] Scanning for dead code...
+[SENTINEL] [PURGE] [DRY RUN] Cleaning console.log statements...
+[SENTINEL] [PURGE] Found 16 issues
+[SENTINEL] [ORACLE] Health Score: 68/100
+[SENTINEL] [TRIAGE] ⚠️ citadel: 68/100
+[SENTINEL] [GHOST]    ▲ Next.js 15.5.12
+[SENTINEL]    - Local:        http://localhost:5173
+[SENTINEL]    - Network:      http://0.0.0.0:5173
+[SENTINEL]    - Environments: .env.development.local, .env.local, .env
+[SENTINEL]
+[SENTINEL]  ✓ Starting...
+[SENTINEL] > [PWA] PWA support is disabled
+[SENTINEL] > [PWA] PWA support is disabled
+[SENTINEL]  ✓ Compiled /instrumentation in 655ms (22 modules)
+[SENTINEL]  ✓ Ready in 7.1s
+[SENTINEL] [GHOST_ERR] <w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (143kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+[SENTINEL] [PERF] Slow pulse detected: 20618ms
+[CITADEL] [00:34:09]   [citadel] GET /api/health 200 in 22ms
+[GHOST-CORE] [DAILY_DIGEST] 📋 Generating daily digest...
+[GHOST-CORE]
+[GHOST-CORE] 🧠 [GHOST_BRAIN] Think Cycle #1 @ 2026-02-25T00:34:09.607Z
+[SENTINEL] [BOOT] Waiting for ROCKET on port 4000...
+[SENTINEL] [GHOST]  ✓ Compiled /middleware in 252ms (168 modules)
+[SENTINEL] [ORACLE] Generating comprehensive audit for components...
+[SENTINEL] [EVOLVE] Scanning components for improvement opportunities...
+[SENTINEL] [EVOLVE] Found 0 improvement opportunities
+[SENTINEL] [PURGE] Running code cleanup scan on components...
+[SENTINEL] [PURGE] Running ESLint...
+[GHOST-CORE]   🔄 [AUTO-RECOVERY] REFLECT is DOWN on port 3000. Restarting...
+[GHOST-CORE]   🔄 [AUTO-RECOVERY] NEXUS is DOWN on port 3001. Restarting...
+[GHOST-CORE]   [ACTION] 🤖 Local Ollama is offline. Sage is running on Groq Cloud.
+[GHOST-CORE]   [ACTION] 🔄 Auto-restarted REFLECT (was offline on :3000)
+[GHOST-CORE]   [ACTION] 🔄 Auto-restarted NEXUS (was offline on :3001)
+[GHOST-CORE] ⚡ [INCOMING TRANSMISSION] {
+[GHOST-CORE]   id: 'd0c5a231-e03a-4411-8213-d9c333a787f5',
+[GHOST-CORE]   output: '{"id":"brain_1771979650033","title":"GHOST BRAIN","message":"🔄 Auto-restarted REFLECT (was offline on :3000)","type":"warning","timestamp":1771979650033}',
+[GHOST-CORE]   source: 'ghost_brain',
+[GHOST-CORE]   status: 'broadcast',
+[GHOST-CORE]   command: 'sys:alert',
+[GHOST-CORE]   response: null,
+[GHOST-CORE]   created_at: '2026-02-25T00:34:12.27132+00:00',
+[GHOST-CORE]   updated_at: '2026-02-25T00:34:12.27132+00:00'
+[GHOST-CORE] }
+[GHOST-CORE]   [GHOST_BRAIN] 3 action(s) taken.
+[GHOST-CORE] ⚡ [INCOMING TRANSMISSION] {
+[GHOST-CORE]   id: '18c5723a-f561-4682-952f-0675b29fd752',
+[GHOST-CORE]   output: '{"ai_status":"OFFLINE","models":0,"uptime":31.9944783,"launchTime":1771979619570,"sessionId":"tcrhfr","services":{"runner":"online","ghost":"online"},"ai_mode":"ollama","ram":"15.0","cpu":"0.00"}',
+[GHOST-CORE]   source: 'ghost_runner',
+[GHOST-CORE]   status: 'silent',
+[GHOST-CORE]   command: 'sys:heartbeat',
+[GHOST-CORE]   response: null,
+[GHOST-CORE]   created_at: '2026-02-25T00:34:12.407162+00:00',
+[GHOST-CORE]   updated_at: '2026-02-25T00:34:12.407162+00:00'
+[GHOST-CORE] }
+[GHOST-CORE] ⚡ [INCOMING TRANSMISSION] {
+[GHOST-CORE]   id: '29c05947-d655-41b9-8806-8050e62501c1',
+[GHOST-CORE]   output: '{"id":"brain_1771979650251","title":"GHOST BRAIN","message":"🔄 Auto-restarted NEXUS (was offline on :3001)","type":"warning","timestamp":1771979650251}',
+[GHOST-CORE]   source: 'ghost_brain',
+[GHOST-CORE]   status: 'broadcast',
+[GHOST-CORE]   command: 'sys:alert',
+[GHOST-CORE]   response: null,
+[GHOST-CORE]   created_at: '2026-02-25T00:34:12.482664+00:00',
+[GHOST-CORE]   updated_at: '2026-02-25T00:34:12.482664+00:00'
+[GHOST-CORE] }
+[CITADEL] [00:34:10]   [citadel] GET / 200 in 78ms
+[GHOST-CORE] [DAILY_DIGEST] ⚠️ No Telegram credentials configured.
+[GHOST-CORE]   📝 [EVENT] INFO | daily_digest | digest_sent: Daily digest sent for 2026-02-25
+[SENTINEL] [PURGE] Running TypeScript type check...
+[SENTINEL] [PURGE] Scanning for dead code...
+[SENTINEL] [PURGE] [DRY RUN] Cleaning console.log statements...
+[SENTINEL] [PURGE] Found 176 issues
+[SENTINEL] [ORACLE] Health Score: 80/100
+[SENTINEL] [TRIAGE] ✅ components: 80/100
+[SENTINEL] [EXECUTING] sys:alert (ID: d0c5a231-e03a-4411-8213-d9c333a787f5)
+[SENTINEL] [EXECUTING] sys:alert (ID: 29c05947-d655-41b9-8806-8050e62501c1)
+[SENTINEL] [GHOST]  ○ Compiling / ...
+[SENTINEL]  ✓ Compiled / in 7.1s (3758 modules)
+[SENTINEL]  GET / 200 in 8629ms
+[SENTINEL] [ROCKET]    ▲ Next.js 15.5.12
+[SENTINEL]    - Local:        http://localhost:4000
+[SENTINEL]    - Network:      http://0.0.0.0:4000
+[SENTINEL]    - Environments: .env.local
+[SENTINEL]    - Experiments (use with caution):
+[SENTINEL]      · optimizePackageImports
+[SENTINEL]
+[SENTINEL]  ✓ Starting...
+[SENTINEL] [BOOT] ROCKET is responsive.
+[SENTINEL] [START] Igniting CITADEL...
+[CITADEL] [00:34:20]   [citadel] GET /api/health 200 in 25ms
+[SENTINEL] [ORACLE] Generating comprehensive audit for ghost-command...
+[SENTINEL] [EVOLVE] Scanning ghost-command for improvement opportunities...
+[SENTINEL] [EVOLVE] Excluded 1 files (tests, mocks, etc.)
+[SENTINEL] [EVOLVE] Found 28 improvement opportunities
+[SENTINEL] [PURGE] Running code cleanup scan on ghost-command...
+[SENTINEL] [PURGE] Running ESLint...
+[CITADEL] [00:34:20]   [citadel] GET / 200 in 74ms

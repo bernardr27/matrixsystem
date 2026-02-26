@@ -1,0 +1,640 @@
+/* initialize.module.css */
+
+.container {
+    min-height: 100vh;
+    background: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'jetBrains Mono', monospace;
+    /* Keep consistent font */
+    position: relative;
+    overflow: hidden;
+    transition: background 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+}
+
+/* Dynamic Backgrounds per Stage */
+.stageLoading {
+    background: radial-gradient(circle at center, #0a0a0f 0%, #000 100%);
+}
+
+.stageInitiation {
+    background: radial-gradient(circle at 50% 30%, #1a1a2e 0%, #000 80%);
+}
+
+.stageCalibration {
+    background: radial-gradient(circle at 50% 70%, #0f172a 0%, #000 80%);
+}
+
+.stageSynchronization {
+    background: radial-gradient(circle at center, #1e1b4b 0%, #000 90%);
+}
+
+.stageSelect_archetype {
+    background: radial-gradient(circle at center, #171717 0%, #000 100%);
+}
+
+.stageTier_manifest {
+    background: radial-gradient(circle at 50% 20%, #2e1065 0%, #000 90%);
+}
+
+.stageOracle {
+    background: radial-gradient(circle at center, #2a0a0a 0%, #000 100%);
+}
+
+.stageAuth {
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+}
+
+.stageTranscendence {
+    background: #000;
+}
+
+/* Global Glow Overlay */
+.glowOverlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, var(--accent-glow, rgba(255, 255, 255, 0.05)) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
+    opacity: 0.6;
+}
+
+/* --- CINEMATIC COMPONENTS --- */
+
+/* Neural Pulse/Aura */
+.neuralAura {
+    position: absolute;
+    width: 60vh;
+    height: 60vh;
+    background: radial-gradient(circle, var(--accent-glow, rgba(255, 255, 255, 0.1)) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.4;
+    animation: breathing 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes breathing {
+
+    0%,
+    100% {
+        transform: scale(0.8);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.6;
+    }
+}
+
+/* Glitch Text Effect */
+.glitchText {
+    position: relative;
+    display: inline-block;
+    color: #fff;
+}
+
+.glitchText::before,
+.glitchText::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+.glitchText::before {
+    left: 2px;
+    text-shadow: -1px 0 #0ff;
+    clip: rect(0, 900px, 200px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitchText::after {
+    left: -2px;
+    text-shadow: -1px 0 #f0f;
+    clip: rect(0, 900px, 200px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(10px, 9999px, 80px, 0);
+    }
+
+    20% {
+        clip: rect(70px, 9999px, 10px, 0);
+    }
+
+    40% {
+        clip: rect(20px, 9999px, 90px, 0);
+    }
+
+    60% {
+        clip: rect(60px, 9999px, 20px, 0);
+    }
+
+    80% {
+        clip: rect(40px, 9999px, 50px, 0);
+    }
+
+    100% {
+        clip: rect(90px, 9999px, 70px, 0);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip: rect(60px, 9999px, 80px, 0);
+    }
+
+    20% {
+        clip: rect(10px, 9999px, 50px, 0);
+    }
+
+    40% {
+        clip: rect(30px, 9999px, 10px, 0);
+    }
+
+    60% {
+        clip: rect(50px, 9999px, 90px, 0);
+    }
+
+    80% {
+        clip: rect(10px, 9999px, 40px, 0);
+    }
+
+    100% {
+        clip: rect(30px, 9999px, 20px, 0);
+    }
+}
+
+/* --- MOBILE-FIRST CARDS --- */
+.card {
+    width: 100%;
+    max-width: 800px;
+    padding: clamp(2rem, 5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    position: relative;
+}
+
+/* Typography */
+.label {
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.4em;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    display: block;
+}
+
+.title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 100;
+    letter-spacing: -0.04em;
+    margin: 0 0 2rem 0;
+    color: #fff;
+    line-height: 0.9;
+}
+
+.desc {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 4rem auto;
+    letter-spacing: 0.05em;
+}
+
+/* Inputs */
+.input,
+.textarea {
+    width: 100%;
+    max-width: 500px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0;
+    padding: 1.5rem 1rem;
+    font-family: inherit;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: center;
+    transition: all 0.3s ease;
+    margin-bottom: 3rem;
+}
+
+.input:focus,
+.textarea:focus {
+    outline: none;
+    background: transparent;
+    border-color: #fff;
+    box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.2);
+}
+
+.textarea {
+    min-height: 140px;
+    resize: none;
+    text-align: left;
+    line-height: 1.6;
+}
+
+/* --- SYNCHRONIZATION RING (CANVAS CONTAINER) --- */
+.syncContainer {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.syncRing {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: rotate 10s linear infinite;
+}
+
+.syncRing::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #fff;
+    transform: translateX(-50%);
+}
+
+.syncCore {
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    border-radius: 50%;
+    filter: blur(30px);
+    opacity: 0.2;
+    animation: corePulse 2s ease-in-out infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes corePulse {
+
+    0%,
+    100% {
+        transform: scale(0.8);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.5;
+    }
+}
+
+/* --- ARCHETYPE SELECT (CINEMATIC CAROUSEL) --- */
+.archetypeContainer {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.carouselContainer {
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 0 50vw;
+    gap: 4rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    z-index: 10;
+}
+
+.carouselContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.archCard {
+    flex: 0 0 320px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    scroll-snap-align: center;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
+    opacity: 0.5;
+    transform: scale(0.9);
+    filter: grayscale(0.8);
+}
+
+.archCard:hover {
+    background: rgba(255, 255, 255, 0.06);
+    opacity: 0.8;
+}
+
+.archCard.selected {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: grayscale(0);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--card-color);
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6), inset 0 0 0 1px var(--card-glow, rgba(255, 255, 255, 0.2));
+    z-index: 20;
+}
+
+.archIcon {
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 0 15px var(--icon-glow));
+    transform: scale(0.9);
+    transition: transform 0.5s ease;
+}
+
+.archCard.selected .archIcon {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 30px var(--icon-glow));
+}
+
+.archTitle {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.archDesc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 260px;
+}
+
+.fixedBottom {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: max-content;
+    max-width: 90vw;
+}
+
+.scrollHint {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* --- TIER SELECTION (Vertical Fidelity) --- */
+.fidelityContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 500px;
+}
+
+.fidelityItem {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.fidelityItem:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.fidelityItem.active {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #fff;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+}
+
+/* --- ORACLE SUMMARY & OVERHAUL --- */
+.oracleSummary {
+    width: 100%;
+    /* background: rgba(255, 255, 255, 0.02); */
+    /* border-radius: 24px; */
+    /* padding: 2rem; */
+    /* border: 1px solid rgba(255, 255, 255, 0.05); */
+    margin-bottom: 2rem;
+    position: relative;
+    /* Overhaul styles below */
+}
+
+/* New Holographic Oracle Styles */
+.hologramContainer {
+    perspective: 1000px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.hologramPlate {
+    width: 300px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform-style: preserve-3d;
+    transform: rotateX(10deg);
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hologramPlate::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+    animation: scanline 3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.holoData {
+    text-align: center;
+    z-index: 2;
+}
+
+.holoLabel {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.holoValue {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.oracleGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.oracleItem h4 {
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    opacity: 0.4;
+    margin-bottom: 0.5rem;
+}
+
+.oracleItem p {
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+/* --- LOADING BAR --- */
+.progressWrapper {
+    width: 200px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 2rem 0 1rem 0;
+}
+
+.progressBar {
+    height: 100%;
+    background: #fff;
+    box-shadow: 0 0 10px #fff;
+    transition: width 0.1s linear;
+}
+
+/* --- UTILS --- */
+.backBtn {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    z-index: 100;
+    transition: color 0.3s;
+}
+
+.backBtn:hover {
+    color: #fff;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    /* Mobile Carousel Adjustment */
+    .carouselContainer {
+        height: 60vh;
+        gap: 1.5rem;
+        padding: 0 50vw;
+        /* Keep center focus */
+    }
+
+    .archCard {
+        flex: 0 0 85vw;
+        /* Almost full width */
+        height: 420px;
+        padding: 2rem 1.5rem;
+    }
+}

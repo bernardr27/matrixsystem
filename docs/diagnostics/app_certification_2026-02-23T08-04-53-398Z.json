@@ -1,0 +1,336 @@
+{
+  "ok": false,
+  "app": "all",
+  "startedAt": "2026-02-23T07:53:49.724Z",
+  "finishedAt": "2026-02-23T08:04:53.398Z",
+  "mode": "quick-ultra-with-targeted-retry",
+  "policy": {
+    "mode": "quick-ultra-with-targeted-retry",
+    "requireOpsHealthy": false
+  },
+  "warnings": [
+    "Ops autopilot is degraded (services)"
+  ],
+  "remediation": [
+    "Ultra pass failed apps: reflect, nexus, citadel, ghost, rocket",
+    "Deep retry still failed: reflect, nexus, citadel, ghost, rocket. Running stabilization pass."
+  ],
+  "mobilePasses": [
+    {
+      "stage": "ultra",
+      "apps": null,
+      "summary": {
+        "mode": "matrix-fast",
+        "app": "all",
+        "ultra": true,
+        "screenshots": false,
+        "autoStart": true,
+        "startedAt": "2026-02-23T07:53:50.788Z",
+        "finishedAt": "2026-02-23T07:57:03.574Z",
+        "total": 5,
+        "passed": 0,
+        "failed": 5
+      }
+    },
+    {
+      "stage": "retry_failed_apps",
+      "apps": [
+        "reflect",
+        "nexus",
+        "citadel",
+        "ghost",
+        "rocket"
+      ],
+      "summary": {
+        "mode": "matrix-fast",
+        "app": "reflect,nexus,citadel,ghost,rocket",
+        "ultra": false,
+        "screenshots": true,
+        "autoStart": true,
+        "startedAt": "2026-02-23T07:58:30.135Z",
+        "finishedAt": "2026-02-23T08:03:20.370Z",
+        "total": 10,
+        "passed": 0,
+        "failed": 10
+      }
+    },
+    {
+      "stage": "stabilization_pass",
+      "apps": [
+        "reflect",
+        "nexus",
+        "citadel",
+        "ghost",
+        "rocket"
+      ],
+      "summary": {
+        "mode": "matrix-fast",
+        "app": "reflect,nexus,citadel,ghost,rocket",
+        "ultra": true,
+        "screenshots": false,
+        "autoStart": true,
+        "startedAt": "2026-02-23T08:03:20.846Z",
+        "finishedAt": "2026-02-23T08:04:39.394Z",
+        "total": 5,
+        "passed": 3,
+        "failed": 2
+      }
+    }
+  ],
+  "apps": [
+    {
+      "app": "reflect",
+      "total": 2,
+      "passed": 1,
+      "failed": 1,
+      "failures": [
+        {
+          "name": "reflect_auth",
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      ],
+      "certified": false
+    },
+    {
+      "app": "nexus",
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "failures": [
+        {
+          "name": "nexus_home",
+          "status": null,
+          "navError": "Navigation timeout of 30000 ms exceeded",
+          "hasClientException": false,
+          "has404": false
+        },
+        {
+          "name": "nexus_diagnostics",
+          "status": null,
+          "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/diagnostics",
+          "hasClientException": false,
+          "has404": false
+        }
+      ],
+      "certified": false
+    },
+    {
+      "app": "citadel",
+      "total": 2,
+      "passed": 1,
+      "failed": 1,
+      "failures": [
+        {
+          "name": "citadel_dashboard",
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      ],
+      "certified": false
+    },
+    {
+      "app": "ghost",
+      "total": 2,
+      "passed": 1,
+      "failed": 1,
+      "failures": [
+        {
+          "name": "ghost_vault",
+          "status": null,
+          "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:5173/vault",
+          "hasClientException": false,
+          "has404": false
+        }
+      ],
+      "certified": false
+    },
+    {
+      "app": "rocket",
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "failures": [
+        {
+          "name": "rocket_home",
+          "status": 200,
+          "navError": null,
+          "hasClientException": false,
+          "has404": false
+        },
+        {
+          "name": "rocket_operations",
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      ],
+      "certified": false
+    }
+  ],
+  "failures": [
+    {
+      "app": "reflect",
+      "failures": [
+        {
+          "name": "reflect_auth",
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      ]
+    },
+    {
+      "app": "nexus",
+      "failures": [
+        {
+          "name": "nexus_home",
+          "status": null,
+          "navError": "Navigation timeout of 30000 ms exceeded",
+          "hasClientException": false,
+          "has404": false
+        },
+        {
+          "name": "nexus_diagnostics",
+          "status": null,
+          "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/diagnostics",
+          "hasClientException": false,
+          "has404": false
+        }
+      ]
+    },
+    {
+      "app": "citadel",
+      "failures": [
+        {
+          "name": "citadel_dashboard",
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      ]
+    },
+    {
+      "app": "ghost",
+      "failures": [
+        {
+          "name": "ghost_vault",
+          "status": null,
+          "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:5173/vault",
+          "hasClientException": false,
+          "has404": false
+        }
+      ]
+    },
+    {
+      "app": "rocket",
+      "failures": [
+        {
+          "name": "rocket_home",
+          "status": 200,
+          "navError": null,
+          "hasClientException": false,
+          "has404": false
+        },
+        {
+          "name": "rocket_operations",
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      ]
+    }
+  ],
+  "legacyDocs": [
+    {
+      "file": "APP_VALIDATION_CHECKLIST.md",
+      "exists": true,
+      "total": 296,
+      "done": 0,
+      "pending": 296,
+      "completionRate": 0
+    },
+    {
+      "file": "APP_VALIDATION_TEST_REPORT.md",
+      "exists": true,
+      "total": 66,
+      "done": 54,
+      "pending": 12,
+      "completionRate": 81.8
+    },
+    {
+      "file": "APP_VALIDATION_FINAL_ASSESSMENT.md",
+      "exists": true,
+      "total": 43,
+      "done": 0,
+      "pending": 43,
+      "completionRate": 0
+    },
+    {
+      "file": "docs/archive/VERIFICATION_REPORT.md",
+      "exists": true,
+      "total": 0,
+      "done": 0,
+      "pending": 0,
+      "completionRate": null
+    },
+    {
+      "file": "get_started/AI_APP_DEV_BLUEPRINT.md",
+      "exists": true,
+      "total": 0,
+      "done": 0,
+      "pending": 0,
+      "completionRate": null
+    }
+  ],
+  "mobileSummary": {
+    "mode": "matrix-fast",
+    "app": "all",
+    "ultra": true,
+    "screenshots": false,
+    "autoStart": true,
+    "startedAt": "2026-02-23T07:53:50.788Z",
+    "finishedAt": "2026-02-23T07:57:03.574Z",
+    "total": 5,
+    "passed": 0,
+    "failed": 5,
+    "secondPassApps": [
+      "reflect",
+      "nexus",
+      "citadel",
+      "ghost",
+      "rocket"
+    ],
+    "secondPassTotal": 10,
+    "stabilizationApps": [
+      "reflect",
+      "nexus",
+      "citadel",
+      "ghost",
+      "rocket"
+    ],
+    "stabilizationTotal": 5
+  },
+  "opsSummary": {
+    "ok": false,
+    "score": 55,
+    "failedChecks": [
+      "services"
+    ]
+  },
+  "artifacts": {
+    "mobile": "docs/diagnostics/mobile_verify_matrix_fast_latest.json",
+    "ops": "docs/diagnostics/ops_autopilot_latest.json",
+    "protocol": "docs/APP_CERTIFICATION_PROTOCOL.md",
+    "standardsMap": "docs/CERTIFICATION_STANDARDS_MAP.md",
+    "failures": "docs/diagnostics/app_certification_failures_latest.json"
+  }
+}

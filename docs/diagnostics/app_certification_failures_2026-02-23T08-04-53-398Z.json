@@ -1,0 +1,76 @@
+[
+  {
+    "app": "reflect",
+    "failures": [
+      {
+        "name": "reflect_auth",
+        "status": 200,
+        "navError": null,
+        "hasClientException": true,
+        "has404": false
+      }
+    ]
+  },
+  {
+    "app": "nexus",
+    "failures": [
+      {
+        "name": "nexus_home",
+        "status": null,
+        "navError": "Navigation timeout of 30000 ms exceeded",
+        "hasClientException": false,
+        "has404": false
+      },
+      {
+        "name": "nexus_diagnostics",
+        "status": null,
+        "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3001/diagnostics",
+        "hasClientException": false,
+        "has404": false
+      }
+    ]
+  },
+  {
+    "app": "citadel",
+    "failures": [
+      {
+        "name": "citadel_dashboard",
+        "status": 200,
+        "navError": null,
+        "hasClientException": true,
+        "has404": false
+      }
+    ]
+  },
+  {
+    "app": "ghost",
+    "failures": [
+      {
+        "name": "ghost_vault",
+        "status": null,
+        "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:5173/vault",
+        "hasClientException": false,
+        "has404": false
+      }
+    ]
+  },
+  {
+    "app": "rocket",
+    "failures": [
+      {
+        "name": "rocket_home",
+        "status": 200,
+        "navError": null,
+        "hasClientException": false,
+        "has404": false
+      },
+      {
+        "name": "rocket_operations",
+        "status": 200,
+        "navError": null,
+        "hasClientException": true,
+        "has404": false
+      }
+    ]
+  }
+]

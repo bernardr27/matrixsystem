@@ -1,0 +1,123 @@
+{
+  "timestamp": "2026-02-23T09:38:38.371Z",
+  "mode": "validate",
+  "viewport": "mobile",
+  "targets": [
+    "reflect_dashboard",
+    "reflect_journal",
+    "reflect_settings",
+    "reflect_developer",
+    "reflect_data",
+    "reflect_graph",
+    "reflect_sage",
+    "reflect_archive",
+    "reflect_session_list"
+  ],
+  "issues": {
+    "reflect_dashboard@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "1 high z-index elements (max: 10000)"
+      }
+    ],
+    "reflect_journal@mobile": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=430x1036 vs client=430x932",
+        "selector": "html"
+      },
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <button> class=\"neural-btn ghost VisualCortex-module__jK2ZlG__uploadBtn\": scroll=208x44 vs client=202x44",
+        "selector": "button"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "3 high z-index elements (max: 10000)"
+      }
+    ],
+    "reflect_settings@mobile": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=430x1589 vs client=430x932",
+        "selector": "html"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "1 high z-index elements (max: 10000)"
+      }
+    ],
+    "reflect_developer@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "2 high z-index elements (max: 10000)"
+      }
+    ],
+    "reflect_data@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "2 high z-index elements (max: 10000)"
+      }
+    ],
+    "reflect_graph@mobile": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=430x1452 vs client=430x932",
+        "selector": "html"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "2 high z-index elements (max: 10000)"
+      }
+    ],
+    "reflect_sage@mobile": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=430x1030 vs client=430x932",
+        "selector": "html"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "2 high z-index elements (max: 10000)"
+      }
+    ],
+    "reflect_archive@mobile": [
+      {
+        "type": "CLIP",
+        "severity": "warning",
+        "message": "Clipped content in <html> class=\"\": scroll=430x1625 vs client=430x932",
+        "selector": "html"
+      },
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "1 high z-index elements (max: 10000)"
+      }
+    ],
+    "reflect_session_list@mobile": [
+      {
+        "type": "Z_INDEX",
+        "severity": "warning",
+        "message": "2 high z-index elements (max: 10000)"
+      }
+    ]
+  },
+  "summary": {
+    "totalTargets": 9,
+    "totalErrors": 0,
+    "totalWarnings": 15,
+    "clean": 0
+  }
+}

@@ -1,0 +1,28 @@
+{
+    "apps": {
+        "reflect": {
+            "target": "vercel",
+            "prod": true,
+            "buildCommand": "npm run build"
+        },
+        "nexus": {
+            "target": "local",
+            "prod": true,
+            "buildCommand": "npm run build"
+        },
+        "ghost-command": {
+            "target": "vercel",
+            "prod": false,
+            "buildCommand": "npm run build"
+        },
+        "rocket-command": {
+            "target": "local",
+            "prod": true,
+            "buildCommand": "npm run build"
+        }
+    },
+    "defaults": {
+        "skipVerify": false,
+        "timeout": 300000
+    }
+}

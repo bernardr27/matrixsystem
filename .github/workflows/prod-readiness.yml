@@ -1,0 +1,49 @@
+name: Matrix Production Readiness
+
+on:
+  workflow_dispatch:
+    inputs:
+      strict:
+        description: "Fail if required production environment variables are missing"
+        required: false
+        default: "true"
+
+jobs:
+  readiness:
+    name: Env + Readiness Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: "true"
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      SENTRY_DSN_NEXTJS: ${{ secrets.SENTRY_DSN_NEXTJS }}
+      SENTRY_DSN_NODE: ${{ secrets.SENTRY_DSN_NODE }}
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      REDIS_URL: ${{ secrets.REDIS_URL }}
+      CDN_ASSET_PREFIX: ${{ secrets.CDN_ASSET_PREFIX }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Validate Env
+        run: npm run env:check
+
+      - name: Validate Production Readiness
+        if: ${{ github.event.inputs.strict != 'false' }}
+        run: npm run prod:readiness
+
+      - name: Readiness Summary
+        if: ${{ github.event.inputs.strict == 'false' }}
+        run: |
+          npm run prod:readiness || true

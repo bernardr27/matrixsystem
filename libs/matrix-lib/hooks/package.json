@@ -1,0 +1,41 @@
+{
+  "name": "@matrix-lib/hooks",
+  "version": "1.0.0",
+  "description": "Shared React custom hooks for Matrix V9 Singularity",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./use-fetch": {
+      "types": "./dist/use-fetch.d.ts",
+      "default": "./dist/use-fetch.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "custom-hooks",
+    "matrix",
+    "singularity"
+  ],
+  "author": "Matrix Development Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "react": "^19.2.4",
+    "typescript": "^5"
+  }
+}

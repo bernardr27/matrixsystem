@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "citadel",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": false,
+    "startedAt": "2026-02-23T08:59:45.578Z",
+    "finishedAt": "2026-02-23T08:59:55.688Z",
+    "total": 2,
+    "passed": 2,
+    "failed": 0
+  },
+  "selectedApps": [
+    "citadel"
+  ],
+  "readiness": {
+    "citadel": true
+  },
+  "startedProcesses": [],
+  "health": [
+    {
+      "app": "citadel",
+      "url": "http://localhost:3005/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "citadel_home",
+      "url": "http://localhost:3005/",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\citadel_home_matrix_fast.png"
+    },
+    {
+      "name": "citadel_dashboard",
+      "url": "http://localhost:3005/dashboard",
+      "ok": true,
+      "responseStatus": 200,
+      "navError": null,
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\citadel_dashboard_matrix_fast.png"
+    }
+  ]
+}

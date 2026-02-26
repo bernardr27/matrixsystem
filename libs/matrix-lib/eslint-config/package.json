@@ -1,0 +1,23 @@
+{
+  "name": "@matrix-lib/eslint-config",
+  "version": "1.0.0",
+  "description": "Shared ESLint flat config presets for Matrix workspaces",
+  "type": "module",
+  "exports": {
+    ".": "./next.mjs",
+    "./base": "./base.mjs",
+    "./next": "./next.mjs"
+  },
+  "keywords": [
+    "eslint",
+    "config",
+    "matrix",
+    "monorepo"
+  ],
+  "author": "Matrix Development Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.0.0"
+  }
+}

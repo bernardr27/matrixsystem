@@ -1,0 +1,77 @@
+{
+  "ok": false,
+  "mode": "heal",
+  "startedAt": "2026-02-25T17:01:04.502Z",
+  "checks": {
+    "services": [
+      {
+        "name": "reflect",
+        "url": "http://127.0.0.1:3000/api/health",
+        "ok": true,
+        "status": 200,
+        "latencyMs": 3923
+      },
+      {
+        "name": "nexus",
+        "url": "http://127.0.0.1:3001/api/health",
+        "ok": false,
+        "status": 500,
+        "latencyMs": 1291
+      },
+      {
+        "name": "ghost",
+        "url": "http://127.0.0.1:5173/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 27,
+        "reason": "fetch failed"
+      },
+      {
+        "name": "citadel",
+        "url": "http://127.0.0.1:3005/api/health",
+        "ok": false,
+        "status": 500,
+        "latencyMs": 271
+      }
+    ],
+    "supabase": {
+      "ok": true,
+      "latencyMs": 494,
+      "reason": "Supabase query ok"
+    },
+    "redis": {
+      "ok": true,
+      "latencyMs": 383,
+      "reason": "Redis ping=PONG"
+    },
+    "env": {
+      "ok": true,
+      "reason": "Environment check passed"
+    },
+    "prodReadiness": {
+      "ok": true,
+      "reason": "Production readiness passed"
+    },
+    "lint": {
+      "ok": true,
+      "reason": "Skipped in quick mode"
+    }
+  },
+  "actions": [
+    "Restart requested for services: nexus, ghost, citadel",
+    "System restart command queued via bridge"
+  ],
+  "artifacts": [],
+  "summary": {
+    "healthScore": 55,
+    "degradedServices": [
+      "nexus",
+      "ghost",
+      "citadel"
+    ],
+    "failedChecks": [
+      "services"
+    ]
+  },
+  "finishedAt": "2026-02-25T17:01:17.049Z"
+}

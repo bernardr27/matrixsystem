@@ -1,0 +1,4 @@
+
+> @matrix-lib/utils@1.0.0 type-check
+> tsc --noEmit
+

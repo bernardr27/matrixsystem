@@ -1,0 +1,16 @@
+{
+  "role": "verifier",
+  "role_name": "Verifier",
+  "purpose": "Runs focused quality checks and returns pass/fail evidence.",
+  "started_at": "2026-02-23T04:30:10.414Z",
+  "policy": {
+    "timeout_ms": 240000,
+    "command_stage_limit": 7
+  },
+  "stage_status": "pass",
+  "command": "node apps/ghost-command/core/capability-engine.cjs run ai_quality_guardrails_smoke",
+  "status": 0,
+  "duration_ms": 15929,
+  "warning_hits": 5,
+  "output_preview": "{\n  \"mode\": \"gate\",\n  \"capability\": \"ai_quality_guardrails_smoke\",\n  \"results\": [\n    {\n      \"command\": \"npm run lint --workspace reflect -- src/app/page.tsx src/app/api/capabilities/run-guardrails/route.ts src/app/api/capabilities/status/route.ts\",\n      \"ok\": true,\n      \"output\": \"ision\\\\VisualCortex.tsx\\n  80:29  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element\\n\\nG:\\\\matrix\\\\apps\\\\reflect\\\\src\\\\context\\\\NotificationContext.tsx\\n   47:30  warning  The ref value 'toastTimeoutsRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'toastTimeoutsRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps\\n  103:8   warning  React Hook useEffect has missing dependencies: 'addNotification' and 'notifications.length'. Either include them or remove the dependency array                                                                                                                                  react-hooks/exhaustive-deps\\n\\nG:\\\\matrix\\\\apps\\\\reflect\\\\src\\\\lib\\\\hooks\\\\useAudioResonance.ts\\n  21:8  warning  React Hook useEffect has a missing dependency: 'mode'. Either include it or remove the dependency array  react-hooks/exhaustive-deps\\n\\nG:\\\\matrix\\\\apps\\\\reflect\\\\src\\\\lib\\\\hooks\\\\useZen.ts\\n  45:8  warning  React Hook useEffect has a missing dependency: 'toggleZen'. Either include it or remove the dependency array  react-hooks/exhaustive-deps\\n\\n✖ 25 problems (0 errors, 25 warnings)\\n\\n\"\n    }\n  ]\n}"
+}

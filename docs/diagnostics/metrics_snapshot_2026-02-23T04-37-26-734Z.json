@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-02-23T04:37:26.799Z",
+  "rows": [
+    {
+      "app": "reflect",
+      "url": "http://localhost:3000/api/health",
+      "ok": false,
+      "error": "",
+      "latency_ms": 40
+    },
+    {
+      "app": "nexus",
+      "url": "http://localhost:3001/api/health",
+      "ok": false,
+      "error": "",
+      "latency_ms": 2
+    },
+    {
+      "app": "citadel",
+      "url": "http://localhost:3005/api/health",
+      "ok": false,
+      "error": "",
+      "latency_ms": 6
+    },
+    {
+      "app": "ghost-command",
+      "url": "http://localhost:5173/api/health",
+      "ok": false,
+      "error": "",
+      "latency_ms": 3
+    }
+  ]
+}

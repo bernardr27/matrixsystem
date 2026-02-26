@@ -1,0 +1,212 @@
+/**
+ * MATRIX GLOBAL DESIGN TOKENS v1.0
+ * Centralized design system for all Matrix applications.
+ */
+
+:root {
+    /* 
+     * RADIANT SCHEME (Light Mode - Standard Baseline) 
+     */
+    --matrix-white: #ffffff;
+    --matrix-black: #000000;
+
+    /* Core Backgrounds */
+    --m-bg-primary: #f8fafc;
+    --m-bg-secondary: #f1f5f9;
+    --m-bg-tertiary: #e2e8f0;
+
+    /* Core Foregrounds */
+    --m-fg-primary: #0f172a;
+    --m-fg-secondary: #475569;
+    --m-fg-muted: #94a3b8;
+
+    /* Brand & Accents */
+    --m-primary: #0f172a;
+    --m-primary-fg: #ffffff;
+
+    --m-accent-cyan: #0891b2;
+    --m-accent-violet: #7c3aed;
+    --m-accent-emerald: #059669;
+    --m-accent-rose: #e11d48;
+    --m-accent-amber: #d97706;
+
+    /* Surfacing (Light) */
+    --m-surface: rgba(255, 255, 255, 0.7);
+    --m-surface-border: rgba(15, 23, 42, 0.08);
+    --m-surface-hover: rgba(15, 23, 42, 0.04);
+
+    /* Glassmorphism Presets (Light) */
+    --m-blur-sm: blur(12px);
+    --m-blur-md: blur(24px);
+    --m-blur-lg: blur(40px);
+}
+
+/* 
+ * SLEEK SCHEME (Dark Mode - Identity Default) 
+ */
+[data-theme='dark'],
+:root:not([data-theme='light']) {
+    /* Core Backgrounds */
+    --m-bg-primary: #020202;
+    --m-bg-secondary: #0a0a0f;
+    --m-bg-tertiary: #16161b;
+
+    /* Core Foregrounds */
+    --m-fg-primary: #f8fafc;
+    --m-fg-secondary: #94a3b8;
+    --m-fg-muted: #475569;
+
+    /* Brand & Accents (Dark) */
+    --m-primary: #ffffff;
+    --m-primary-fg: #000000;
+
+    --m-accent-cyan: #22d3ee;
+    --m-accent-violet: #8b5cf6;
+    --m-accent-emerald: #10b981;
+    --m-accent-rose: #f43f5e;
+    --m-accent-amber: #f59e0b;
+
+    /* Surfacing (Dark) */
+    --m-surface: rgba(255, 255, 255, 0.02);
+    --m-surface-border: rgba(255, 255, 255, 0.06);
+    --m-surface-hover: rgba(255, 255, 255, 0.1);
+
+    /* Glassmorphism Presets (Dark) */
+    --m-blur-sm: blur(16px);
+    --m-blur-md: blur(32px);
+    --m-blur-lg: blur(60px);
+}
+
+:root {
+    /* 
+     * SPACING & GRID 
+     */
+    --m-space-1: 0.25rem;
+    /* 4px */
+    --m-space-2: 0.5rem;
+    /* 8px */
+    --m-space-3: 0.75rem;
+    /* 12px */
+    --m-space-4: 1rem;
+    /* 16px */
+    --m-space-6: 1.5rem;
+    /* 24px */
+    --m-space-8: 2rem;
+    /* 32px */
+    --m-space-12: 3rem;
+    /* 48px */
+
+    /* 
+     * TYPOGRAPHY SCALE 
+     */
+    --m-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --m-font-display: 'Outfit', 'Inter', system-ui, sans-serif;
+    --m-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+    /* Fluid sizes (Mobile -> Desktop) */
+    --m-text-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem);
+    --m-text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);
+    --m-text-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+    --m-text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+    --m-text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    --m-text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+    --m-text-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3.5rem);
+
+    /* 
+     * BORDER RADIUS 
+     */
+    --m-radius-sm: 8px;
+    --m-radius-md: 16px;
+    --m-radius-lg: 24px;
+    --m-radius-xl: 32px;
+    --m-radius-full: 9999px;
+
+    /* 
+     * ELEVATION & SHADOWS 
+     */
+    --m-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --m-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --m-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --m-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* Neumorphic Presets (Dark) */
+    --m-shadow-neumorphic-outer: -5px -5px 10px rgba(255, 255, 255, 0.02), 5px 5px 15px rgba(0, 0, 0, 0.5);
+    --m-shadow-neumorphic-inner: inset -2px -2px 6px rgba(255, 255, 255, 0.02), inset 2px 2px 8px rgba(0, 0, 0, 0.6);
+    --m-shadow-neumorphic-flat: 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+    /* Veylix & Nova High-Density Glows */
+    --m-glow-cyan: 0 0 30px rgba(34, 211, 238, 0.2), 0 0 60px rgba(34, 211, 238, 0.1);
+    --m-glow-violet: 0 0 30px rgba(139, 92, 246, 0.2), 0 0 60px rgba(139, 92, 246, 0.1);
+    --m-glow-neon-purple: 0 0 40px rgba(191, 90, 242, 0.25);
+
+    /* Industrial & Glow Presets */
+    --m-shadow-industrial: 0 0 0 1px var(--m-surface-border), var(--m-shadow-lg);
+    --m-shadow-glow-cyan: var(--m-glow-cyan);
+    --m-shadow-glow-violet: var(--m-glow-violet);
+    --m-shadow-glow-emerald: 0 0 20px rgba(16, 185, 129, 0.15);
+    --m-shadow-glow-amber: 0 0 20px rgba(245, 158, 11, 0.15);
+    --m-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--m-surface-border);
+    --m-shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--m-surface-border);
+
+    /* 
+     * ANIMATION EASING 
+     */
+    --m-ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+    --m-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --m-ease-spring: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /*
+     * OPENAI SDK: ALPHA LAYERS (Transparency Scale)
+     * Sourced from github.com/openai/apps-sdk-ui
+     */
+    --m-alpha-05: rgba(255, 255, 255, 0.02);
+    --m-alpha-08: rgba(255, 255, 255, 0.03);
+    --m-alpha-10: rgba(255, 255, 255, 0.04);
+    --m-alpha-15: rgba(255, 255, 255, 0.06);
+    --m-alpha-20: rgba(255, 255, 255, 0.08);
+    --m-alpha-30: rgba(255, 255, 255, 0.12);
+    --m-alpha-40: rgba(255, 255, 255, 0.16);
+    --m-alpha-50: rgba(255, 255, 255, 0.20);
+    --m-alpha-60: rgba(255, 255, 255, 0.30);
+
+    /*
+     * OPENAI SDK: SEMANTIC BORDERS
+     */
+    --m-border-default: rgba(255, 255, 255, 0.08);
+    --m-border-subtle: rgba(255, 255, 255, 0.04);
+    --m-border-accent: rgba(34, 211, 238, 0.2);
+    --m-border-success: rgba(16, 185, 129, 0.2);
+    --m-border-warning: rgba(245, 158, 11, 0.2);
+    --m-border-danger: rgba(239, 68, 68, 0.2);
+
+    /*
+     * AG-UI PROTOCOL: STATE COLORS
+     * Sourced from github.com/ag-ui-protocol/ag-ui
+     */
+    --m-state-streaming: #22d3ee;
+    --m-state-thinking: #8b5cf6;
+    --m-state-complete: #10b981;
+    --m-state-error: #ef4444;
+    --m-state-warning: #f59e0b;
+    --m-state-idle: rgba(255, 255, 255, 0.3);
+
+    /*
+     * INK: TERMINAL PALETTE
+     * Sourced from github.com/vadimdemedes/ink
+     */
+    --m-terminal-green: #4ade80;
+    --m-terminal-cyan: #22d3ee;
+    --m-terminal-red: #f87171;
+    --m-terminal-yellow: #fbbf24;
+    --m-terminal-dim: rgba(255, 255, 255, 0.2);
+    --m-terminal-prompt: #8b5cf6;
+
+    /*
+     * UI VALIDATION: SAFE SIZING CONSTRAINTS
+     * Used by matrix-capture.js for UI issue detection
+     */
+    --m-min-touch-target: 44px;
+    --m-min-font-size: 10px;
+    --m-max-line-length: 80ch;
+    --m-safe-area-inset: env(safe-area-inset-bottom, 0px);
+}

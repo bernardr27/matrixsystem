@@ -1,0 +1,247 @@
+{
+  "ok": false,
+  "app": "all",
+  "startedAt": "2026-02-23T07:48:13.167Z",
+  "finishedAt": "2026-02-23T07:53:07.413Z",
+  "mode": "quick-ultra-with-targeted-retry",
+  "policy": {
+    "mode": "quick-ultra-with-targeted-retry",
+    "requireOpsHealthy": false
+  },
+  "warnings": [
+    "Ops autopilot is degraded (services)"
+  ],
+  "remediation": [
+    "Ultra pass failed apps: reflect, citadel, ghost, rocket",
+    "Deep retry still failed: reflect, citadel, ghost, rocket. Running stabilization pass."
+  ],
+  "mobilePasses": [
+    {
+      "stage": "ultra",
+      "apps": null,
+      "summary": {
+        "mode": "matrix-fast",
+        "app": "all",
+        "ultra": true,
+        "screenshots": false,
+        "autoStart": true,
+        "startedAt": "2026-02-23T07:48:13.964Z",
+        "finishedAt": "2026-02-23T07:51:30.637Z",
+        "total": 5,
+        "passed": 1,
+        "failed": 4
+      }
+    },
+    {
+      "stage": "retry_failed_apps",
+      "apps": [
+        "reflect",
+        "citadel",
+        "ghost",
+        "rocket"
+      ],
+      "summary": {
+        "mode": "matrix-fast",
+        "app": "reflect,citadel,ghost,rocket",
+        "ultra": false,
+        "screenshots": true,
+        "autoStart": true,
+        "startedAt": "2026-02-23T07:51:31.171Z",
+        "finishedAt": "2026-02-23T07:52:12.767Z",
+        "total": 8,
+        "passed": 0,
+        "failed": 8
+      }
+    },
+    {
+      "stage": "stabilization_pass",
+      "apps": [
+        "reflect",
+        "citadel",
+        "ghost",
+        "rocket"
+      ],
+      "summary": {
+        "mode": "matrix-fast",
+        "app": "reflect,citadel,ghost,rocket",
+        "ultra": true,
+        "screenshots": false,
+        "autoStart": true,
+        "startedAt": "2026-02-23T07:52:13.694Z",
+        "finishedAt": "2026-02-23T07:52:58.825Z",
+        "total": 4,
+        "passed": 2,
+        "failed": 2
+      }
+    }
+  ],
+  "apps": [
+    {
+      "app": "reflect",
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "failures": [
+        {
+          "name": "reflect_session",
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        },
+        {
+          "name": "reflect_auth",
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      ],
+      "certified": false
+    },
+    {
+      "app": "nexus",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "failures": [],
+      "certified": true
+    },
+    {
+      "app": "citadel",
+      "total": 2,
+      "passed": 1,
+      "failed": 1,
+      "failures": [
+        {
+          "name": "citadel_dashboard",
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      ],
+      "certified": false
+    },
+    {
+      "app": "ghost",
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "failures": [
+        {
+          "name": "ghost_home",
+          "status": 200,
+          "navError": null,
+          "hasClientException": false,
+          "has404": false
+        },
+        {
+          "name": "ghost_vault",
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      ],
+      "certified": false
+    },
+    {
+      "app": "rocket",
+      "total": 2,
+      "passed": 1,
+      "failed": 1,
+      "failures": [
+        {
+          "name": "rocket_operations",
+          "status": 200,
+          "navError": null,
+          "hasClientException": true,
+          "has404": false
+        }
+      ],
+      "certified": false
+    }
+  ],
+  "legacyDocs": [
+    {
+      "file": "APP_VALIDATION_CHECKLIST.md",
+      "exists": true,
+      "total": 296,
+      "done": 0,
+      "pending": 296,
+      "completionRate": 0
+    },
+    {
+      "file": "APP_VALIDATION_TEST_REPORT.md",
+      "exists": true,
+      "total": 66,
+      "done": 54,
+      "pending": 12,
+      "completionRate": 81.8
+    },
+    {
+      "file": "APP_VALIDATION_FINAL_ASSESSMENT.md",
+      "exists": true,
+      "total": 43,
+      "done": 0,
+      "pending": 43,
+      "completionRate": 0
+    },
+    {
+      "file": "docs/archive/VERIFICATION_REPORT.md",
+      "exists": true,
+      "total": 0,
+      "done": 0,
+      "pending": 0,
+      "completionRate": null
+    },
+    {
+      "file": "get_started/AI_APP_DEV_BLUEPRINT.md",
+      "exists": true,
+      "total": 0,
+      "done": 0,
+      "pending": 0,
+      "completionRate": null
+    }
+  ],
+  "mobileSummary": {
+    "mode": "matrix-fast",
+    "app": "all",
+    "ultra": true,
+    "screenshots": false,
+    "autoStart": true,
+    "startedAt": "2026-02-23T07:48:13.964Z",
+    "finishedAt": "2026-02-23T07:51:30.637Z",
+    "total": 5,
+    "passed": 1,
+    "failed": 4,
+    "secondPassApps": [
+      "reflect",
+      "citadel",
+      "ghost",
+      "rocket"
+    ],
+    "secondPassTotal": 8,
+    "stabilizationApps": [
+      "reflect",
+      "citadel",
+      "ghost",
+      "rocket"
+    ],
+    "stabilizationTotal": 4
+  },
+  "opsSummary": {
+    "ok": false,
+    "score": 55,
+    "failedChecks": [
+      "services"
+    ]
+  },
+  "artifacts": {
+    "mobile": "docs/diagnostics/mobile_verify_matrix_fast_latest.json",
+    "ops": "docs/diagnostics/ops_autopilot_latest.json",
+    "protocol": "docs/APP_CERTIFICATION_PROTOCOL.md",
+    "standardsMap": "docs/CERTIFICATION_STANDARDS_MAP.md"
+  }
+}

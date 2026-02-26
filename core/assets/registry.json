@@ -1,0 +1,11 @@
+{
+    "icons": {
+        "primary": "Tabler Icons (Industrial/Sleek)",
+        "secondary": "Lucide (Minimal UI)",
+        "cdn": "https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+    },
+    "illustrations": {
+        "provider": "IconScout / Storyset (Customized to Matrix Palette)",
+        "hero_placeholder": "https://img.freepik.com/free-vector/abstract-dark-hexagonal-background_23-2148359051.jpg"
+    }
+}

@@ -1,0 +1,93 @@
+
+
+🔍 CITADEL DASHBOARD UI ANALYSIS REPORT
+Generated: 2026-02-23T15:47:27.939Z
+URL: http://localhost:3005/dashboard
+
+============================================================
+VIEW: Desktop (1440x900)
+============================================================
+
+❌ FAIL - Layout Shift Detection
+   Error: SyntaxError: Failed to execute 'querySelectorAll' on 'Document': '*:visible' is not a valid selector.
+
+✅ PASS - Text Readability & Contrast
+
+✅ PASS - Button Accessibility
+
+✅ PASS - Safe Area Compliance (Mobile)
+
+✅ PASS - Performance Issues
+
+✅ PASS - Image Optimization
+
+============================================================
+Summary: 5 passed, 1 failed
+Total Issues Found: 0
+============================================================
+
+============================================================
+VIEW: Tablet (768x1024)
+============================================================
+
+❌ FAIL - Layout Shift Detection
+   Error: SyntaxError: Failed to execute 'querySelectorAll' on 'Document': '*:visible' is not a valid selector.
+
+✅ PASS - Text Readability & Contrast
+
+✅ PASS - Button Accessibility
+
+✅ PASS - Safe Area Compliance (Mobile)
+
+✅ PASS - Performance Issues
+
+✅ PASS - Image Optimization
+
+============================================================
+Summary: 5 passed, 1 failed
+Total Issues Found: 0
+============================================================
+
+============================================================
+VIEW: iPhone 12 (390x844)
+============================================================
+
+❌ FAIL - Layout Shift Detection
+   Error: SyntaxError: Failed to execute 'querySelectorAll' on 'Document': '*:visible' is not a valid selector.
+
+✅ PASS - Text Readability & Contrast
+
+✅ PASS - Button Accessibility
+
+✅ PASS - Safe Area Compliance (Mobile)
+
+✅ PASS - Performance Issues
+
+✅ PASS - Image Optimization
+
+============================================================
+Summary: 5 passed, 1 failed
+Total Issues Found: 0
+============================================================
+
+============================================================
+VIEW: iPhone Mini (375x812)
+============================================================
+
+❌ FAIL - Layout Shift Detection
+   Error: SyntaxError: Failed to execute 'querySelectorAll' on 'Document': '*:visible' is not a valid selector.
+
+✅ PASS - Text Readability & Contrast
+
+✅ PASS - Button Accessibility
+
+✅ PASS - Safe Area Compliance (Mobile)
+
+✅ PASS - Performance Issues
+
+✅ PASS - Image Optimization
+
+============================================================
+Summary: 5 passed, 1 failed
+Total Issues Found: 0
+============================================================

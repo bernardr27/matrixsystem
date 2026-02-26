@@ -1,0 +1,62 @@
+{
+  "summary": {
+    "mode": "matrix-fast",
+    "app": "reflect",
+    "ultra": false,
+    "screenshots": true,
+    "autoStart": true,
+    "startedAt": "2026-02-23T08:35:47.896Z",
+    "finishedAt": "2026-02-23T08:36:47.251Z",
+    "total": 2,
+    "passed": 0,
+    "failed": 2
+  },
+  "selectedApps": [
+    "reflect"
+  ],
+  "readiness": {
+    "reflect": false
+  },
+  "startedProcesses": [
+    {
+      "name": "reflect",
+      "pid": 5112,
+      "cwd": "apps\\reflect",
+      "method": "cmd-start"
+    }
+  ],
+  "health": [
+    {
+      "app": "reflect",
+      "url": "http://localhost:3000/api/health",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "results": [
+    {
+      "name": "reflect_session",
+      "url": "http://localhost:3000/session",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3000/session",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_session_matrix_fast.png"
+    },
+    {
+      "name": "reflect_auth",
+      "url": "http://localhost:3000/auth",
+      "ok": false,
+      "responseStatus": null,
+      "navError": "net::ERR_CONNECTION_REFUSED at http://localhost:3000/auth",
+      "hasClientException": false,
+      "has404": false,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshot": "temp_mobile_verification\\reflect_auth_matrix_fast.png"
+    }
+  ]
+}
