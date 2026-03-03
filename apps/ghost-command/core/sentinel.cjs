@@ -1,8 +1,9 @@
-
-const dns = require('dns');
-dns.setDefaultResultOrder('ipv4first'); // Force IPv4 for T-Mobile/Cloudflare compatibility
-process.stdout.setEncoding('utf8');
-process.stderr.setEncoding('utf8');
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('[CRITICAL] Unhandled Rejection at:', promise, 'reason:', reason);
+});
+process.on('uncaughtException', (err) => {
+    console.error('[CRITICAL] Uncaught Exception:', err);
+});
 
 const { createClient } = require('@supabase/supabase-js');
 const { exec, execFile, spawn, execSync } = require('child_process');
@@ -106,8 +107,10 @@ const SERVICES = {
     }
 };
 
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 const IntegrationHub = require('./integration-hub.cjs');
-const integrationHub = new IntegrationHub(createClient(supabaseUrl, supabaseKey));
+const integrationHub = new IntegrationHub(supabase);
 const EventLogger = require('./event-logger.cjs');
 
 // Initialize Integrations
@@ -144,7 +147,6 @@ const EventLogger = require('./event-logger.cjs');
 })();
 
 const PROCESSED_IDS = new Set();
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Planetary Mesh Initialization (Phase 47)
 const ENV_MAP = { 'development': 'dev', 'production': 'production', 'staging': 'staging', 'test': 'test' };
@@ -607,7 +609,7 @@ async function executeCommand(cmd) {
 
         // REMOVED: Generic Sage Simulation (Handled by Ghost Runner)
 
-        if (action === 'sys:ignite' || action === 'sys:boot' || action === 'sys:restart_all' || action === 'sys:deep_ignite') {
+        if (action === 'sys:ignite' || action === 'sys:boot' || action === 'sys:restart_all' || action === 'sys:deep_ignite' || action === 'sys:start') {
             WATCHDOG_ACTIVE = true;
             console.log('\x1b[36m[IGNITION] Sequencing Full System Start...\x1b[0m');
             await manager.broadcast('Initiating full system ignition sequence...');
@@ -655,7 +657,7 @@ async function executeCommand(cmd) {
             console.log('\x1b[32m[SYSTEM] MATRIX ONLINE.\x1b[0m');
             await manager.broadcast('All systems online. Matrix established.');
 
-        } else if (action === 'sys:kill_all' || action === 'sys:purge' || action === 'sys:hazard_purge') {
+        } else if (action === 'sys:kill_all' || action === 'sys:purge' || action === 'sys:hazard_purge' || action === 'sys:stop') {
             WATCHDOG_ACTIVE = false;
             console.log('[HAZARD] KILL ALL INITIATED');
             await manager.killService('RUNNER');
@@ -897,14 +899,34 @@ async function executeCommand(cmd) {
                 delete CHILD_PROCESSES['DESKTOP_STREAM'];
                 await manager.broadcast('Desktop Portal Offline');
             }
-        } else if (action.startsWith('sys:start_') || action.startsWith('sys:stop_') || action.startsWith('sys:restart_')) {
-            const parts = action.split('_');
-            const verb = parts[0];
+        } else if (action.startsWith('sys:start_') || action.startsWith('sys:stop_') || action.startsWith('sys:restart_') ||
+            action.startsWith('sys:local_start_') || action.startsWith('sys:local_stop_') || action.startsWith('sys:local_restart_') ||
+            action.startsWith('sys:cloud_start_') || action.startsWith('sys:cloud_stop_') || action.startsWith('sys:cloud_restart_')) {
+
+            // Normalize action string
+            let cleanAction = action;
+            let mode = 'legacy';
+            if (action.startsWith('sys:local_')) {
+                mode = 'local';
+                cleanAction = action.replace('sys:local_', 'sys:');
+            }
+            if (action.startsWith('sys:cloud_')) {
+                mode = 'cloud';
+                cleanAction = action.replace('sys:cloud_', 'sys:');
+            }
+
+            const parts = cleanAction.split('_');
+            const verb = parts[0].replace('sys:', ''); // start, stop, restart
             const target = parts[1].toUpperCase();
-            if (SERVICES[target]) {
-                if (verb === 'sys:start') {
+
+            // Ignore cloud commands from launching local processes for now (acts as a UI simulation)
+            if (mode === 'cloud') {
+                console.log(`[CLOUD_SIM] Intercepted remote cloud ${verb} execution for ${target}`);
+                await manager.broadcast(`[CLOUD_SIM] Remote ${verb} command executed on ${target}.`);
+            } else if (SERVICES[target]) {
+                if (verb === 'start') {
                     await manager.startService(target);
-                } else if (verb === 'sys:stop') {
+                } else if (verb === 'stop') {
                     await manager.killService(target);
                     // Broadcast offline status for this specific service immediately
                     const servicesPayload = { [target.toLowerCase()]: 'offline' };
@@ -912,10 +934,14 @@ async function executeCommand(cmd) {
                         command: 'sys:heartbeat', source: 'nexus_sentinel', status: 'silent',
                         output: JSON.stringify({ services: servicesPayload, timestamp: Date.now() })
                     });
-                } else if (verb === 'sys:restart') {
+                } else if (verb === 'restart') {
                     await manager.restartService(target);
                 }
             }
+        } else if (action === 'sys:update' || action === 'sys:rebuild') {
+            console.log('[UPDATE] Cloud app update triggered (Rebuilding).');
+            await manager.broadcast('Cloud apps updating/rebuilding...');
+            try { execSync(`powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "npm run build"`, { stdio: 'ignore', cwd: path.join(__dirname, '../../..') }); } catch (e) { }
         } else if (action === 'sys:heal') {
             await purgeZombies();
         } else if (action === 'sys:autopilot' || action === 'sys:autopilot_full') {
