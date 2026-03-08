@@ -12,9 +12,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - name: Install deps (root)
-        run: npm ci
+        run: npm install --no-audit --no-fund
       - name: Run cleanup (dry-run)
         run: node ./scripts/maintenance/cleanup_organize.cjs --keep=100 --days=30
 
@@ -26,7 +26,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - name: Run auth snapshot generator (manual secrets required)
         env:
           CHROME_PATH: /usr/bin/google-chrome-stable

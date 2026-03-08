@@ -1,8 +1,6 @@
 name: Matrix Shadow (Cloud Bridge)
 
 on:
-  push:
-    branches: [ main, master ]
   workflow_dispatch:
     inputs:
       action:
@@ -15,11 +13,16 @@ on:
           - build
           - deploy
           - troubleshoot
+  schedule:
+    - cron: "*/10 * * * *"
 
 jobs:
   cloud-bridge:
     runs-on: ubuntu-latest
-    timeout-minutes: 360 # 6 hours max
+    timeout-minutes: 15
+    concurrency:
+      group: matrix-shadow-cloud-bridge
+      cancel-in-progress: true
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
@@ -34,27 +37,27 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install Dependencies
+        run: npm install --no-audit --no-fund
 
-      - name: Build Matrix Core
-        run: npm run build:turbo
-        continue-on-error: true
+      - name: Cloud Preflight (No Dispatch)
+        run: node scripts/tools/cloud_preflight.cjs --json --skip-github
 
-      - name: Start Matrix Shadow (Remote Sentinel)
+      - name: Execute Cloud Action
         run: |
-          node apps/ghost-command/core/sentinel.cjs --headless &
-          echo "Sentinel started in shadow mode. Monitoring Supabase for commands..."
-          sleep 30
-        
-      - name: Continuous Remote Heartbeat
-        run: |
-          # Keep the runner alive and pulsing to Supabase
-          # This allows the local agent (me) to talk to the cloud server
-          while true; do
-            date
-            sleep 60
-          done
+          ACTION="${{ github.event.inputs.action || 'heartbeat' }}"
+          echo "matrix-shadow action=${ACTION}"
+          case "$ACTION" in
+            heartbeat) npm run cloud:control:heartbeat ;;
+            build) npm run cloud:control:build ;;
+            deploy) npm run cloud:control:ignite ;;
+            troubleshoot) npm run cloud:control:troubleshoot ;;
+            *) echo "Unknown action: ${ACTION}" && exit 1 ;;
+          esac
+
+      - name: Bridge Audit Snapshot
+        if: always()
+        run: npm run diag:bridge -- --limit=20
