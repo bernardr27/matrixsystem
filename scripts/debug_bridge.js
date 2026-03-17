@@ -1,6 +1,5 @@
-require('dotenv').config({ path: 'g:\\matrix\\.env' });
-const { createClient } = require('@supabase/supabase-js');
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+const { createSupabaseFromEnv } = require('./tools/_supabase_client.cjs');
+const supabase = createSupabaseFromEnv();
 
 async function debugBridge() {
     const { data: rows } = await supabase

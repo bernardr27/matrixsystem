@@ -10,7 +10,22 @@ param([switch]$Revert)
 
 $hostsFile = "C:\Windows\System32\drivers\etc\hosts"
 $marker = "# MATRIX_SUPABASE_PATCH"
-$supabaseHost = "phmnyenltuqxtkadnhpj.supabase.co"
+$supabaseUrl = $env:SUPABASE_URL
+if (-not $supabaseUrl -or $supabaseUrl.Trim().Length -eq 0) {
+    $supabaseUrl = $env:NEXT_PUBLIC_SUPABASE_URL
+}
+if (-not $supabaseUrl -or $supabaseUrl.Trim().Length -eq 0) {
+    Write-Host "[!] Missing SUPABASE_URL/NEXT_PUBLIC_SUPABASE_URL in environment." -ForegroundColor Red
+    Exit
+}
+
+try {
+    $supabaseHost = ([Uri]$supabaseUrl).Host
+}
+catch {
+    Write-Host "[!] Invalid SUPABASE_URL format: $supabaseUrl" -ForegroundColor Red
+    Exit
+}
 $targetIp = "104.18.38.236"  # Groq's Cloudflare IP — reachable through T-Mobile
 
 # --- Admin check ---

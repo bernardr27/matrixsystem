@@ -1,7 +1,5 @@
-const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config({ path: 'g:\\matrix\\.env' });
-
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+const { createSupabaseFromEnv } = require('./tools/_supabase_client.cjs');
+const supabase = createSupabaseFromEnv();
 
 async function seed() {
     console.log("Seeding Triage Data...");

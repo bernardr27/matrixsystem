@@ -1,0 +1,56 @@
+name: Matrix AWS Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: matrix-aws-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to AWS EC2
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CI: "true"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.AWS_EC2_HOST }}
+          username: ${{ secrets.AWS_EC2_USER }}
+          key: ${{ secrets.AWS_EC2_SSH_KEY }}
+          port: ${{ secrets.AWS_EC2_SSH_PORT || 22 }}
+          timeout: 600s
+          script: |
+            cd /opt/matrix
+            sudo bash infra/aws-ec2/update_aws_ec2.sh
+
+      - name: Verify Deployment
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.AWS_EC2_HOST }}
+          username: ${{ secrets.AWS_EC2_USER }}
+          key: ${{ secrets.AWS_EC2_SSH_KEY }}
+          port: ${{ secrets.AWS_EC2_SSH_PORT || 22 }}
+          timeout: 120s
+          script: |
+            cd /opt/matrix
+            bash infra/aws-ec2/verify_aws_ec2.sh
+
+      - name: Health Check
+        run: |
+          echo "Waiting 30s for services to stabilize..."
+          sleep 30
+          STATUS=$(curl -sf --max-time 10 "http://${{ secrets.AWS_EC2_HOST }}/health" || echo "UNREACHABLE")
+          echo "Health check result: $STATUS"
+          if [[ "$STATUS" == "UNREACHABLE" ]]; then
+            echo "::warning::Health check failed - services may still be starting"
+          fi

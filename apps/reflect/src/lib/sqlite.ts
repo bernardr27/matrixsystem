@@ -72,7 +72,7 @@ export function getDb() {
       INSERT OR IGNORE INTO profiles (id, username, tier) VALUES ('test-user-123', 'TestUser', 'Seed');
     `);
     return db;
-  } catch (err) {
+  } catch (err: any) {
     if (err.message && err.message.includes('Could not locate the bindings file')) {
       // Ssssh! Known issue on Windows production builds without build tools.
       // We fall back to standard non-persistent behavior.

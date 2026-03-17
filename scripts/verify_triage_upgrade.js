@@ -1,8 +1,7 @@
-require('dotenv').config({ path: 'g:\\matrix\\.env' });
-const { createClient } = require('@supabase/supabase-js');
+const { createSupabaseFromEnv } = require('./tools/_supabase_client.cjs');
 const TriageHandler = require('../apps/ghost-command/core/handlers/triage-handler');
 
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+const supabase = createSupabaseFromEnv();
 
 async function verifyTriage() {
     console.log('--- VERIFYING TRIAGE UPGRADE ---');

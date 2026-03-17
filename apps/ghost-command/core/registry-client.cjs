@@ -75,8 +75,12 @@ class RegistryClient {
 
     async heartbeat() {
         if (!this.instanceId) {
-            console.warn('[REGISTRY] Cannot send heartbeat - not registered');
-            return false;
+            console.warn('[REGISTRY] Heartbeat requested without registration. Attempting self-register...');
+            const id = await this.register();
+            if (!id) {
+                console.warn('[REGISTRY] Self-register failed; heartbeat skipped');
+                return false;
+            }
         }
 
         try {
@@ -103,7 +107,28 @@ class RegistryClient {
                 })
                 .eq('id', this.instanceId);
 
-            if (error) throw error;
+            if (error) {
+                const msg = String(error.message || '');
+                const missingRow = msg.includes('0 rows') || msg.includes('Results contain 0 rows');
+                if (missingRow) {
+                    console.warn('[REGISTRY] Instance row missing during heartbeat. Re-registering...');
+                    const id = await this.register();
+                    if (!id) throw error;
+                    const retry = await this.supabase
+                        .from('matrix_instances')
+                        .update({
+                            last_heartbeat: new Date().toISOString(),
+                            cpu_load: cpuLoad,
+                            ram_percent: ramPercent,
+                            uptime_seconds: Math.floor(process.uptime()),
+                            status: 'online'
+                        })
+                        .eq('id', this.instanceId);
+                    if (retry.error) throw retry.error;
+                    return true;
+                }
+                throw error;
+            }
             return true;
         } catch (err) {
             console.error('[REGISTRY] Heartbeat failed:', err.message);

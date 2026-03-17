@@ -1,17 +1,7 @@
-const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
 const fs = require('fs');
-require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
-
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-    console.error('❌ Missing Supabase credentials');
-    process.exit(1);
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+const { createSupabaseFromEnv } = require('./tools/_supabase_client.cjs');
+const supabase = createSupabaseFromEnv();
 
 async function healthCheck() {
     console.log('\n╔════════════════════════════════════════════════════════════╗');

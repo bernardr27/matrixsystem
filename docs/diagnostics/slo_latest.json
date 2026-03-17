@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-03-08T17:32:16.275Z",
+  "windowMinutes": 15,
+  "slos": {
+    "heartbeat_freshness_p95_sec": 850,
+    "command_success_rate_pct": 100,
+    "command_failure_rate_pct": 0,
+    "sample_sizes": {
+      "heartbeat": 90,
+      "commands": 96
+    }
+  }
+}

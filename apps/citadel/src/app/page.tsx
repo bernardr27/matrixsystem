@@ -78,6 +78,39 @@ export default function LoginPage() {
             console.warn('[Auth] Initialization error (likely missing env vars):', e);
         }
     }, [router]);
+    const runBootSequence = useCallback(() => {
+        const steps = [...bootSteps];
+        let stepIndex = 0;
+        const totalSteps = steps.length;
+
+        const runStep = () => {
+            if (stepIndex >= totalSteps) {
+                setBootProgress(100);
+                setTimeout(() => {
+                    setPhase('redirect');
+                    setTimeout(() => router.push('/dashboard'), 600);
+                }, 500);
+                return;
+            }
+
+            // Mark current step as running
+            steps[stepIndex] = { ...steps[stepIndex], status: 'running' };
+            setBootSteps([...steps]);
+            setBootProgress(Math.round(((stepIndex + 0.5) / totalSteps) * 100));
+
+            // Complete after delay
+            const delay = 300 + Math.random() * 300;
+            setTimeout(() => {
+                steps[stepIndex] = { ...steps[stepIndex], status: 'done' };
+                setBootSteps([...steps]);
+                setBootProgress(Math.round(((stepIndex + 1) / totalSteps) * 100));
+                stepIndex++;
+                setTimeout(runStep, 100);
+            }, delay);
+        };
+
+        setTimeout(runStep, 400);
+    }, [bootSteps, router]);
 
     // ─── Login handler ───
     const handleLogin = useCallback(async (e: React.FormEvent) => {
@@ -118,19 +151,10 @@ export default function LoginPage() {
                 const redirectUri = `${window.location.origin}/auth/callback?next=/dashboard`;
                 console.log('[Auth] Redirect URI:', redirectUri);
 
-                // Create a 5-second timeout promise
-                const timeoutPromise = new Promise<{ error: Error }>((_, reject) => {
-                    setTimeout(() => reject(new Error('Uplink timeout: OAuth provider unreachable')), 5000);
+                const { error } = await supabase.auth.signInWithOAuth({
+                    provider: 'discord',
+                    options: { redirectTo: redirectUri }
                 });
-
-                // Race the actual auth call against the timeout
-                const { error } = await Promise.race([
-                    supabase.auth.signInWithOAuth({
-                        provider: 'discord',
-                        options: { redirectTo: redirectUri }
-                    }),
-                    timeoutPromise
-                ]) as { error: any };
 
                 if (error) {
                     console.error('[Auth] OAuth Error:', error.message || error);
@@ -142,14 +166,20 @@ export default function LoginPage() {
         } catch (err: any) {
             console.error('[Login] Exception:', err.message || err);
             setPhase('login');
+
+            let errorMessage = err.message || 'Uplink Failed. Manual Override Recommended.';
+            if (errorMessage.toLowerCase().includes('provider is not enabled') || errorMessage.toLowerCase().includes('unsupported provider')) {
+                errorMessage = 'Discord Auth is disabled in your Supabase project. Please enable it in the Supabase Dashboard -> Authentication -> Providers, or use the System Override below.';
+            }
+
             // If it was a timeout or connection issue on remote, suggest the manual override
-            setError(err.message || 'Uplink Failed. Manual Override Recommended.');
+            setError(errorMessage);
             setUseLocalAuth(true); // Automatically reveal local auth fields as fallback
             setShowOverride(true);
             setShaking(true);
             setTimeout(() => setShaking(false), 600);
         }
-    }, [useLocalAuth, username, password, isSupabaseConfigured, router, runBootSequence]);
+    }, [phase, useLocalAuth, username, password, isSupabaseConfigured, runBootSequence]);
 
     // ─── Secret Override Handler ───
     const handleTitleTap = useCallback(() => {
@@ -173,39 +203,6 @@ export default function LoginPage() {
             setTapCount(0);
         }, 2000); // 2 second window to complete 7 taps
     }, [showOverride]);
-    const runBootSequence = useCallback(() => {
-        const steps = [...bootSteps];
-        let stepIndex = 0;
-        const totalSteps = steps.length;
-
-        const runStep = () => {
-            if (stepIndex >= totalSteps) {
-                setBootProgress(100);
-                setTimeout(() => {
-                    setPhase('redirect');
-                    setTimeout(() => router.push('/dashboard'), 600);
-                }, 500);
-                return;
-            }
-
-            // Mark current step as running
-            steps[stepIndex] = { ...steps[stepIndex], status: 'running' };
-            setBootSteps([...steps]);
-            setBootProgress(Math.round(((stepIndex + 0.5) / totalSteps) * 100));
-
-            // Complete after delay
-            const delay = 300 + Math.random() * 300;
-            setTimeout(() => {
-                steps[stepIndex] = { ...steps[stepIndex], status: 'done' };
-                setBootSteps([...steps]);
-                setBootProgress(Math.round(((stepIndex + 1) / totalSteps) * 100));
-                stepIndex++;
-                setTimeout(runStep, 100);
-            }, delay);
-        };
-
-        setTimeout(runStep, 400);
-    }, [bootSteps, router]);
 
     // ─── Discord Polling ───
     const pollDiscordVerification = useCallback((code: string) => {

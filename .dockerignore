@@ -1,0 +1,67 @@
+# Dependencies (installed fresh in container)
+node_modules
+.npm-cache
+
+# Build output (rebuilt in container)
+.next
+dist
+build
+.turbo
+
+# Version control
+.git
+.gitignore
+
+# Development files
+.vscode
+.storybook
+.gemini
+.agent
+.agents
+.achievements
+.analytics
+.triage
+.deploys
+
+# Large data directories
+backups
+.backups
+captures
+screenshots
+downloads
+uploads
+logs
+"brain share"
+"old matrix stuff"
+"design screens"
+"ui ideas"
+stuff
+temp_mobile_verification
+MASTER
+omega
+knowledge
+
+# Documentation (not needed in container)
+docs
+plans
+resources
+
+# OS files
+*.log
+Thumbs.db
+Desktop.ini
+
+# Launcher scripts (Windows-only, not for container)
+launchers
+matrix.bat
+*.bat
+*.vbs
+*.ps1
+
+# Misc
+debug_startup.log
+sentinel_boot.log
+sentinel_error.log
+nexus_build_new.log
+*.md
+!README.md

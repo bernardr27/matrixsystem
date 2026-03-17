@@ -1,5 +1,7 @@
 # Matrix Architecture
 
+> Runtime authority update: use `docs/CANONICAL_RUNTIME.md` as the source of truth for current orchestration, health, and recovery paths.
+
 ## System Overview
 
 The Matrix follows a "Monorepo-like" structure where multiple applications share a common core of services and utilities, driven by an autonomous **Phone → Ship** development pipeline.

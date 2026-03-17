@@ -209,10 +209,10 @@ function ExplorerContent() {
             </header>
 
             {/* Main Content */}
-            <main className="flex-1 flex overflow-hidden relative z-10 m-6 mb-8 gap-6 max-h-[calc(100vh-120px)]">
+            <main className="flex-1 flex flex-row overflow-hidden relative z-10 m-1 sm:m-6 mb-24 sm:mb-8 gap-1 sm:gap-6 max-h-[calc(100vh-115px)] sm:max-h-[calc(100vh-100px)]">
 
                 {/* Sidebar - File Tree */}
-                <div className="w-[300px] shrink-0 glass-panel border border-white/5 rounded-2xl flex flex-col overflow-hidden">
+                <div className="w-[170px] sm:w-[280px] h-full shrink-0 glass-panel border border-white/5 rounded-2xl flex flex-col overflow-hidden">
                     <div className="p-4 border-b border-white/5 bg-white/[0.02]">
                         <h2 className="text-xs font-mono text-white/40 tracking-widest uppercase">File System</h2>
                     </div>
@@ -224,16 +224,16 @@ function ExplorerContent() {
                 {/* Editor Pane */}
                 <div className="flex-1 glass-panel border border-white/5 rounded-2xl flex flex-col overflow-hidden relative group">
                     {/* Editor Header */}
-                    <div className="h-12 border-b border-white/5 bg-white/[0.02] flex items-center justify-between px-4">
-                        <div className="flex items-center gap-2 truncate">
+                    <div className="h-12 border-b border-white/5 bg-white/[0.02] flex items-center justify-between px-3 sm:px-4 shrink-0">
+                        <div className="flex items-center gap-2 truncate overflow-hidden">
                             {selectedFile ? (
                                 <>
-                                    <File className="w-4 h-4 text-white/30" />
-                                    <span className="text-xs font-mono text-white/70">{selectedFile.path}</span>
-                                    {hasChanges && <span className="w-2 h-2 rounded-full bg-amber-400" />}
+                                    <File className="w-4 h-4 text-white/30 shrink-0" />
+                                    <span className="text-[10px] sm:text-xs font-mono text-white/70 truncate">{selectedFile.path}</span>
+                                    {hasChanges && <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />}
                                 </>
                             ) : (
-                                <span className="text-xs font-mono text-white/30 italic">No file selected</span>
+                                <span className="text-[10px] sm:text-xs font-mono text-white/30 italic truncate">No file selected</span>
                             )}
                         </div>
 

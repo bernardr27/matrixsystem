@@ -1,146 +1,144 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { SystemDock } from './SystemDock';
-import { DesktopWindow } from './DesktopWindow';
-import { MenuBar } from './MenuBar';
-import { AppDrawer } from './AppDrawer';
-import { IntelligenceDashboard } from './IntelligenceDashboard';
+import { useAuth } from '@/components/providers/AuthProvider';
 
-interface WindowState {
-    id: string;
-    title: string;
-    url: string;
-    isOpen: boolean;
-    isMinimized: boolean;
-    position: { x: number; y: number };
-    size: { width: number; height: number };
-}
+import { TopAppBar } from './TopAppBar';
+import { BottomNavBar } from './BottomNavBar';
+import { MobileDashboard } from './MobileDashboard';
+import { IntelligenceDashboard } from './IntelligenceDashboard';
+import { SettingsPanel } from './SettingsPanel';
+import { CinematicBackground } from '@/components/ui/CinematicBackground';
+import { LiquidGlass } from '@/components/ui/LiquidGlass';
+
+type Tab = 'home' | 'intelligence' | 'explorer' | 'settings';
 
 export const MatrixDesktop: React.FC = () => {
-    const [windows, setWindows] = useState<WindowState[]>([]);
-    const [focusedId, setFocusedId] = useState<string | null>(null);
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const [isIntelligenceOpen, setIsIntelligenceOpen] = useState(false);
+    const { username, logout } = useAuth();
 
-    const handleLaunch = useCallback((appId: string, title: string, url: string) => {
-        const existing = windows.find(w => w.id === appId);
-        if (existing) {
-            if (existing.isMinimized) {
-                setWindows(prev => prev.map(w => w.id === appId ? { ...w, isMinimized: false } : w));
+    const [activeTab, setActiveTab] = useState<Tab>('home');
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+    // Top App Bar state
+    const [tunnelUrl, setTunnelUrl] = useState<string | null>(null);
+    const [tunnelActive, setTunnelActive] = useState(false);
+    const [tunnelCopied, setTunnelCopied] = useState(false);
+    const [refreshInterval, setRefreshInterval] = useState(15000);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+    const fetchTunnel = useCallback(async () => {
+        try {
+            const res = await fetch('/api/tunnel', { credentials: 'include' });
+            if (res.ok) {
+                const data = await res.json();
+                setTunnelUrl(data.url);
+                setTunnelActive(data.active);
             }
-            setFocusedId(appId);
+        } catch { }
+    }, []);
+
+    useEffect(() => {
+        fetchTunnel();
+        const timer = setInterval(fetchTunnel, refreshInterval);
+        return () => clearInterval(timer);
+    }, [fetchTunnel, refreshInterval]);
+
+    const handleCopyTunnel = async () => {
+        if (!tunnelUrl) return;
+        try {
+            await navigator.clipboard.writeText(tunnelUrl);
+            setTunnelCopied(true);
+            setTimeout(() => setTunnelCopied(false), 2000);
+        } catch { }
+    };
+
+    const handleRefresh = () => {
+        fetchTunnel();
+        setRefreshTrigger(prev => prev + 1); // This can be passed to MobileDashboard if needed, but MobileDashboard has its own polling.
+        // Actually since MobileDashboard has its own polling, maybe it is fine.
+        // Let's just force a window reload for hard refresh
+        window.location.reload();
+    };
+
+    const handleLogout = async () => {
+        await logout();
+        window.location.href = '/';
+    };
+
+    // When clicking a tab that opens a modal/overlay (like settings or intelligence),
+    // we either render it over the content OR change the active pane.
+    // For Intelligence, we can render `IntelligenceDashboard` when activeTab === 'intelligence'
+    // For Settings, it's better as an overlay.
+
+    const handleTabChange = (tab: Tab) => {
+        if (tab === 'settings') {
+            setIsSettingsOpen(true);
+            // Don't change actual tab so it acts as an overlay
             return;
         }
-
-        const windowCount = windows.length;
-        const offsetX = 80 + (windowCount * 40) % 300;
-        const offsetY = 100 + (windowCount * 40) % 200;
-
-        const newWindow: WindowState = {
-            id: appId,
-            title,
-            url,
-            isOpen: true,
-            isMinimized: false,
-            position: { x: offsetX, y: offsetY },
-            size: { width: 900, height: 600 }
-        };
-
-        setWindows(prev => [...prev, newWindow]);
-        setFocusedId(appId);
-    }, [windows]);
-
-    const handleClose = (id: string) => {
-        setWindows(prev => prev.filter(w => w.id !== id));
-        if (focusedId === id) setFocusedId(null);
+        if (tab === 'explorer') {
+            window.location.href = '/dashboard/explorer';
+            return;
+        }
+        setActiveTab(tab);
     };
-
-    const handleMinimize = (id: string) => {
-        setWindows(prev => prev.map(w => w.id === id ? { ...w, isMinimized: true } : w));
-        if (focusedId === id) setFocusedId(null);
-    };
-
-    const handleRestore = (id: string) => {
-        setWindows(prev => prev.map(w => w.id === id ? { ...w, isMinimized: false } : w));
-        setFocusedId(id);
-    };
-
-    const handleUpdatePosition = (id: string, x: number, y: number) => {
-        setWindows(prev => prev.map(w =>
-            w.id === id ? { ...w, position: { x, y } } : w
-        ));
-    };
-
-    const handleUpdateSize = (id: string, width: number, height: number) => {
-        setWindows(prev => prev.map(w =>
-            w.id === id ? { ...w, size: { width, height } } : w
-        ));
-    };
-
-    const activeIds = windows.filter(w => !w.isMinimized).map(w => w.id);
-    const minimizedCount = windows.filter(w => w.isMinimized).length;
 
     return (
-        <div className="matrix-desktop h-screen w-screen bg-background text-foreground overflow-hidden relative">
-            {/* Cosmic Background */}
-            <div className="absolute inset-0 cosmic-void opacity-100" />
-            <div className="absolute inset-0 cosmic-grid opacity-30 mix-blend-screen" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent pointer-events-none" />
+        <div className="matrix-desktop h-screen w-screen bg-[#04040c] text-foreground overflow-hidden relative flex flex-col">
+            <CinematicBackground />
+            <div className="absolute inset-0 citadel-mesh pointer-events-none z-0" />
+            <div className="absolute inset-0 citadel-grid opacity-30 pointer-events-none z-0" />
 
-            {/* Menu Bar */}
-            <MenuBar minimizedCount={minimizedCount} onOpenDrawer={() => setIsDrawerOpen(true)} />
+            <TopAppBar
+                onOpenSettings={() => setIsSettingsOpen(true)}
+                onRefresh={handleRefresh}
+                tunnelActive={tunnelActive}
+                tunnelUrl={tunnelUrl}
+            />
 
-            {/* Main Workspace - Properly positioned below menu bar with safe areas */}
             <main
-                className="fixed overflow-auto bg-transparent z-10"
+                className="flex-1 relative z-10 overflow-y-auto overflow-x-hidden"
                 style={{
-                    top: 'calc(var(--app-safe-top) + 3rem)',
-                    bottom: 'calc(var(--app-safe-bottom) + 6.5rem)',
-                    left: 'max(0px, env(safe-area-inset-left))',
-                    right: 'max(0px, env(safe-area-inset-right))',
+                    paddingTop: 'max(4.5rem, calc(env(safe-area-inset-top) + 3.5rem))',
+                    paddingBottom: 'max(5.5rem, calc(env(safe-area-inset-bottom) + 5rem))'
                 }}
             >
-                <AnimatePresence>
-                    {windows.map((win) => (
-                        !win.isMinimized && (
-                            <DesktopWindow
-                                key={win.id}
-                                {...win}
-                                isFocused={focusedId === win.id}
-                                onFocus={() => setFocusedId(win.id)}
-                                onClose={() => handleClose(win.id)}
-                                onMinimize={() => handleMinimize(win.id)}
-                                onUpdatePosition={handleUpdatePosition}
-                                onUpdateSize={handleUpdateSize}
-                            />
-                        )
-                    ))}
-                </AnimatePresence>
+                <div className="px-3 pb-4">
+                    <LiquidGlass className="rounded-[28px] border-gold-500/15 min-h-[78vh] overflow-hidden">
+                        <AnimatePresence mode="wait">
+                            {activeTab === 'home' && (
+                                <MobileDashboard key="home" />
+                            )}
+                            {activeTab === 'intelligence' && (
+                                <IntelligenceDashboard
+                                    key="intelligence"
+                                    isOpen={true}
+                                    onClose={() => setActiveTab('home')}
+                                />
+                            )}
+                        </AnimatePresence>
+                    </LiquidGlass>
+                </div>
             </main>
 
-            {/* Intelligence Dashboard */}
-            <IntelligenceDashboard
-                isOpen={isIntelligenceOpen}
-                onClose={() => setIsIntelligenceOpen(false)}
+            <BottomNavBar
+                activeTab={activeTab === 'intelligence' ? 'intelligence' : 'home'}
+                onTabChange={handleTabChange as any}
             />
 
-            {/* Dock */}
-            <SystemDock
-                activeWindows={activeIds}
-                minimizedWindows={windows.filter(w => w.isMinimized).map(w => ({ id: w.id, title: w.title }))}
-                onLaunch={handleLaunch}
-                onRestore={handleRestore}
-                onOpenIntelligence={() => setIsIntelligenceOpen(true)}
-                focusedId={focusedId}
-            />
-
-            {/* App Management Drawer Overlay */}
-            {isDrawerOpen && (
-                <div className="fixed inset-0 z-[100] animate-fade-in">
-                    <AppDrawer onClose={() => setIsDrawerOpen(false)} />
-                </div>
+            {isSettingsOpen && (
+                <SettingsPanel
+                    refreshInterval={refreshInterval}
+                    onRefreshChange={setRefreshInterval}
+                    username={username || null}
+                    tunnelUrl={tunnelUrl}
+                    tunnelActive={tunnelActive}
+                    onCopyTunnel={handleCopyTunnel}
+                    tunnelCopied={tunnelCopied}
+                    onClose={() => setIsSettingsOpen(false)}
+                    onLogout={handleLogout}
+                />
             )}
         </div>
     );

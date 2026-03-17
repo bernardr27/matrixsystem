@@ -47,7 +47,7 @@ export function DebugConsole() {
             }
             return inst;
         }));
-    }, [messages]);
+    }, [messages, mounted]);
 
     // Sync System Telemetry
     useEffect(() => {
@@ -64,7 +64,7 @@ export function DebugConsole() {
             }
             return inst;
         }));
-    }, [systemHealth]);
+    }, [systemHealth, mounted]);
 
     const activeTerminal = instances.find(i => i.id === activeInstanceId);
 

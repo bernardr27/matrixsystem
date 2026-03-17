@@ -7,8 +7,57 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config({ path: path.join(__dirname, '..', '..', '..', '.env') });
 
+const MATRIX_ENVIRONMENT = String(process.env.MATRIX_ENVIRONMENT || '').toLowerCase();
+const LOCAL_CLOUD_ONLY_BLOCK =
+    String(process.env.MATRIX_CLOUD_MODE || '').toLowerCase() === 'true' &&
+    MATRIX_ENVIRONMENT !== 'cloud' &&
+    process.env.MATRIX_ALLOW_LOCAL_RUNNER !== '1';
+
+if (LOCAL_CLOUD_ONLY_BLOCK) {
+    console.log('[CLOUD_ONLY] MATRIX_CLOUD_MODE=true and MATRIX_ENVIRONMENT!=cloud; local ghost-runner launch blocked.');
+    process.exit(0);
+}
+
 const { createClient } = require('@supabase/supabase-js');
-const { exec, spawn } = require('child_process');
+const childProcess = require('child_process');
+const PROCESS_EVENT_LOG = path.join(__dirname, '..', '..', '..', 'logs', 'process_launch_events.jsonl');
+const appendProcessLaunchEvent = (event) => {
+    const payload = {
+        timestamp: new Date().toISOString(),
+        service: 'ghost_runner',
+        ...event
+    };
+    try {
+        const dir = path.dirname(PROCESS_EVENT_LOG);
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        fs.appendFileSync(PROCESS_EVENT_LOG, `${JSON.stringify(payload)}\n`);
+    } catch { }
+    try {
+        const client = global.__matrixSupabase;
+        if (client) {
+            client.from('process_launch_events').insert({
+                service: payload.service,
+                kind: payload.kind || 'unknown',
+                command: payload.command || null,
+                args: payload.args || [],
+                metadata: payload
+            }).then(() => { }).catch(() => { });
+        }
+    } catch { }
+};
+const exec = (command, options, callback) => {
+    appendProcessLaunchEvent({ kind: 'exec', command: String(command || '').slice(0, 240) });
+    if (typeof options === 'function') return childProcess.exec(command, { windowsHide: true }, options);
+    return childProcess.exec(command, { windowsHide: true, ...(options || {}) }, callback);
+};
+const spawn = (command, args, options) => {
+    appendProcessLaunchEvent({
+        kind: 'spawn',
+        command: String(command || '').slice(0, 120),
+        args: Array.isArray(args) ? args.map((a) => String(a).slice(0, 120)) : []
+    });
+    return childProcess.spawn(command, args, { windowsHide: true, ...(options || {}) });
+};
 const os = require('os');
 const http = require('http');
 
@@ -21,6 +70,7 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
+global.__matrixSupabase = supabase;
 
 
 // --- HTTP SEND POLYFILL (Phase 16) ---
@@ -435,6 +485,14 @@ const pulse = async () => {
                 status: 'silent',
                 output: JSON.stringify(payload)
             });
+            // Dual-write heartbeat stream to dedicated observability table (best-effort).
+            try {
+                await supabase.from('system_heartbeats').insert({
+                    source: 'ghost_runner',
+                    status: 'online',
+                    payload
+                });
+            } catch { }
         }
     } catch (err) {
         console.error('[PULSE_FAILED]', err.message);

@@ -96,7 +96,8 @@ describe('health API', () => {
     global.fetch = mockFetch as any;
 
     const { GET } = await import('../app/api/health/route');
-    const res = await GET();
+    const req = new Request('http://localhost/api/health');
+    const res = await GET(req);
     const body = await res.json();
 
     expect(body.env).toBeDefined();

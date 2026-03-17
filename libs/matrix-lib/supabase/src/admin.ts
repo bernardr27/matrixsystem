@@ -3,15 +3,15 @@ import { createClient } from "@supabase/supabase-js";
 type Env = NodeJS.ProcessEnv;
 
 function urlFromEnv(env: Env): string {
-  return String(env.NEXT_PUBLIC_SUPABASE_URL || "").trim();
+  return String(env.SUPABASE_URL || env.NEXT_PUBLIC_SUPABASE_URL || "").trim();
 }
 
 function anonKeyFromEnv(env: Env): string {
-  return String(env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "").trim();
+  return String(env.NEXT_PUBLIC_SUPABASE_ANON_KEY || env.SUPABASE_ANON_KEY || env.SUPABASE_PUBLISHABLE_KEY || "").trim();
 }
 
 function serviceKeyFromEnv(env: Env): string {
-  return String(env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
+  return String(env.SUPABASE_SERVICE_ROLE_KEY || env.SUPABASE_SECRET_KEY || env.SUPABASE_KEY || "").trim();
 }
 
 export function createAnonSupabaseClientFromEnv(env: Env = process.env) {

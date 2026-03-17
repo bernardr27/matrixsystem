@@ -4,6 +4,7 @@ const path = require('path');
 const { execFile } = require('child_process');
 const dotenv = require('dotenv');
 const { createClient } = require('@supabase/supabase-js');
+const { resolveRuntimeProfile } = require('./runtime_profile.cjs');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const DIAG_DIR = path.join(ROOT, 'docs', 'diagnostics');
@@ -167,7 +168,7 @@ function summarize(report) {
   let score = 100;
   score -= degradedServices.length * 15;
   if (!report.checks.supabase.ok) score -= 20;
-  if (!report.checks.redis.ok) score -= 10;
+  if (report.runtime?.production && !report.checks.redis.ok) score -= 10;
   if (!report.checks.env.ok) score -= 10;
   if (!report.checks.prodReadiness.ok) score -= 15;
   if (!report.checks.lint.ok) score -= 10;
@@ -188,6 +189,7 @@ async function run() {
     ok: true,
     mode: args.heal ? 'heal' : 'check',
     startedAt: new Date().toISOString(),
+    runtime: resolveRuntimeProfile(process.env),
     checks: {
       services: [],
       supabase: { ok: false, reason: 'not_run' },
@@ -210,6 +212,9 @@ async function run() {
   report.checks.services = await Promise.all(targets.map((t) => checkHealthEndpoint(t.name, t.url)));
   report.checks.supabase = await checkSupabase();
   report.checks.redis = await checkRedis();
+  if (!report.runtime.production && !report.checks.redis.ok) {
+    report.checks.redis = { ok: true, reason: 'Redis optional outside production profile' };
+  }
 
   const envRes = await execNodeScript('scripts/tools/env_manager.cjs', ['check'], Math.min(args.timeoutMs, 60000));
   report.checks.env = {
@@ -271,6 +276,15 @@ async function run() {
         reason: readinessRetry.ok ? 'Production readiness passed after remediation' : (readinessRetry.stderr || readinessRetry.stdout || 'Production readiness still failing')
       };
       report.actions.push(readinessRetry.ok ? 'Production readiness recovered' : 'Production readiness still degraded');
+    }
+
+    if (!report.checks.supabase.ok) {
+      const cloudRecover = await execNodeScript('scripts/tools/cloud_preflight.cjs', ['--recover', '--skip-github'], 60000);
+      report.actions.push(
+        cloudRecover.ok
+          ? 'Cloud preflight auto-recover queued bootstrap commands'
+          : `Cloud auto-recover failed: ${cloudRecover.stderr || cloudRecover.stdout || 'unknown error'}`
+      );
     }
   }
 

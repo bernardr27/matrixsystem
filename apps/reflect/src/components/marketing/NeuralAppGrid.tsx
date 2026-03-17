@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Reveal } from '../ui/Reveal';
+import { ParallaxLayer } from '../ui/ParallaxLayer';
 
 const AppIcons = {
     reflect: (color: string) => (
@@ -48,81 +50,85 @@ export default function NeuralAppGrid({ onSelect }: { onSelect: (id: string) => 
             justifyContent: 'center',
             flexWrap: 'wrap' // Allow wrapping on small screens
         }}>
-            {apps.map((app) => (
-                <motion.button
-                    key={app.id}
-                    onClick={() => onSelect(app.id)}
-                    whileHover={{ scale: 1.05, translateY: -5 }}
-                    whileTap={{ scale: 0.95 }}
-                    style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: '0.8rem',
-                        minWidth: '80px' // Ensure stable touch target width
-                    }}
-                >
-                    <div style={{
-                        width: 'clamp(64px, 12vw, 80px)', // Scalable icon
-                        height: 'clamp(64px, 12vw, 80px)',
-                        borderRadius: '24px',
-                        background: 'rgba(255,255,255,0.02)',
-                        border: '1px solid rgba(255,255,255,0.06)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        position: 'relative',
-                        transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-                        boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
-                        backdropFilter: 'blur(8px)',
-                        WebkitBackdropFilter: 'blur(8px)'
-                    }} className="app-icon-container">
-                        <div style={{
-                            position: 'absolute',
-                            inset: -1,
-                            borderRadius: '24px',
-                            border: `1.5px solid ${app.color}`,
-                            opacity: 0,
-                            filter: `blur(4px) drop-shadow(0 0 8px ${app.color}40)`,
-                            transition: 'opacity 0.4s'
-                        }} className="icon-glow" />
-
-                        <div style={{
-                            filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.1))',
-                            zIndex: 2
-                        }}>
-                            {AppIcons[app.id as keyof typeof AppIcons](app.color)}
-                        </div>
-
-                        <motion.div
-                            animate={{ scale: [1, 1.1, 1], opacity: [0.03, 0.08, 0.03] }}
-                            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            {apps.map((app, index) => (
+                <Reveal key={app.id} delay={index * 0.05}>
+                    <ParallaxLayer offset={8 + (index % 2) * 4}>
+                        <motion.button
+                            onClick={() => onSelect(app.id)}
+                            whileHover={{ scale: 1.05, translateY: -5 }}
+                            whileTap={{ scale: 0.95 }}
                             style={{
-                                position: 'absolute',
-                                inset: 0,
-                                borderRadius: '24px',
-                                background: app.color,
-                                zIndex: -1
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                gap: '0.8rem',
+                                minWidth: '88px',
+                                minHeight: '112px'
                             }}
-                        />
-                    </div>
-                    <span style={{
-                        fontSize: '0.65rem',
-                        fontWeight: 800,
-                        letterSpacing: '0.2rem',
-                        color: 'rgba(255,255,255,0.35)',
-                        transition: 'all 0.4s'
-                    }} className="app-label">{app.label}</span>
+                        >
+                            <div style={{
+                                width: 'clamp(64px, 12vw, 80px)', // Scalable icon
+                                height: 'clamp(64px, 12vw, 80px)',
+                                borderRadius: '24px',
+                                background: 'rgba(255,255,255,0.02)',
+                                border: '1px solid rgba(255,255,255,0.06)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                position: 'relative',
+                                transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                                boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
+                                backdropFilter: 'blur(8px)',
+                                WebkitBackdropFilter: 'blur(8px)'
+                            }} className="app-icon-container">
+                                <div style={{
+                                    position: 'absolute',
+                                    inset: -1,
+                                    borderRadius: '24px',
+                                    border: `1.5px solid ${app.color}`,
+                                    opacity: 0,
+                                    filter: `blur(4px) drop-shadow(0 0 8px ${app.color}40)`,
+                                    transition: 'opacity 0.4s'
+                                }} className="icon-glow" />
 
-                    <style jsx>{`
+                                <div style={{
+                                    filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.1))',
+                                    zIndex: 2
+                                }}>
+                                    {AppIcons[app.id as keyof typeof AppIcons](app.color)}
+                                </div>
+
+                                <motion.div
+                                    animate={{ scale: [1, 1.1, 1], opacity: [0.03, 0.08, 0.03] }}
+                                    transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                                    style={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        borderRadius: '24px',
+                                        background: app.color,
+                                        zIndex: -1
+                                    }}
+                                />
+                            </div>
+                            <span style={{
+                                fontSize: '0.65rem',
+                                fontWeight: 800,
+                                letterSpacing: '0.2rem',
+                                color: 'rgba(255,255,255,0.35)',
+                                transition: 'all 0.4s'
+                            }} className="app-label">{app.label}</span>
+
+                            <style jsx>{`
                         button:hover .icon-glow { opacity: 0.5 !important; }
                         button:hover .app-icon-container { border-color: ${app.color}60 !important; background: rgba(255,255,255,0.04) !important; }
                         button:hover .app-label { color: #fff !important; letter-spacing: 0.25rem !important; }
                     `}</style>
-                </motion.button>
+                        </motion.button>
+                    </ParallaxLayer>
+                </Reveal>
             ))}
         </div>
     );

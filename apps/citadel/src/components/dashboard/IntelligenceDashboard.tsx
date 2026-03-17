@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Brain, Sparkles, Database, Code, X, ChevronRight, Activity } from 'lucide-react';
+import { LiquidGlass } from '@/components/ui/LiquidGlass';
 
 interface IntelligenceDashboardProps {
     isOpen: boolean;
@@ -34,37 +35,40 @@ export const IntelligenceDashboard: React.FC<IntelligenceDashboardProps> = ({ is
                     initial={{ opacity: 0, scale: 0.95, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                    className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-md"
+                    className="fixed inset-0 z-[100] flex items-center justify-center sm:p-6 bg-black/60 backdrop-blur-md"
                 >
-                    <div className="w-full max-w-4xl h-[70vh] glass-panel border border-gold-500/20 shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden relative">
+                    <div className="w-full h-full sm:max-w-4xl sm:h-[80vh] sm:rounded-3xl border border-gold-500/20 shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden relative pb-20 sm:pb-0 ct-liquid-glass"
+                        style={{ paddingTop: 'max(0px, env(safe-area-inset-top))' }}
+                    >
                         {/* Background Neural Effect */}
                         <div className="absolute inset-0 pointer-events-none opacity-20 overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(212,168,67,0.1)_0%,transparent_70%)]" />
                         </div>
 
                         {/* Header */}
-                        <div className="flex items-center justify-between px-8 py-6 border-b border-white/5 relative z-10">
-                            <div className="flex items-center gap-4">
-                                <div className="p-3 rounded-2xl bg-gold-500/10 border border-gold-500/30 text-gold-500 shadow-[0_0_20px_rgba(212,168,67,0.2)]">
+                        <div className="flex items-center justify-between px-4 sm:px-8 py-4 sm:py-6 border-b border-white/5 relative z-10">
+                            <div className="flex items-center gap-3 sm:gap-4">
+                                <div className="p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-gold-500/10 border border-gold-500/30 text-gold-500 shadow-[0_0_20px_rgba(212,168,67,0.2)] shrink-0">
                                     <Brain className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <h2 className="text-xl font-display font-bold text-white tracking-widest uppercase">Deep Intelligence</h2>
-                                    <p className="text-xs font-mono text-gold-500/60 tracking-widest uppercase">NotebookLM Grounded Synthesis // AntiGravity Bridge</p>
+                                    <h2 className="text-sm sm:text-xl font-display font-bold text-white tracking-widest uppercase truncate">Deep Intelligence</h2>
+                                    <p className="hidden sm:block text-xs font-mono text-gold-500/60 tracking-widest uppercase">NotebookLM Grounded Synthesis // AntiGravity Bridge</p>
+                                    <p className="sm:hidden text-[9px] font-mono text-gold-500/60 tracking-widest uppercase truncate">AntiGravity Bridge</p>
                                 </div>
                             </div>
                             <button
                                 onClick={onClose}
-                                className="p-2 rounded-xl hover:bg-white/5 text-white/40 hover:text-white transition-all"
+                                className="p-2 rounded-xl hover:bg-white/5 text-white/40 hover:text-white transition-all shrink-0"
                             >
-                                <X className="w-6 h-6" />
+                                <X className="w-5 h-5 sm:w-6 sm:h-6" />
                             </button>
                         </div>
 
                         {/* Content */}
-                        <div className="flex-1 flex overflow-hidden relative z-10">
+                        <div className="flex-1 flex flex-col sm:flex-row overflow-hidden relative z-10">
                             {/* Actions Panel */}
-                            <div className="w-72 border-r border-white/5 p-6 flex flex-col gap-4">
+                            <div className="w-full sm:w-72 border-b sm:border-b-0 sm:border-r border-white/5 p-4 sm:p-6 flex flex-col gap-4 shrink-0 sm:overflow-y-auto">
                                 <button
                                     onClick={startDeepResearch}
                                     disabled={isAnalyzing}
@@ -95,8 +99,8 @@ export const IntelligenceDashboard: React.FC<IntelligenceDashboardProps> = ({ is
                             </div>
 
                             {/* Main Reasoning View */}
-                            <div className="flex-1 p-8 overflow-y-auto">
-                                <div className="space-y-8">
+                            <div className="flex-1 p-4 sm:p-8 overflow-y-auto pb-[calc(env(safe-area-inset-bottom)+2rem)]">
+                                <div className="space-y-6 sm:space-y-8">
                                     {isAnalyzing && (
                                         <div className="space-y-6">
                                             <div className="flex items-center justify-between text-[10px] font-mono tracking-[0.2em] text-gold-500/80 uppercase">
@@ -147,7 +151,7 @@ export const IntelligenceDashboard: React.FC<IntelligenceDashboardProps> = ({ is
                                                 </div>
                                             </div>
 
-                                            <div className="p-6 rounded-2xl bg-black/40 border border-white/5 space-y-4">
+                                            <LiquidGlass className="p-6 rounded-2xl space-y-4">
                                                 <div className="flex items-center gap-2 text-[10px] font-mono text-gold-500/60 tracking-widest uppercase">
                                                     <Activity className="w-3 h-3" />
                                                     Insight Preview
@@ -159,7 +163,7 @@ SOURCES: NotebookLM://id_8829, InternalDocs://mesh_v2
 STATUS: READY FOR EXECUTION
 ARCHITECT: AntiGravity Intelligence Bridge`}
                                                 </pre>
-                                            </div>
+                                            </LiquidGlass>
                                         </motion.div>
                                     )}
                                 </div>

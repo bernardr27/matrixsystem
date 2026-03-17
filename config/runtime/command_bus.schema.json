@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "matrix://runtime/command_bus.schema.json",
+  "title": "Matrix Command Bus Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["command", "source", "timestamp", "idempotencyKey", "payload"],
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "Command identifier routed by matrix_command_bus.cjs"
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "ISO8601 UTC timestamp"
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "minLength": 8
+    },
+    "payload": {
+      "type": "object",
+      "description": "Command-specific arguments"
+    }
+  }
+}
+

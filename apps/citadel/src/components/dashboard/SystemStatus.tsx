@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Activity, Wifi, WifiOff, Clock, Cpu, HardDrive, Monitor, Globe } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { createPollingController } from '@matrix-lib/observability';
 
 interface ServiceStatus {
     status: string;
@@ -61,9 +62,10 @@ export function SystemStatus() {
             } catch { /* ignore */ }
             setLoading(false);
         };
-        fetchStatus();
-        const timer = setInterval(fetchStatus, 3000);
-        return () => clearInterval(timer);
+
+        const controller = createPollingController(fetchStatus, 3000);
+        controller.start();
+        return () => controller.stop();
     }, []);
 
     if (loading || !data) return null;

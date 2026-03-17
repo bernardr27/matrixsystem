@@ -177,7 +177,7 @@ These can be overridden using environment variables:
 ## Browser Environment Configuration
 **File:** `citadel/.env.local`
 ```
-NEXT_PUBLIC_SUPABASE_URL=https://phmnyenltuqxtkadnhpj.supabase.co
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 

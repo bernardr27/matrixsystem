@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient as createClient } from '@matrix-lib/supabase';
+import { validateSession } from '@/lib/auth';
 import path from 'path';
 import fs from 'fs/promises';
 
@@ -10,14 +11,17 @@ import fs from 'fs/promises';
 
 const ROOT_DIR = 'g:\\matrix';
 
-async function checkAuth() {
+async function checkAuth(req: NextRequest) {
+    const sessionToken = req.cookies.get('citadel_session')?.value;
+    if (sessionToken && validateSession(sessionToken)) return true;
+
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
     return !!user;
 }
 
 export async function POST(req: NextRequest) {
-    if (!(await checkAuth())) {
+    if (!(await checkAuth(req))) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 

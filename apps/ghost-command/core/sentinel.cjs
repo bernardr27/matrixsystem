@@ -6,7 +6,57 @@ process.on('uncaughtException', (err) => {
 });
 
 const { createClient } = require('@supabase/supabase-js');
-const { exec, execFile, spawn, execSync } = require('child_process');
+const childProcess = require('child_process');
+const PROCESS_EVENT_LOG = require('path').join(__dirname, '..', '..', '..', 'logs', 'process_launch_events.jsonl');
+const appendProcessLaunchEvent = (event) => {
+    const payload = {
+        timestamp: new Date().toISOString(),
+        service: 'nexus_sentinel',
+        ...event
+    };
+    try {
+        const fsSafe = require('fs');
+        const pathSafe = require('path');
+        const dir = pathSafe.dirname(PROCESS_EVENT_LOG);
+        if (!fsSafe.existsSync(dir)) fsSafe.mkdirSync(dir, { recursive: true });
+        fsSafe.appendFileSync(PROCESS_EVENT_LOG, `${JSON.stringify(payload)}\n`);
+    } catch { }
+    try {
+        const client = global.__matrixSupabase;
+        if (client) {
+            client.from('process_launch_events').insert({
+                service: payload.service,
+                kind: payload.kind || 'unknown',
+                command: payload.command || null,
+                args: payload.args || [],
+                metadata: payload
+            }).then(() => { }).catch(() => { });
+        }
+    } catch { }
+};
+const exec = (command, options, callback) => {
+    appendProcessLaunchEvent({ kind: 'exec', command: String(command || '').slice(0, 240) });
+    if (typeof options === 'function') return childProcess.exec(command, { windowsHide: true }, options);
+    return childProcess.exec(command, { windowsHide: true, ...(options || {}) }, callback);
+};
+const execFile = (file, args, options, callback) => {
+    appendProcessLaunchEvent({
+        kind: 'execFile',
+        file: String(file || '').slice(0, 120),
+        args: Array.isArray(args) ? args.map((a) => String(a).slice(0, 120)) : []
+    });
+    if (typeof options === 'function') return childProcess.execFile(file, args, { windowsHide: true }, options);
+    return childProcess.execFile(file, args, { windowsHide: true, ...(options || {}) }, callback);
+};
+const spawn = (command, args, options) => {
+    appendProcessLaunchEvent({
+        kind: 'spawn',
+        command: String(command || '').slice(0, 120),
+        args: Array.isArray(args) ? args.map((a) => String(a).slice(0, 120)) : []
+    });
+    return childProcess.spawn(command, args, { windowsHide: true, ...(options || {}) });
+};
+const execSync = (command, options) => childProcess.execSync(command, { windowsHide: true, ...(options || {}) });
 const crypto = require('crypto');
 const http = require('http');
 const net = require('net');
@@ -19,6 +69,7 @@ require('dotenv').config({ path: path.join(__dirname, '..', '..', '..', '.env') 
 // Planetary Mesh Infrastructure (Phase 47)
 const RegistryClient = require('./registry-client.cjs');
 const HiveMessenger = require('./hive-messenger.cjs');
+const { normalizeCommand, validateBridgeEnvelope } = require('./runtime/command-contract.cjs');
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
@@ -55,6 +106,16 @@ if (HEADLESS_MODE) {
 
 const MATRIX_MODE = process.env.MATRIX_MODE || 'production';
 const IS_PROD = MATRIX_MODE === 'production';
+const MATRIX_ENVIRONMENT = String(process.env.MATRIX_ENVIRONMENT || '').toLowerCase();
+const LOCAL_CLOUD_ONLY_BLOCK =
+    String(process.env.MATRIX_CLOUD_MODE || '').toLowerCase() === 'true' &&
+    MATRIX_ENVIRONMENT !== 'cloud' &&
+    process.env.MATRIX_ALLOW_LOCAL_SENTINEL !== '1';
+
+if (LOCAL_CLOUD_ONLY_BLOCK) {
+    console.log('[CLOUD_ONLY] MATRIX_CLOUD_MODE=true and MATRIX_ENVIRONMENT!=cloud; local sentinel launch blocked.');
+    process.exit(0);
+}
 
 console.log(`[CONFIG] Matrix Mode: ${MATRIX_MODE.toUpperCase()}`);
 
@@ -96,7 +157,7 @@ const SERVICES = {
         command: 'node',
         args: ['guardian.cjs'],
         cwd: path.join(__dirname, '../../citadel'),
-        healthPath: '/'
+        healthPath: '/api/health'
     },
     RUNNER: {
         port: null,
@@ -108,6 +169,7 @@ const SERVICES = {
 };
 
 const supabase = createClient(supabaseUrl, supabaseKey);
+global.__matrixSupabase = supabase;
 
 const IntegrationHub = require('./integration-hub.cjs');
 const integrationHub = new IntegrationHub(supabase);
@@ -471,6 +533,20 @@ const HANDLED_COMMANDS = [
     // Triage System Commands
     'triage:evolve', 'triage:purge', 'triage:oracle', 'triage:full', 'triage:revert', 'triage:health'
 ];
+const STRICT_COMMAND_SCHEMA = process.env.MATRIX_STRICT_COMMAND_SCHEMA === '1';
+const COMMAND_SCHEMA_METRICS = {
+    rejected: 0,
+    warned: 0,
+    reasons: {}
+};
+
+function trackSchemaMetric(kind, reason) {
+    if (!COMMAND_SCHEMA_METRICS.reasons[reason]) COMMAND_SCHEMA_METRICS.reasons[reason] = 0;
+    COMMAND_SCHEMA_METRICS.reasons[reason] += 1;
+    if (kind === 'rejected') COMMAND_SCHEMA_METRICS.rejected += 1;
+    if (kind === 'warned') COMMAND_SCHEMA_METRICS.warned += 1;
+}
+
 const AUTO_HEAL_ENABLED = process.env.MATRIX_AUTO_HEAL !== '0';
 let AUTO_HEAL_RUNNING = false;
 let LAST_AUTO_HEAL_TS = 0;
@@ -590,10 +666,27 @@ async function runEmergencyRecover(manager) {
 
 async function executeCommand(cmd) {
     if (!cmd.id || PROCESSED_IDS.has(cmd.id)) return;
-    const action = (cmd.command || '').trim();
+    let action = normalizeCommand((cmd.command || '').trim());
+    const envelope = validateBridgeEnvelope({ ...cmd, command: action }, HANDLED_COMMANDS);
+    if (!envelope.ok) {
+        const detail = `[SCHEMA] Rejecting command ${cmd.id}: ${envelope.reason}`;
+        if (STRICT_COMMAND_SCHEMA || envelope.reason !== 'non_canonical_command') {
+            trackSchemaMetric('rejected', envelope.reason);
+            console.warn(detail);
+            try {
+                await supabase
+                    .from('ghost_bridge')
+                    .update({ status: 'failed', output: `ERROR: ${detail}` })
+                    .eq('id', cmd.id);
+            } catch (e) { }
+            return;
+        }
+        trackSchemaMetric('warned', envelope.reason);
+        console.warn(`${detail} (compat mode: allowed)`);
+    }
     const isQuiet = action.startsWith('sys:heartbeat') || action.startsWith('sys:broadcast');
 
-    if (!action.startsWith('sys:') && !action.startsWith('triage:')) return;
+    if (!action.startsWith('sys:') && !action.startsWith('triage:') && !action.startsWith('fs:') && !action.startsWith('transfer:')) return;
     if (new Date(cmd.created_at).getTime() < (LAUNCH_TIMESTAMP - 300000)) return; // 5m window
 
     PROCESSED_IDS.add(cmd.id);
@@ -618,10 +711,6 @@ async function executeCommand(cmd) {
             console.log('[HYGIENE] Purging stale neural fragments...');
             await supabase.from('ghost_bridge').delete().eq('status', 'pending');
 
-            await manager.startService('RUNNER');
-            // Runner doesn't have a port, so we give it a tiny grace period
-            await new Promise(r => setTimeout(r, 500));
-
             const IS_CLOUD = process.env.MATRIX_CLOUD_MODE === 'true';
             if (IS_CLOUD) {
                 console.log('\x1b[35m[CLOUD] Cloud Bridge Active. Redirecting ignition to remote cloud.\x1b[0m');
@@ -635,12 +724,18 @@ async function executeCommand(cmd) {
                 if (result.success) {
                     console.log('\x1b[32m[CLOUD] Remote Ignition Command Dispatched.\x1b[0m');
                     await manager.broadcast('Remote ignition sequence started.');
+                    global.lastHeartbeatPersist = 0;
+                    await pulse();
                 } else {
                     console.error('[CLOUD] Failed to trigger remote ignition:', result.error);
                     await manager.broadcast('CRITICAL: Remote ignition failure. Check GitHub settings.');
                 }
                 return;
             }
+
+            await manager.startService('RUNNER');
+            // Runner doesn't have a port, so we give it a tiny grace period
+            await new Promise(r => setTimeout(r, 500));
 
             const sequence = ['REFLECT', 'NEXUS', 'GHOST', 'ROCKET', 'CITADEL'];
             for (const name of sequence) {
@@ -656,6 +751,8 @@ async function executeCommand(cmd) {
 
             console.log('\x1b[32m[SYSTEM] MATRIX ONLINE.\x1b[0m');
             await manager.broadcast('All systems online. Matrix established.');
+            global.lastHeartbeatPersist = 0;
+            await pulse();
 
         } else if (action === 'sys:kill_all' || action === 'sys:purge' || action === 'sys:hazard_purge' || action === 'sys:stop') {
             WATCHDOG_ACTIVE = false;
@@ -919,13 +1016,19 @@ async function executeCommand(cmd) {
             const verb = parts[0].replace('sys:', ''); // start, stop, restart
             const target = parts[1].toUpperCase();
 
-            // Ignore cloud commands from launching local processes for now (acts as a UI simulation)
-            if (mode === 'cloud') {
-                console.log(`[CLOUD_SIM] Intercepted remote cloud ${verb} execution for ${target}`);
-                await manager.broadcast(`[CLOUD_SIM] Remote ${verb} command executed on ${target}.`);
+            const CLOUD_ONLY = process.env.MATRIX_CLOUD_MODE === 'true';
+            // In cloud-only mode, only explicit sys:local_* commands may touch local services.
+            if (mode === 'cloud' || (CLOUD_ONLY && mode !== 'local')) {
+                console.log(`[CLOUD_SIM] Intercepted ${verb} execution for ${target} (mode=${mode}, cloud_only=${CLOUD_ONLY}).`);
+                await manager.broadcast(`[CLOUD_SIM] ${verb} command accepted for ${target}; local launch skipped.`);
             } else if (SERVICES[target]) {
+                const svc = SERVICES[target];
                 if (verb === 'start') {
                     await manager.startService(target);
+                    if (svc.port) {
+                        const ready = await manager.waitForPort(svc.port, 30000);
+                        if (!ready) throw new Error(`${target} failed to become ready on port ${svc.port}`);
+                    }
                 } else if (verb === 'stop') {
                     await manager.killService(target);
                     // Broadcast offline status for this specific service immediately
@@ -936,6 +1039,10 @@ async function executeCommand(cmd) {
                     });
                 } else if (verb === 'restart') {
                     await manager.restartService(target);
+                    if (svc.port) {
+                        const ready = await manager.waitForPort(svc.port, 30000);
+                        if (!ready) throw new Error(`${target} failed to become ready on port ${svc.port}`);
+                    }
                 }
             }
         } else if (action === 'sys:update' || action === 'sys:rebuild') {
@@ -1038,8 +1145,8 @@ function checkPorts(force = false) {
 
     return new Promise(async (resolve) => {
         lastPortCheck = now;
-        const portsToCheck = [3000, 3001, 5173, 4000];
-        const results = { 3000: false, 3001: false, 5173: false, 4000: false };
+        const portsToCheck = [3000, 3001, 5173, 4000, 3005];
+        const results = { 3000: false, 3001: false, 5173: false, 4000: false, 3005: false };
 
         await Promise.all(portsToCheck.map(port => {
             return new Promise((res) => {
@@ -1179,10 +1286,42 @@ const pulse = async () => {
             nexus: determine(3001, cachedHealth.nexus),
             ghost: determine(5173, cachedHealth.ghost),
             rocket: determine(4000, cachedHealth.rocket),
+            citadel: determine(3005, cachedHealth.citadel),
             runner: runnerStatus,
             sentinel: 'online',
             gate: Object.values(GATES).some(g => g.url) ? 'online' : 'offline'
         };
+
+        if (services.runner === 'offline') {
+            MISSED_RUNNER_PULSES.count += 1;
+        } else {
+            MISSED_RUNNER_PULSES.count = 0;
+        }
+
+        if (MISSED_RUNNER_PULSES.count === 3) {
+            const alertMeta = {
+                title: 'Runner Heartbeat SLO Breach',
+                message: 'ghost_runner offline for 3 consecutive pulse windows',
+                type: 'critical',
+                timestamp: Date.now(),
+                services
+            };
+            await Promise.allSettled([
+                supabase.from('system_alerts').insert({
+                    source: 'nexus_sentinel',
+                    severity: 'critical',
+                    title: alertMeta.title,
+                    message: alertMeta.message,
+                    metadata: alertMeta
+                }),
+                supabase.from('ghost_bridge').insert({
+                    command: 'sys:alert',
+                    source: 'nexus_sentinel',
+                    status: 'broadcast',
+                    output: JSON.stringify(alertMeta)
+                })
+            ]);
+        }
 
         const os = require('os');
         const usedMem = os.totalmem() - os.freemem();
@@ -1215,7 +1354,7 @@ const pulse = async () => {
         healthBroadcast.httpSend({ type: 'broadcast', event: 'heartbeat', payload });
 
         // 2. PERSIST (Throttled to 30s to prevent DB spam)
-        const HEARTBEAT_PERSIST_INTERVAL = 30000;
+        const HEARTBEAT_PERSIST_INTERVAL = 5000;
         const now = Date.now();
         if (!global.lastHeartbeatPersist || (now - global.lastHeartbeatPersist > HEARTBEAT_PERSIST_INTERVAL)) {
             global.lastHeartbeatPersist = now;
@@ -1225,6 +1364,14 @@ const pulse = async () => {
                 status: 'silent',
                 output: JSON.stringify(payload)
             });
+            // Dual-write heartbeat stream to dedicated observability table (best-effort).
+            try {
+                await supabase.from('system_heartbeats').insert({
+                    source: 'nexus_sentinel',
+                    status: 'online',
+                    payload
+                });
+            } catch { }
         }
     } catch (e) { }
 };
@@ -1271,6 +1418,30 @@ const channel = supabase.channel('sentinel_v3')
         }
     })
     .subscribe();
+
+// Fallback command poller: keeps bridge commands flowing even if realtime subscription degrades.
+async function pollPendingBridgeCommands() {
+    try {
+        const freshCutoff = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+        const { data, error } = await supabase
+            .from('ghost_bridge')
+            .select('*')
+            .eq('status', 'pending')
+            .gte('created_at', freshCutoff)
+            .order('created_at', { ascending: true })
+            .limit(30);
+        if (error) return;
+        if (!Array.isArray(data) || data.length === 0) return;
+        for (const cmd of data) {
+            await executeCommand(cmd);
+        }
+    } catch (e) {
+        // Keep silent: this should never impact core runtime.
+    }
+}
+
+setTimeout(() => { pollPendingBridgeCommands().catch(() => { }); }, 1500);
+setInterval(() => { pollPendingBridgeCommands().catch(() => { }); }, 5000);
 
 // --- LOCAL STATUS SERVER (HYBRID CONNECTIVITY) ---
 let latestStatusPayload = null;
@@ -1494,6 +1665,22 @@ setInterval(async () => {
             .in('status', ['executed', 'failed'])
             .lt('created_at', threeDaysAgo);
 
+        // Expire stuck pending/executing commands older than 2 hours.
+        const twoHoursAgo = new Date(Date.now() - 2 * 3600000).toISOString();
+        await supabase.from('ghost_bridge')
+            .update({ status: 'expired', output: 'Expired by hygiene loop (stale pending/executing > 2h)' })
+            .in('status', ['pending', 'executing'])
+            .lt('created_at', twoHoursAgo);
+
+        // Trim observability tables to avoid unbounded growth.
+        const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 3600000).toISOString();
+        await supabase.from('system_heartbeats')
+            .delete()
+            .lt('created_at', sevenDaysAgo);
+        await supabase.from('process_launch_events')
+            .delete()
+            .lt('created_at', sevenDaysAgo);
+
         console.log('[HYGIENE] Database cleaned.');
     } catch (e) { }
 }, 15 * 60 * 1000); // Every 15 minutes
@@ -1693,6 +1880,25 @@ setTimeout(() => {
             if (fs.existsSync(src)) fs.copyFileSync(src, dest);
         });
         console.log(`[BACKUP] Startup backup created: ${backupPath}`);
+    } catch (e) { }
+}, 5 * 60 * 1000);
+
+// Command schema telemetry snapshot
+setInterval(async () => {
+    try {
+        const summary = {
+            mode: STRICT_COMMAND_SCHEMA ? 'strict' : 'compat',
+            rejected: COMMAND_SCHEMA_METRICS.rejected,
+            warned: COMMAND_SCHEMA_METRICS.warned,
+            reasons: COMMAND_SCHEMA_METRICS.reasons,
+            timestamp: new Date().toISOString()
+        };
+        await supabase.from('ghost_bridge').insert({
+            command: 'sys:schema_metrics',
+            source: 'nexus_sentinel',
+            status: 'silent',
+            output: JSON.stringify(summary)
+        });
     } catch (e) { }
 }, 5 * 60 * 1000);
 

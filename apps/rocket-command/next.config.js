@@ -3,6 +3,7 @@ const cdnAssetPrefix = process.env.CDN_ASSET_PREFIX || '';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    output: 'standalone',
     outputFileTracingRoot: path.resolve(__dirname, '../../'),
     assetPrefix: cdnAssetPrefix || undefined,
     reactStrictMode: true,

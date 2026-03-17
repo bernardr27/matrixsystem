@@ -10,6 +10,7 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig = {
+    output: 'standalone',
     assetPrefix: cdnAssetPrefix || undefined,
     reactStrictMode: true,
     poweredByHeader: false,

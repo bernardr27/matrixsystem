@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { isSafeMode } from '@/lib/safe-mode';
 
-export async function GET() {
+export async function GET(request: Request) {
   const env = {
     NEXT_PUBLIC_SUPABASE_URL: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
@@ -19,9 +19,19 @@ export async function GET() {
   } catch { }
 
   let apiReachable = false;
-  const selfBase = process.env.NEXT_PUBLIC_SITE_URL || `http://localhost:${process.env.PORT || 3000}`;
+  const headers = request.headers;
+  const forwardedProto = headers.get('x-forwarded-proto');
+  const forwardedHost = headers.get('x-forwarded-host');
+  const host = forwardedHost || headers.get('host');
+  const protocol = forwardedProto || (host?.includes('localhost') ? 'http' : 'https');
+  const requestBase = host ? `${protocol}://${host}` : null;
+  const selfBase = process.env.NEXT_PUBLIC_SITE_URL || requestBase || `http://localhost:${process.env.PORT || 3000}`;
   try {
-    const r = await fetch(`${selfBase.replace(/\/$/, '')}/api/sessions`, { method: 'GET', cache: 'no-store' });
+    const r = await fetch(`${selfBase.replace(/\/$/, '')}/api/sessions`, {
+      method: 'GET',
+      cache: 'no-store',
+      signal: AbortSignal.timeout(3000),
+    });
     apiReachable = r.ok;
   } catch { }
 
@@ -30,7 +40,10 @@ export async function GET() {
   const aiModel = process.env.NEXT_PUBLIC_AI_MODEL_ID;
   if (aiBase) {
     try {
-      const probe = await fetch(aiBase.replace(/\/$/, '') + '/models', { method: 'GET' });
+      const probe = await fetch(aiBase.replace(/\/$/, '') + '/models', {
+        method: 'GET',
+        signal: AbortSignal.timeout(3000),
+      });
       aiReachable = probe.ok;
     } catch { }
   }

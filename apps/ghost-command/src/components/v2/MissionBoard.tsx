@@ -389,7 +389,7 @@ function ExecutingProgress({ createdAt }: { createdAt: string }) {
         update();
         const id = setInterval(update, 2000);
         return () => clearInterval(id);
-    }, [createdAt]);
+    }, [createdAt, mounted]);
 
     return <ProgressBar value={progress} max={100} color="cyan" size="sm" showLabel animated />;
 }

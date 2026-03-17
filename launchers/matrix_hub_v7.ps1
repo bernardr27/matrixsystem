@@ -2,6 +2,9 @@
 # Stunning ASCII UI with Live Service Polling
 $Host.UI.RawUI.WindowTitle = "MATRIX SOVEREIGN OS [SYSTEM COMMAND HUB]"
 
+Write-Host "[DEPRECATED] matrix_hub_v7.ps1 is legacy." -ForegroundColor Yellow
+Write-Host "[DEPRECATED] Use launchers\\matrix_hub.ps1 (canonical runtime hub)." -ForegroundColor Yellow
+
 $matrixRoot = Split-Path -Parent $PSScriptRoot
 if (-not $matrixRoot -or $matrixRoot -eq '') {
     $matrixRoot = (Get-Item "$PSScriptRoot\..").FullName

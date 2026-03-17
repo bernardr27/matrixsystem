@@ -11,6 +11,7 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 });
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   outputFileTracingRoot: path.join(__dirname, '../../'),
   assetPrefix: cdnAssetPrefix || undefined,
   transpilePackages: [

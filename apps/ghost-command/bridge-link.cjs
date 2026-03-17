@@ -1,18 +1,6 @@
-const { createClient } = require('@supabase/supabase-js');
-const { exec } = require('child_process');
-const dotenv = require('dotenv');
-
-dotenv.config();
-
-const supabaseUrl = 'https://phmnyenltuqxtkadnhpj.supabase.co';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-if (!supabaseKey) {
-    console.error('ERROR: VITE_SUPABASE_ANON_KEY not found in .env');
-    process.exit(1);
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+const { createSupabaseFromEnv } = require('../../scripts/tools/_supabase_client.cjs');
+const { exec } = require('node:child_process');
+const supabase = createSupabaseFromEnv();
 
 // --- AI STACK INITIALIZATION ---
 const AiHandler = require('./core/handlers/ai-handler.js');
@@ -36,6 +24,8 @@ const ralphAgent = new RalphAgent(supabase, { config });
 const ralphHandler = new RalphHandler(supabase, { agent: ralphAgent, aiHandler });
 const ralphWatcher = new RalphWatcher(ralphHandler.loop);
 
+const LEGACY_BRIDGE_HEARTBEAT = process.env.MATRIX_LEGACY_BRIDGE_HEARTBEAT === '1';
+
 console.log('--- GHOST BRIDGE NEURAL LINK ACTIVE ---');
 console.log(`[DAEMON] AI_MODEL: ${config.ollama.chatModel}`);
 
@@ -58,9 +48,14 @@ const sendHeartbeat = async () => {
     if (error) console.error('[HEARTBEAT ERROR]:', error.message);
 };
 
-// Initial pulse and interval
-sendHeartbeat();
-setInterval(sendHeartbeat, 30000);
+// Legacy bridge heartbeat is disabled by default to avoid duplicate producers.
+if (LEGACY_BRIDGE_HEARTBEAT) {
+    sendHeartbeat();
+    setInterval(sendHeartbeat, 30000);
+    console.log('[HEARTBEAT] Legacy bridge heartbeat enabled (MATRIX_LEGACY_BRIDGE_HEARTBEAT=1).');
+} else {
+    console.log('[HEARTBEAT] Bridge heartbeat disabled by default; sentinel/runner heartbeat is authoritative.');
+}
 
 // 2. COMMAND LISTENER
 const subscription = supabase

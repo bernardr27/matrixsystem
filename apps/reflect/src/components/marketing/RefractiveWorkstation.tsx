@@ -41,7 +41,7 @@ export default function RefractiveWorkstation({
         if (isListening && transcript) {
             setInput(transcript);
         }
-    }, [isListening, transcript]);
+    }, [isListening, transcript, setInput]);
 
     const protocols = [
         { id: 'clarity', label: 'CLARITY', prompt: archetype ? `How does ${archetype.traits.focus} influence my current thought?` : 'I need to clear my mind of...' },

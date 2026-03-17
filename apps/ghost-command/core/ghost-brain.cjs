@@ -10,7 +10,6 @@
 const os = require('os');
 const path = require('path');
 const net = require('net');
-const { exec } = require('child_process');
 require('dotenv').config({ path: path.join(__dirname, '..', '..', '..', '.env') });
 
 const { createClient } = require('@supabase/supabase-js');
@@ -32,8 +31,8 @@ const RESTART_COOLDOWN = 10 * 60 * 1000; // 10 min cooldown between restarts
 // Services to monitor for auto-recovery
 const MATRIX_ROOT = path.join(__dirname, '..', '..', '..');
 const MONITORED_SERVICES = {
-    reflect: { port: 3000, cmd: `cd /d "${path.join(MATRIX_ROOT, 'apps', 'reflect')}" && npm.cmd run dev`, title: 'REFLECT_OS' },
-    nexus: { port: 3001, cmd: `cd /d "${path.join(MATRIX_ROOT, 'apps', 'nexus')}" && npm.cmd run dev`, title: 'MATRIX_HUB' }
+    reflect: { port: 3000, recoverCommand: 'sys:start_reflect' },
+    nexus: { port: 3001, recoverCommand: 'sys:start_nexus' }
 };
 
 let lastThought = null;
@@ -141,8 +140,13 @@ async function think() {
                 if (cooldownExpired) {
                     console.log(`  🔄 [AUTO-RECOVERY] ${name.toUpperCase()} is DOWN on port ${svc.port}. Restarting...`);
 
-                    // Restart via cmd window
-                    exec(`start "${svc.title}" /MIN cmd /k "title ${svc.title} && ${svc.cmd}"`, { cwd: MATRIX_ROOT });
+                    // Queue recovery for sentinel/runner instead of spawning local cmd windows.
+                    await supabase.from('ghost_bridge').insert({
+                        command: svc.recoverCommand,
+                        source: 'ghost_brain',
+                        status: 'pending',
+                        output: `AUTO_RECOVERY_REQUEST: ${name}`
+                    });
                     lastRestartTimes[name] = Date.now();
 
                     actions.push({
@@ -199,18 +203,29 @@ async function think() {
 
             // Broadcast critical alerts to Telegram via IntegrationHub
             if (action.severity === 'warning') {
+                const alertPayload = {
+                    id: `brain_${Date.now()}`,
+                    title: 'GHOST BRAIN',
+                    message: action.message,
+                    type: 'warning',
+                    timestamp: Date.now()
+                };
                 await supabase.from('ghost_bridge').insert({
                     command: 'sys:alert',
                     source: 'ghost_brain',
                     status: 'broadcast',
-                    output: JSON.stringify({
-                        id: `brain_${Date.now()}`,
-                        title: 'GHOST BRAIN',
-                        message: action.message,
-                        type: 'warning',
-                        timestamp: Date.now()
-                    })
+                    output: JSON.stringify(alertPayload)
                 });
+                // Mirror alerts into dedicated table for low-noise querying (best-effort).
+                try {
+                    await supabase.from('system_alerts').insert({
+                        source: 'ghost_brain',
+                        severity: 'warning',
+                        title: alertPayload.title,
+                        message: alertPayload.message,
+                        metadata: alertPayload
+                    });
+                } catch { }
             }
         }
 

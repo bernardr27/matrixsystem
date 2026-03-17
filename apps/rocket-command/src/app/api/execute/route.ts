@@ -149,13 +149,14 @@ async function handleSpecialCommand(commandId: string, req: NextRequest): Promis
 
         case 'network:ping': {
             const host = req.nextUrl.hostname || 'localhost';
+            const supabaseTarget = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://supabase.co';
             const targets = [
                 { name: 'Reflect', url: `http://${host}:3000` },
                 { name: 'Nexus', url: `http://${host}:3001` },
                 { name: 'RocketCommand', url: `http://${host}:4000` },
                 { name: 'Ghost Command', url: `http://${host}:5173` },
                 { name: 'Ollama', url: `http://${host}:11434` },
-                { name: 'Supabase', url: 'https://phmnyenltuqxtkadnhpj.supabase.co' },
+                { name: 'Supabase', url: supabaseTarget },
                 { name: 'Groq API', url: 'https://api.groq.com' },
                 { name: 'Google AI', url: 'https://generativelanguage.googleapis.com' },
             ];

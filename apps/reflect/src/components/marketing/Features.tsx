@@ -4,11 +4,21 @@ import { NeuralSurface } from '../ui/NeuralSurface';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { NeuralButton } from '../ui/NeuralButton';
+import { CinematicBackground } from '../ui/CinematicBackground';
+import { LiquidGlass } from '../ui/LiquidGlass';
+import { Reveal } from '../ui/Reveal';
+import { ParallaxLayer } from '../ui/ParallaxLayer';
+
+type FeatureItem = {
+    title: string;
+    desc: string;
+    icon: React.ReactNode;
+};
 
 export default function Features() {
-    const [selectedFeature, setSelectedFeature] = useState<any>(null);
+    const [selectedFeature, setSelectedFeature] = useState<FeatureItem | null>(null);
 
-    const features = [
+    const features: FeatureItem[] = [
         {
             title: "Neural Workbench",
             desc: "The core of your reflection. Synthesize thoughts, refract logic, and explore the depth of your consciousness.",
@@ -80,6 +90,7 @@ export default function Features() {
 
     return (
         <section style={{ width: '100%', background: 'transparent', position: 'relative' }}>
+            <CinematicBackground className="opacity-60" />
             <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '1rem 0', width: '100%' }}>
                 <div style={{
                     display: 'grid',
@@ -88,31 +99,33 @@ export default function Features() {
                     justifyContent: 'center'
                 }}>
                     {features.map((f, i) => (
-                        <motion.div
-                            key={f.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1, duration: 0.8 }}
-                            onClick={() => setSelectedFeature(f)}
-                            style={{ cursor: 'pointer', height: '100%' }}
-                            whileHover={{ y: -8 }}
-                        >
-                            <NeuralSurface
-                                variant="glass"
-                                style={{
-                                    padding: 'clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.5rem)',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'flex-start',
-                                    height: '100%',
-                                    borderRadius: '32px',
-                                    position: 'relative',
-                                    overflow: 'hidden',
-                                    transition: 'all 0.5s var(--ease-fluid)',
-                                    willChange: 'transform, box-shadow'
-                                }}
-                                className="feature-card-premium"
+                        <Reveal key={f.title} delay={i * 0.05}>
+                            <motion.div
+                                onClick={() => setSelectedFeature(f)}
+                                style={{ cursor: 'pointer', height: '100%' }}
+                                whileHover={{ y: -8 }}
                             >
+                                <ParallaxLayer offset={10 + (i % 3) * 4}>
+                                    <NeuralSurface
+                                        variant="glass"
+                                        style={{
+                                            padding: 'clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.5rem)',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'flex-start',
+                                            minHeight: '260px',
+                                            height: '100%',
+                                            borderRadius: '32px',
+                                            position: 'relative',
+                                            overflow: 'hidden',
+                                            transition: 'all 0.5s var(--ease-fluid)',
+                                            willChange: 'transform, box-shadow'
+                                        }}
+                                        className="feature-card-premium"
+                                    >
+                                        <LiquidGlass className="absolute top-4 right-4 px-3 py-1 text-[10px] text-white/60 font-semibold tracking-wide">
+                                            Feature
+                                        </LiquidGlass>
                                 {/* Glowing Dynamic Border (Optimized) */}
                                 <div className="glowing-border" style={{
                                     position: 'absolute',
@@ -128,32 +141,34 @@ export default function Features() {
                                     willChange: 'opacity'
                                 }} />
 
-                                <div style={{
-                                    color: '#fff',
-                                    marginBottom: '1.8rem',
-                                    opacity: 0.8,
-                                    willChange: 'filter'
-                                }}>{f.icon}</div>
+                                        <div style={{
+                                            color: '#fff',
+                                            marginBottom: '1.8rem',
+                                            opacity: 0.8,
+                                            willChange: 'filter'
+                                        }}>{f.icon}</div>
 
-                                <h3 style={{
-                                    fontSize: '1.6rem', // Slightly compressed for mobile
-                                    marginBottom: '1rem',
-                                    color: '#fff',
-                                    fontWeight: 100,
-                                    letterSpacing: '-0.02em',
-                                    lineHeight: 1.1
-                                }}>{f.title}</h3>
+                                        <h3 style={{
+                                            fontSize: '1.6rem', // Slightly compressed for mobile
+                                            marginBottom: '1rem',
+                                            color: '#fff',
+                                            fontWeight: 100,
+                                            letterSpacing: '-0.02em',
+                                            lineHeight: 1.1
+                                        }}>{f.title}</h3>
 
-                                <p style={{
-                                    color: 'rgba(255,255,255,0.4)',
-                                    lineHeight: 1.6,
-                                    fontSize: '0.95rem',
-                                    margin: 0,
-                                    fontWeight: 300,
-                                    letterSpacing: '0.01em'
-                                }}>{f.desc}</p>
-                            </NeuralSurface>
-                        </motion.div>
+                                        <p style={{
+                                            color: 'rgba(255,255,255,0.4)',
+                                            lineHeight: 1.6,
+                                            fontSize: '0.95rem',
+                                            margin: 0,
+                                            fontWeight: 300,
+                                            letterSpacing: '0.01em'
+                                        }}>{f.desc}</p>
+                                    </NeuralSurface>
+                                </ParallaxLayer>
+                            </motion.div>
+                        </Reveal>
                     ))}
                 </div>
             </div>

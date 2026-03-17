@@ -1,17 +1,59 @@
-version: '3.8'
+# =============================================================================
+# Matrix System — Production Docker Compose for AWS EC2
+# =============================================================================
 
 services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infra/aws-ec2/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      citadel:
+        condition: service_healthy
+      reflect:
+        condition: service_healthy
+      nexus:
+        condition: service_healthy
+      rocket-command:
+        condition: service_healthy
+      ghost-command:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - matrix-mesh
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
   citadel:
     build:
       context: .
       args:
         APP_NAME: citadel
         PORT: 3005
-    ports:
-      - "3005:3005"
+    expose:
+      - "3005"
     env_file: .env.docker
+    environment:
+      - PORT=3005
+      - HOSTNAME=0.0.0.0
+    restart: unless-stopped
     networks:
       - matrix-mesh
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3005/"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
 
   reflect:
     build:
@@ -19,11 +61,25 @@ services:
       args:
         APP_NAME: reflect
         PORT: 3000
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     env_file: .env.docker
+    environment:
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+    restart: unless-stopped
     networks:
       - matrix-mesh
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
 
   nexus:
     build:
@@ -31,11 +87,25 @@ services:
       args:
         APP_NAME: nexus
         PORT: 3001
-    ports:
-      - "3001:3001"
+    expose:
+      - "3001"
     env_file: .env.docker
+    environment:
+      - PORT=3001
+      - HOSTNAME=0.0.0.0
+    restart: unless-stopped
     networks:
       - matrix-mesh
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
 
   rocket-command:
     build:
@@ -43,11 +113,25 @@ services:
       args:
         APP_NAME: rocket-command
         PORT: 4000
-    ports:
-      - "4000:4000"
+    expose:
+      - "4000"
     env_file: .env.docker
+    environment:
+      - PORT=4000
+      - HOSTNAME=0.0.0.0
+    restart: unless-stopped
     networks:
       - matrix-mesh
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:4000/"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
 
   ghost-command:
     build:
@@ -55,11 +139,25 @@ services:
       args:
         APP_NAME: ghost-command
         PORT: 5173
-    ports:
-      - "5173:5173"
+    expose:
+      - "5173"
     env_file: .env.docker
+    environment:
+      - PORT=5173
+      - HOSTNAME=0.0.0.0
+    restart: unless-stopped
     networks:
       - matrix-mesh
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5173/"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
 
 networks:
   matrix-mesh:

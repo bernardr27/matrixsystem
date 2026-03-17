@@ -1,0 +1,8 @@
+{
+  "generatedAt": "2026-03-11T03:54:31.631Z",
+  "ok": true,
+  "skipped": true,
+  "latency_ms": 4,
+  "summary": null,
+  "error": "spawn EPERM"
+}

@@ -80,7 +80,7 @@ write <file> <content>  → Write to file
 ## Environment Variables Required
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=https://qdnxpjqynzwxawefsuhg.supabase.co
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<your_key>
 ```
 

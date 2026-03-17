@@ -1,9 +1,8 @@
-const { createClient } = require('@supabase/supabase-js');
 const fs = require('fs');
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../.env') });
+const { createSupabaseFromEnv } = require('./tools/_supabase_client.cjs');
 
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+const supabase = createSupabaseFromEnv();
 
 const FILES = [
     'transfers/1770790792980_IMG_0672.png',

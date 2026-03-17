@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-03-11T03:54:31.690Z",
+  "credentials": [
+    {
+      "connector": "supabase",
+      "required_keys": [
+        "SUPABASE_URL",
+        "SUPABASE_SERVICE_ROLE_KEY"
+      ],
+      "present_keys": [
+        "SUPABASE_URL",
+        "SUPABASE_SERVICE_ROLE_KEY"
+      ],
+      "ok": true
+    },
+    {
+      "connector": "github",
+      "required_keys": [
+        "GITHUB_TOKEN",
+        "GITHUB_REPO"
+      ],
+      "present_keys": [
+        "GITHUB_TOKEN"
+      ],
+      "ok": false
+    },
+    {
+      "connector": "aws",
+      "required_keys": [
+        "AWS_REGION",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY"
+      ],
+      "present_keys": [],
+      "ok": false
+    },
+    {
+      "connector": "redis",
+      "required_keys": [
+        "REDIS_URL"
+      ],
+      "present_keys": [
+        "REDIS_URL"
+      ],
+      "ok": true
+    },
+    {
+      "connector": "vercel",
+      "required_keys": [
+        "VERCEL_TOKEN"
+      ],
+      "present_keys": [],
+      "ok": false
+    }
+  ],
+  "live": {
+    "credential_doctor": {
+      "ok": false,
+      "data": null,
+      "error": "spawn EPERM"
+    },
+    "cloud_preflight": {
+      "ok": false,
+      "data": null,
+      "error": "spawn EPERM"
+    },
+    "heartbeat_diag": {
+      "ok": false,
+      "data": null,
+      "error": "spawn EPERM"
+    }
+  }
+}

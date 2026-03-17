@@ -1,0 +1,91 @@
+{
+  "ok": false,
+  "mode": "heal",
+  "startedAt": "2026-03-06T19:10:44.144Z",
+  "runtime": {
+    "name": "cloud-prod",
+    "production": true,
+    "cloud": true,
+    "strictSchemaDefault": true
+  },
+  "checks": {
+    "services": [
+      {
+        "name": "reflect",
+        "url": "http://127.0.0.1:3000/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 28,
+        "reason": "fetch failed"
+      },
+      {
+        "name": "nexus",
+        "url": "http://127.0.0.1:3001/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 5,
+        "reason": "fetch failed"
+      },
+      {
+        "name": "ghost",
+        "url": "http://127.0.0.1:5173/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 5,
+        "reason": "fetch failed"
+      },
+      {
+        "name": "citadel",
+        "url": "http://127.0.0.1:3005/api/health",
+        "ok": false,
+        "status": 0,
+        "latencyMs": 5,
+        "reason": "fetch failed"
+      }
+    ],
+    "supabase": {
+      "ok": false,
+      "latencyMs": 10703,
+      "reason": "TypeError: fetch failed"
+    },
+    "redis": {
+      "ok": false,
+      "reason": "Connection timeout"
+    },
+    "env": {
+      "ok": true,
+      "reason": "Environment check passed"
+    },
+    "prodReadiness": {
+      "ok": false,
+      "reason": "{\n  \"ok\": false,\n  \"checks\": {\n    \"ci_cd\": {\n      \"ok\": true,\n      \"reason\": \"ci-turbo workflow present\"\n    },\n    \"sentry\": {\n      \"ok\": true,\n      \"reason\": \"Sentry DSNs present (nextjs/node)\"\n    },\n    \"cdn\": {\n      \"ok\": true,\n      \"reason\": \"CDN_ASSET_PREFIX not set (optional)\"\n    },\n    \"redis\": {\n      \"ok\": false,\n      \"reason\": \"Connection timeout\"\n    }\n  }\n}"
+    },
+    "lint": {
+      "ok": true,
+      "reason": "Skipped in quick mode"
+    }
+  },
+  "actions": [
+    "Restart requested for services: reflect, nexus, ghost, citadel",
+    "System restart command queued via bridge",
+    "Production readiness still degraded",
+    "Cloud auto-recover failed: === MATRIX CLOUD PREFLIGHT ===\ntime: 2026-03-06T19:11:29.464Z\nrepo: bernardr27/matrixsystem\nworkflow: matrix-shadow.yml (ref=main)\nmode: recover\nprofile: cloud-prod"
+  ],
+  "artifacts": [],
+  "summary": {
+    "healthScore": 0,
+    "degradedServices": [
+      "reflect",
+      "nexus",
+      "ghost",
+      "citadel"
+    ],
+    "failedChecks": [
+      "services",
+      "supabase",
+      "redis",
+      "prodReadiness"
+    ]
+  },
+  "finishedAt": "2026-03-06T19:12:29.301Z"
+}

@@ -1,28 +1,35 @@
 {
     "apps": {
         "reflect": {
-            "target": "vercel",
+            "target": "aws-ec2",
             "prod": true,
             "buildCommand": "npm run build"
         },
         "nexus": {
-            "target": "local",
+            "target": "aws-ec2",
             "prod": true,
             "buildCommand": "npm run build"
         },
         "ghost-command": {
-            "target": "vercel",
-            "prod": false,
+            "target": "aws-ec2",
+            "prod": true,
             "buildCommand": "npm run build"
         },
         "rocket-command": {
-            "target": "local",
+            "target": "aws-ec2",
+            "prod": true,
+            "buildCommand": "npm run build"
+        },
+        "citadel": {
+            "target": "aws-ec2",
             "prod": true,
             "buildCommand": "npm run build"
         }
     },
     "defaults": {
         "skipVerify": false,
-        "timeout": 300000
+        "timeout": 300000,
+        "platform": "aws-ec2",
+        "deployMethod": "pm2-standalone"
     }
 }

@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "recipes": [
+    {
+      "id": "ignite_all_cloud",
+      "summary": "Enforce cloud-only mode, run preflight, then dispatch cloud ignite.",
+      "steps": [
+        { "id": "enforce_cloud_mode", "type": "npm", "script": "cloud:control:enforce", "critical": true },
+        { "id": "cloud_preflight", "type": "npm", "script": "cloud:preflight", "critical": true },
+        { "id": "cloud_ignite_dispatch", "type": "npm", "script": "cloud:control:ignite", "critical": true }
+      ]
+    },
+    {
+      "id": "heartbeat_recover",
+      "summary": "Diagnose heartbeat state and trigger cloud heartbeat + self-heal once.",
+      "steps": [
+        { "id": "diag_heartbeat", "type": "npm", "script": "diag:heartbeat", "critical": false },
+        { "id": "dispatch_heartbeat", "type": "npm", "script": "cloud:control:heartbeat", "critical": true },
+        { "id": "self_heal_once", "type": "npm", "script": "cloud:self-heal:once", "critical": true }
+      ]
+    },
+    {
+      "id": "release_readiness",
+      "summary": "Run release certification with diagnostics and visual audit hook.",
+      "steps": [
+        { "id": "credentials_diag", "type": "npm", "script": "diag:credentials", "critical": true },
+        { "id": "release_certify", "type": "npm", "script": "certify:release", "critical": true },
+        { "id": "connector_dashboard", "type": "npm", "script": "diag:connectors", "critical": false },
+        { "id": "kpi_dashboard", "type": "npm", "script": "diag:kpi", "critical": false }
+      ]
+    },
+    {
+      "id": "ui_quality_gate",
+      "summary": "Run visual audit and fast mobile matrix verification.",
+      "steps": [
+        { "id": "visual_audit", "type": "npm", "script": "diag:ui:visual", "critical": true },
+        { "id": "mobile_verify_matrix", "type": "npm", "script": "mobile:verify:matrix", "critical": false }
+      ]
+    },
+    {
+      "id": "aws_repair_and_verify",
+      "summary": "Repair AWS EC2 workspace permissions/dependencies and verify cloud diagnostics.",
+      "steps": [
+        { "id": "aws_update", "type": "shell", "command": "bash infra/aws-ec2/update_aws_ec2.sh", "critical": true },
+        { "id": "aws_verify", "type": "shell", "command": "bash infra/aws-ec2/verify_aws_ec2.sh", "critical": true }
+      ]
+    }
+  ]
+}
+

@@ -1,20 +1,6 @@
-const { createClient } = require('@supabase/supabase-js');
 const { execSync } = require('child_process');
-const path = require('path');
-const dotenv = require('dotenv');
-dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
-
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-
-console.log(`[DEBUG] SUPABASE_URL: ${supabaseUrl}`);
-console.log(`[DEBUG] SUPABASE_KEY PRESENT: ${!!supabaseKey}`);
-
-if (!supabaseUrl || !supabaseKey) {
-    throw new Error('Missing SUPABASE_URL or SUPABASE_KEY in .env');
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+const { createSupabaseFromEnv } = require('./_supabase_client.cjs');
+const supabase = createSupabaseFromEnv();
 
 async function runTest() {
     console.log('\x1b[36m--- NEXUS ULTIMATE VALIDATION (E2E STRESS TEST) ---\x1b[0m\n');

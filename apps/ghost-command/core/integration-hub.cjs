@@ -11,6 +11,32 @@ class IntegrationHub extends EventEmitter {
     }
 
     /**
+     * Local/env fallback for critical integrations when DB config is absent.
+     */
+    getFallbackConfig(integrationName) {
+        if (integrationName !== 'github') return null;
+        const token = process.env.GITHUB_TOKEN;
+        if (!token) return null;
+
+        let owner = 'bernardr27';
+        let repo = 'matrixsystem';
+        if (process.env.GITHUB_REPO) {
+            const parts = process.env.GITHUB_REPO.split('/');
+            if (parts.length === 2) {
+                owner = parts[0];
+                repo = parts[1];
+            }
+        }
+
+        return {
+            integration_name: 'github',
+            enabled: true,
+            api_key: token,
+            extra_settings: { owner, repo }
+        };
+    }
+
+    /**
      * Register an integration plugin
      */
     register(name, plugin) {
@@ -40,10 +66,14 @@ class IntegrationHub extends EventEmitter {
                 .eq('integration_name', integrationName)
                 .single();
 
-            if (error) return false;
-            return data?.enabled || false;
+            if (error || !data) {
+                return Boolean(this.getFallbackConfig(integrationName));
+            }
+
+            if (typeof data.enabled === 'boolean') return data.enabled;
+            return Boolean(this.getFallbackConfig(integrationName));
         } catch {
-            return false;
+            return Boolean(this.getFallbackConfig(integrationName));
         }
     }
 
@@ -62,6 +92,11 @@ class IntegrationHub extends EventEmitter {
             return data;
         } catch (err) {
             console.error(`[INTEGRATION_HUB] Failed to get config for ${integrationName}:`, err.message);
+            const fallback = this.getFallbackConfig(integrationName);
+            if (fallback) {
+                console.warn(`[INTEGRATION_HUB] Using env fallback config for ${integrationName}.`);
+                return fallback;
+            }
             return null;
         }
     }

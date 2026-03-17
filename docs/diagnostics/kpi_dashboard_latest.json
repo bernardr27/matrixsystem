@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-03-11T03:53:53.747Z",
+  "windowHours": 24,
+  "kpis": {
+    "ignite_runs": 0,
+    "heartbeat_samples": 0,
+    "command_success_rate_pct": null,
+    "command_failure_rate_pct": null,
+    "heartbeat_offline_rate_pct": null,
+    "time_to_online_avg_sec": null,
+    "time_to_online_samples": 0
+  }
+}

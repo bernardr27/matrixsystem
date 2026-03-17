@@ -625,9 +625,10 @@ a[role="button"],
 
 /* ─── Aesthetic v4 Extreme Curvature (Global Replacement for Squircle) ─── */
 .squircle {
-    border-radius: 2rem !important;
-    mask-image: none !important;
-    -webkit-mask-image: none !important;
+    border-radius: 22.5% !important;
+    /* Perfect continuous curve approximation */
+    clip-path: inset(0% round 22.5%);
+    /* Safari native squircle fallback */
 }
 
 /* ─── Custom Animations ─── */
@@ -687,4 +688,50 @@ a[role="button"],
     margin-bottom: var(--safe-bottom);
     margin-left: var(--safe-left);
     margin-right: var(--safe-right);
+}
+
+/* Dynamic cinematic surface primitives */
+.ct-cinematic-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.ct-cinematic-video,
+.ct-cinematic-fallback {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+}
+
+.ct-cinematic-fallback {
+    background:
+        radial-gradient(circle at 15% 28%, rgba(212, 168, 67, 0.14), transparent 45%),
+        radial-gradient(circle at 78% 25%, rgba(139, 92, 246, 0.11), transparent 50%),
+        radial-gradient(circle at 52% 80%, rgba(59, 130, 246, 0.08), transparent 55%),
+        #05070d;
+}
+
+.ct-cinematic-mask {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.86) 0%, transparent 24%, transparent 76%, rgba(0, 0, 0, 0.92) 100%);
+}
+
+.ct-liquid-glass {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(212, 168, 67, 0.2);
+    backdrop-filter: blur(20px) saturate(145%);
+    -webkit-backdrop-filter: blur(20px) saturate(145%);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ct-liquid-glass:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 24px 52px rgba(0, 0, 0, 0.42), 0 0 36px rgba(212, 168, 67, 0.1);
 }

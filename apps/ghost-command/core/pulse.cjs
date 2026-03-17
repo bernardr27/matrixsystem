@@ -38,10 +38,8 @@ async function runPulse() {
 
     console.log('[PULSE] Starting Stage 2: Cloud Synchronization...');
     try {
-        const { createClient } = require('@supabase/supabase-js');
-        const supabaseUrl = 'https://phmnyenltuqxtkadnhpj.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBobW55ZW5sdHVxeHRrYWRuaHBqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkyMTc4ODAsImV4cCI6MjA4NDc5Mzg4MH0.oyEVHSF8iZxvDD4scTmYuUOGrU82DVrPRJ1ABLBnZzM'.trim();
-        const supabase = createClient(supabaseUrl, supabaseKey);
+        const { createSupabaseFromEnv } = require('../../../scripts/tools/_supabase_client.cjs');
+        const supabase = createSupabaseFromEnv();
 
         const { error } = await supabase.from('ghost_bridge').select('id').limit(1);
         results.cloud = error ? 'DISCONNECTED' : 'STABLE';

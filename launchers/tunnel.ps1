@@ -17,8 +17,10 @@ $cfDir = "C:\Program Files (x86)\cloudflared"
 if (Test-Path $cfDir) { $env:Path += ";$cfDir" }
 
 # -- Supabase config (for broadcasting URLs to Gate UI) --
-$SUPABASE_URL = "https://phmnyenltuqxtkadnhpj.supabase.co"
-$SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBobW55ZW5sdHVxeHRrYWRuaHBqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkyMTc4ODAsImV4cCI6MjA4NDc5Mzg4MH0.oyEVHSF8iZxvDD4scTmYuUOGrU82DVrPRJ1ABLBnZzM"
+$SUPABASE_URL = $env:SUPABASE_URL
+if (-not $SUPABASE_URL -or $SUPABASE_URL -eq '') { $SUPABASE_URL = $env:NEXT_PUBLIC_SUPABASE_URL }
+$SUPABASE_KEY = $env:SUPABASE_KEY
+if (-not $SUPABASE_KEY -or $SUPABASE_KEY -eq '') { $SUPABASE_KEY = $env:NEXT_PUBLIC_SUPABASE_ANON_KEY }
 
 # -- App Registry --
 $Apps = [ordered]@{
@@ -59,6 +61,10 @@ function Test-PortListening([int]$Port) {
 }
 
 function Push-UrlToSupabase {
+    if (-not $SUPABASE_URL -or -not $SUPABASE_KEY) {
+        Write-Host "  [WARN] Supabase env missing. Skipping tunnel URL publish." -ForegroundColor Yellow
+        return
+    }
     $urlPayload = @{}
     foreach ($key in $script:tunnelUrls.Keys) {
         $urlPayload[$key] = $script:tunnelUrls[$key]

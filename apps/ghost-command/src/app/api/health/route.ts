@@ -3,6 +3,14 @@ import os from 'os';
 
 export const dynamic = 'force-dynamic';
 
+function normalizeServiceUrl(url: string | undefined, fallback: string): string {
+    const value = (url || '').trim();
+    if (!value) return fallback;
+    // Backward-compat: runner moved from 3002 to 3333.
+    if (value.includes('localhost:3002')) return 'http://localhost:3333';
+    return value;
+}
+
 export async function GET() {
     const cpus = os.cpus();
     const cpuUsage = cpus.reduce((acc, cpu) => {
@@ -28,11 +36,11 @@ export async function GET() {
     }
 
     // Check which services are reachable (env vars for production, localhost fallback for dev)
-    const reflectUrl = process.env.REFLECT_URL || 'http://localhost:3000';
-    const nexusUrl = process.env.NEXUS_URL || 'http://localhost:3001';
-    const runnerUrl = process.env.RUNNER_URL || 'http://localhost:3333';
-    const rocketUrl = process.env.ROCKET_URL || 'http://localhost:4000';
-    const citadelUrl = process.env.CITADEL_URL || 'http://localhost:3005';
+    const reflectUrl = normalizeServiceUrl(process.env.REFLECT_URL, 'http://localhost:3000');
+    const nexusUrl = normalizeServiceUrl(process.env.NEXUS_URL, 'http://localhost:3001');
+    const runnerUrl = normalizeServiceUrl(process.env.RUNNER_URL, 'http://localhost:3333');
+    const rocketUrl = normalizeServiceUrl(process.env.ROCKET_URL, 'http://localhost:4000');
+    const citadelUrl = normalizeServiceUrl(process.env.CITADEL_URL, 'http://localhost:3005');
 
     const serviceChecks = await Promise.allSettled([
         fetch(`${reflectUrl}/api/health`, { signal: AbortSignal.timeout(2000) }).then(r => r.ok),

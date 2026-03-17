@@ -45,8 +45,14 @@ interface SessionData {
     expiresAt: number;
 }
 
-// In-memory session store (resets on server restart)
-const sessions = new Map<string, SessionData>();
+// @ts-ignore
+declare global {
+    var _citadelSessions: Map<string, SessionData> | undefined;
+}
+
+// In-memory session store (resets on server restart, but persists HMR)
+const sessions = global._citadelSessions || new Map<string, SessionData>();
+if (process.env.NODE_ENV !== 'production') global._citadelSessions = sessions;
 
 /** Timing-safe credential verification */
 export function verifyCredentials(username: string, password: string): boolean {

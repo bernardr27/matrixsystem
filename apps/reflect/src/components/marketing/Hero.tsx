@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NeuralSurface } from '../ui/NeuralSurface';
+import { CinematicBackground } from '../ui/CinematicBackground';
+import { LiquidGlass } from '../ui/LiquidGlass';
+import { Reveal } from '../ui/Reveal';
+import { ParallaxLayer } from '../ui/ParallaxLayer';
 
 const SUBTITLES = [
-    "A high-fidelity spatial environment for cognitive clarity.",
-    "Engineered silence. A workspace for deep, structured thought.",
+    'A high-fidelity spatial environment for cognitive clarity.',
+    'Engineered silence. A workspace for deep, structured thought.',
     "The operating system for your mind's eye.",
-    "Fluid digital architecture designed for flow state.",
-    "Recall, reflect, and organize without the static noise."
+    'Fluid digital architecture designed for flow state.',
+    'Recall, reflect, and organize without the static noise.'
 ];
 
 export default function Hero({ onAppSelect }: { onAppSelect: (id: string) => void }) {
@@ -38,32 +42,18 @@ export default function Hero({ onAppSelect }: { onAppSelect: (id: string) => voi
     }, []);
 
     return (
-        <section style={{
-            width: '100%',
-            background: 'transparent',
-            position: 'relative',
-            zIndex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: '10vh 0'
-        }}>
-            {/* Optimized Background Glow */}
-            <div style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '80%',
-                height: '80%',
-                maxWidth: '800px',
-                maxHeight: '800px',
-                background: 'radial-gradient(circle, rgba(74, 158, 255, 0.05) 0%, transparent 75%)',
-                filter: 'blur(100px)',
-                zIndex: 0,
-                pointerEvents: 'none',
-                opacity: 0.8
-            }} />
+        <section
+            style={{
+                width: '100%',
+                position: 'relative',
+                zIndex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: '10vh 0'
+            }}
+        >
+            <CinematicBackground />
 
             <NeuralSurface
                 variant="ghost"
@@ -78,60 +68,66 @@ export default function Hero({ onAppSelect }: { onAppSelect: (id: string) => voi
                     padding: 0
                 }}
             >
-                <motion.div
-                    animate={{ opacity: [0.15, 0.4, 0.15] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                <Reveal>
+                    <LiquidGlass className="px-5 py-2 text-[10px] font-black tracking-[0.45em] text-white/55 uppercase">
+                        REFLECT ENGINE // PROTOCOL 01
+                    </LiquidGlass>
+                </Reveal>
+
+                <Reveal delay={0.05}>
+                    <h1
+                        style={{
+                            fontSize: 'clamp(2rem, 6vw, 5.5rem)',
+                            fontWeight: 800,
+                            letterSpacing: '-0.02em',
+                            lineHeight: 1.1,
+                            margin: 0,
+                            color: '#fff',
+                            textAlign: 'center',
+                            fontFamily: 'var(--font-display)',
+                            padding: '0 1rem',
+                        }}
+                    >
+                        The OS for
+                        <br />
+                        your thoughts.
+                    </h1>
+                </Reveal>
+
+                <ParallaxLayer offset={16}>
+                    <motion.div
+                        animate={{
+                            x: mousePos.x * 12,
+                            y: mousePos.y * 12
+                        }}
+                        transition={{ type: 'spring', damping: 25, stiffness: 120 }}
+                        style={{
+                            fontSize: 'clamp(3rem, 8vw, 7rem)',
+                            fontWeight: 700,
+                            fontStyle: 'italic',
+                            fontFamily: 'Playfair Display, Georgia, serif',
+                            color: 'rgba(255,255,255,0.9)',
+                            marginTop: 'clamp(0.5rem, 1.5vh, 1rem)',
+                            letterSpacing: '0.05em',
+                            textAlign: 'center',
+                            willChange: 'transform',
+                            textShadow: '0 20px 40px rgba(0,0,0,0.3)'
+                        }}
+                    >
+                        REFLECT
+                    </motion.div>
+                </ParallaxLayer>
+
+                <div
                     style={{
-                        fontSize: 'clamp(0.5rem, 0.8vw, 0.6rem)',
-                        fontWeight: 900,
-                        letterSpacing: '0.6em',
-                        color: 'var(--foreground)',
-                        opacity: 0.2,
-                        textIndent: '0.6em',
-                        textTransform: 'uppercase',
-                        fontFamily: 'var(--font-sans)'
+                        position: 'relative',
+                        height: '3rem',
+                        marginTop: 'clamp(1rem, 2vh, 1.5rem)',
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'center'
                     }}
                 >
-                    REFLECT ENGINE // PROTOCOL 01
-                </motion.div>
-
-                <h1 style={{
-                    fontSize: 'clamp(2rem, 6vw, 5.5rem)',
-                    fontWeight: 800,
-                    letterSpacing: '-0.02em',
-                    lineHeight: 1.1,
-                    margin: 0,
-                    color: '#fff',
-                    textAlign: 'center',
-                    fontFamily: 'var(--font-display)',
-                }}>
-                    The OS for<br />your thoughts.
-                </h1>
-
-                {/* Stabilized Magnetic Title */}
-                <motion.div
-                    animate={{
-                        x: mousePos.x * 12,
-                        y: mousePos.y * 12
-                    }}
-                    transition={{ type: 'spring', damping: 25, stiffness: 120 }}
-                    style={{
-                        fontSize: 'clamp(4rem, 8vw, 7rem)',
-                        fontWeight: 700,
-                        fontStyle: 'italic',
-                        fontFamily: 'Playfair Display, Georgia, serif',
-                        color: 'rgba(255,255,255,0.9)',
-                        marginTop: 'clamp(0.5rem, 1.5vh, 1rem)',
-                        letterSpacing: '0.05em',
-                        textAlign: 'center',
-                        willChange: 'transform',
-                        textShadow: '0 20px 40px rgba(0,0,0,0.3)'
-                    }}
-                >
-                    REFLECT
-                </motion.div>
-
-                <div style={{ position: 'relative', height: '3rem', marginTop: 'clamp(1rem, 2vh, 1.5rem)', width: '100%', display: 'flex', justifyContent: 'center' }}>
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={index}
@@ -158,7 +154,18 @@ export default function Hero({ onAppSelect }: { onAppSelect: (id: string) => voi
                         </motion.p>
                     </AnimatePresence>
                 </div>
+
+                <Reveal delay={0.1}>
+                    <div className="mt-5 flex items-center justify-center gap-3 px-4 flex-wrap">
+                        <LiquidGlass as="button" className="min-h-11 px-5 py-3 text-sm font-semibold text-white" onClick={() => onAppSelect('session')}>
+                            Start Session
+                        </LiquidGlass>
+                        <LiquidGlass as="button" className="min-h-11 px-5 py-3 text-sm font-semibold text-cyan-200" onClick={() => onAppSelect('insights')}>
+                            View Insights
+                        </LiquidGlass>
+                    </div>
+                </Reveal>
             </NeuralSurface>
-        </section >
+        </section>
     );
 }

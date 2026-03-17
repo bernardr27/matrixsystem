@@ -1,0 +1,4 @@
+
+> nexus@0.1.0 lint
+> eslint "src/**/*.ts" "src/**/*.tsx"
+

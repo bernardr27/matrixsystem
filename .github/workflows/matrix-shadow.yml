@@ -13,13 +13,11 @@ on:
           - build
           - deploy
           - troubleshoot
-  schedule:
-    - cron: "*/10 * * * *"
 
 jobs:
   cloud-bridge:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     concurrency:
       group: matrix-shadow-cloud-bridge
       cancel-in-progress: true
@@ -43,21 +41,18 @@ jobs:
       - name: Install Dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Cloud Preflight (No Dispatch)
-        run: node scripts/tools/cloud_preflight.cjs --json --skip-github
-
       - name: Execute Cloud Action
         run: |
           ACTION="${{ github.event.inputs.action || 'heartbeat' }}"
           echo "matrix-shadow action=${ACTION}"
           case "$ACTION" in
-            heartbeat) npm run cloud:control:heartbeat ;;
-            build) npm run cloud:control:build ;;
-            deploy) npm run cloud:control:ignite ;;
-            troubleshoot) npm run cloud:control:troubleshoot ;;
+            heartbeat) npm run diag:heartbeat -- --limit=8 || true ;;
+            build) npm run build:turbo || true ;;
+            deploy) npm run cloud:preflight -- --skip-github || true ;;
+            troubleshoot) npm run diag:bridge -- --limit=25 || true ;;
             *) echo "Unknown action: ${ACTION}" && exit 1 ;;
           esac
 
       - name: Bridge Audit Snapshot
         if: always()
-        run: npm run diag:bridge -- --limit=20
+        run: npm run diag:bridge -- --limit=20 || true

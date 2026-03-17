@@ -1,11 +1,5 @@
-const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config({ path: '../../.env' }); // Adjust path as needed
-
-// Hardcode connection for the test script to avoid path dancing
-const supabaseUrl = 'https://phmnyenltuqxtkadnhpj.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBobW55ZW5sdHVxeHRrYWRuaHBqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkyMTc4ODAsImV4cCI6MjA4NDc5Mzg4MH0.oyEVHSF8iZxvDD4scTmYuUOGrU82DVrPRJ1ABLBnZzM';
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+const { createSupabaseFromEnv } = require('../tools/_supabase_client.cjs');
+const supabase = createSupabaseFromEnv();
 
 async function simulateCrash() {
     console.log('[TEST] Simulating Critical Error Storm for Reflect...');
